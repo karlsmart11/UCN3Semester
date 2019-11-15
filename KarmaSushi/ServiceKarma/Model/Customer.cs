@@ -7,6 +7,7 @@ namespace ServiceKarma.Model
 {
     public class Customer
     {
+        public string id { get; set; }
         public string name { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
