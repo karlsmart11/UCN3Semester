@@ -61,30 +61,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
+    <Content Include="EmployeeService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\CustomerController.cs" />
-    <Compile Include="Controller\OrderController.cs" />
-    <Compile Include="Controller\ProductController.cs" />
-    <Compile Include="Controller\ReservationController.cs" />
-    <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\Employee.cs" />
-    <Compile Include="Model\Order.cs" />
-    <Compile Include="Model\OrderLine.cs" />
-    <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\Reservation.cs" />
-    <Compile Include="Model\Table.cs" />
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
-    </Compile>
-    <Compile Include="Service\IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="SQL\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
@@ -93,6 +77,16 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Implementation\Implementation.csproj">
+      <Project>{18dfa050-8b08-473b-bab1-acebe681b482}</Project>
+      <Name>Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceContract\ServiceContract.csproj">
+      <Project>{32ca725a-b92a-44e6-99e2-136e52e14a2a}</Project>
+      <Name>ServiceContract</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
