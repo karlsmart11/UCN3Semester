@@ -13,13 +13,19 @@ namespace SQLRepository
 {
    public class EmployeeRepository : IEmployee
     {
+        /// <summary>
+        /// Method that manage the connection to the database given the parameters and returning an Employee searched by id.
+        /// The word using is use to define which objects are going to release resources(destruct the object) once finished.
+        /// The method use stored procedures in the database in this case giving them one parameter
+        /// </summary>
+        /// <param name="id">Id of the wanted employee</param>
+        /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                connection.Open();
                 var parameters = new DynamicParameters();
-                parameters.Add("Id", id);
+                parameters.Add("@Id", id);
 
                 var result = connection.QuerySingle<Employee>("dbo.spEmployee_GetById", param: parameters, commandType: CommandType.StoredProcedure);
               
