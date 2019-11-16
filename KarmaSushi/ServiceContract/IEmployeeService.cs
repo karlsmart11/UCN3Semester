@@ -16,7 +16,7 @@ namespace ServiceContract
     {
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetEmployee/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
-        [FaultContract(typeof(Error))] //faulcontract allows you to customize the error messages
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         Employee GetEmployeeById(string id);
     }
 }
