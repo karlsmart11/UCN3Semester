@@ -17,9 +17,8 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                connection.Open();
                 var parameters = new DynamicParameters();
-                parameters.Add("Id", id);
+                parameters.Add("@Id", id);
 
                 var result = connection.QuerySingle<Employee>("dbo.spEmployee_GetById", param: parameters, commandType: CommandType.StoredProcedure);
               

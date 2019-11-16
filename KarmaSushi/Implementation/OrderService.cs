@@ -1,25 +1,24 @@
-﻿using Controller;
-using Model;
-using ServiceContract;
-using ServiceKarma.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Controller;
+using Model;
+using ServiceContract;
 
 namespace Implementation
 {
-    class EmployeeService : IEmployeeService
+    class OrderService : IOrderService
     {
-        public Employee GetEmployeeById(string id)
+        public Order GetOrderById(string id)
         {
             try
             {
-                using (var instance = new EmployeeController())
+                using (var instance = new OrderController())
                 {
-                    return instance.GetEmployeeById(id);
+                    return instance.GetOrderById(id);
                 }
             }
             catch (Exception ex)
@@ -27,7 +26,7 @@ namespace Implementation
                 throw new FaultException<Error>(new Error()
                 {
                     CodigoError = "10001",
-                    Mensaje = ex.Message, 
+                    Mensaje = ex.Message,
                     Description = "Exception Administrada por el servcio"
                 });
             }
