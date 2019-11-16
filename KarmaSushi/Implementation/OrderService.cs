@@ -27,7 +27,7 @@ namespace Implementation
                 {
                     CodigoError = "10001",
                     Mensaje = ex.Message,
-                    Description = "Exception Administrada por el servcio"
+                    Description = "Exception managed by the administrator"
                 });
             }
         }

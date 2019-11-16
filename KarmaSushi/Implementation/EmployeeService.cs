@@ -13,6 +13,13 @@ namespace Implementation
 {
     class EmployeeService : IEmployeeService
     {
+        /// <summary>
+        /// Method that creates an intance of EmployeeController and use the method GetEmployeeById from the controller.
+        /// In case there is an error the try/catch will manage the error and display the custom error store in the class error in Domain layer/Model
+        /// to about showing sensitive data to the customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Employee GetEmployeeById(string id)
         {
             try
@@ -28,7 +35,7 @@ namespace Implementation
                 {
                     CodigoError = "10001",
                     Mensaje = ex.Message, 
-                    Description = "Exception Administrada por el servcio"
+                    Description = "Exception managed by the administrator "
                 });
             }
         }

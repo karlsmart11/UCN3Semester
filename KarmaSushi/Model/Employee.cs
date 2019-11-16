@@ -9,12 +9,24 @@ namespace ServiceKarma.Model
     [DataContract]
     public class Employee
     {
+        /// <summary>
+        /// Unique id for the employee
+        /// </summary>
         [DataMember]
         public int Id { get; set; }
+        /// <summary>
+        /// Name of the employee
+        /// </summary>
         [DataMember]
         public string Name { get; set; }
+        /// <summary>
+        /// Email of the employee
+        /// </summary>
         [DataMember]
         public string Email { get; set; }
+        /// <summary>
+        /// Phone number of the employee
+        /// </summary>
         [DataMember]
         public string Phone { get; set; }
     }
