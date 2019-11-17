@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ServiceKarma.OrderService" CodeBehind="OrderService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.OrderService" %>
