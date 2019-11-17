@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace ServiceKarma.Model
+namespace Model
 {   [DataContract]
     public class Product
     {   [DataMember]
@@ -17,6 +17,5 @@ namespace ServiceKarma.Model
         public Category Category { get; set; }
     }
 
-    //[DataContract] ?
     public enum Category { Appetizer, MainCourse, Dessert };
 }

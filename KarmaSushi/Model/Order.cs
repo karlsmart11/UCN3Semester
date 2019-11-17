@@ -11,6 +11,11 @@ namespace Model
     public class Order
     {
         /// <summary>
+        /// Unique id
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Time when the order was created.
         /// Persistent database handles creation.
         /// </summary>
@@ -43,7 +48,6 @@ namespace Model
 
         #region Dapper test
 
-        public int OrderLineId { get; set; }
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
 

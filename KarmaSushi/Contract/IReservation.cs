@@ -10,6 +10,6 @@ namespace Contract
 {
     public interface IReservation
     {
-        public Reservation GetByCustomer(Customer customer);
+        Reservation GetByCustomer(Customer customer);
     }
 }

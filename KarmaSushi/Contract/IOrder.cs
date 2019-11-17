@@ -14,7 +14,7 @@ namespace Contract
         /// Finding it by id.
         /// </summary>
         /// <param name="id">Id of the order to be returned</param>
-        /// <returns></returns>
+        /// <returns>An order</returns>
         Order GetOrderById(string id);
     }
 }

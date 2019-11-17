@@ -21,22 +21,25 @@ namespace SQLRepository
     {
         private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
         private readonly CustomerRepository _customerRepository = new CustomerRepository();
-        //private readonly OrderLineRepository _orderLineRepository = new OrderLineRepository();
+        private readonly OrderLineRepository _orderLineRepository = new OrderLineRepository();
 
         public Order GetOrderById(string id)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
-
                 p.Add("@Id", id);
-                var result = connection.QuerySingle<Order>("dbo.spOrders_GetById", param: p, commandType: CommandType.StoredProcedure);
 
-                result.Employee = _employeeRepository.GetEmployeeById(result.EmployeeId.ToString());
-                result.Customer = _customerRepository.GetCustomerById(result.CustomerId.ToString());
-                //result.OrderLines = _orderLineRepository.GetOrderLinesById(result.OrderLineId.ToString());
+                var order = connection.QuerySingle<Order>(
+                    sql: "dbo.spOrders_GetById", 
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
 
-                return result;
+                order.Employee = _employeeRepository.GetEmployeeById(order.EmployeeId.ToString());
+                order.Customer = _customerRepository.GetCustomerById(order.CustomerId.ToString());
+                order.OrderLines = _orderLineRepository.GetOrderLinesByOrder(order);
+
+                return order;
             }
         }
     }

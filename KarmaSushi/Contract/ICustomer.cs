@@ -12,7 +12,7 @@ namespace Contract
     
     public interface ICustomer
     {
-       public Customer GetCustomerById(string id);
-       public Customer GetCustomerByName(string name);
+       Customer GetCustomerById(string id);
+       Customer GetCustomerByName(string name);
     }
 }

@@ -8,11 +8,28 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
 namespace SQLRepository
 {
     public class ProductRepository : IProduct
     {
+        public Product GetProductById(string id)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", id);
+
+                var product = connection.QuerySingle<Product>(
+                    sql:"dbo.spProduct_GetById",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+
+                return product;
+            }
+        }
+
         public Product GetProductByCategory(Category category)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))

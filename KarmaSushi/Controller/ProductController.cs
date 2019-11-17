@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Model;
 
-namespace ServiceKarma.Controller
+namespace Controller
 {
     public class ProductController :  IDisposable
     {

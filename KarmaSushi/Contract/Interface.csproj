@@ -47,6 +47,7 @@
     <Compile Include="ICustomer.cs" />
     <Compile Include="IEmployee.cs" />
     <Compile Include="IOrder.cs" />
+    <Compile Include="IOrderLine.cs" />
     <Compile Include="IProduct.cs" />
     <Compile Include="IReservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
