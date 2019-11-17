@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contract
+namespace Interface
 {
     public interface IEmployee
     {
         /// <summary>
-        /// Method in interface use to return an employee found by the id
+        /// Method in interface use to return an employee found by the Id
         /// </summary>
-        /// <param name="id"> id of the employee store in the database</param>
+        /// <param Name="id"> Id of the employee store in the database</param>
         /// <returns></returns>
         Employee GetEmployeeById(string id);
     }

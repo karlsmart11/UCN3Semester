@@ -10,10 +10,10 @@ namespace Model
     public class Customer
     {
         [DataMember]
-        public string id { get; set; }
+        public string Id { get; set; }
 
         [DataMember]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [DataMember]
         public string PhoneNumber { get; set; }

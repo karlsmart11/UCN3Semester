@@ -2,8 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Contract;
 using Dapper;
+using Interface;
 using Model;
 
 namespace SQLRepository

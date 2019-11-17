@@ -10,7 +10,7 @@ namespace ServiceKarma.Model
     public class Employee
     {
         /// <summary>
-        /// Unique id for the employee
+        /// Unique Id for the employee
         /// </summary>
         [DataMember]
         public int Id { get; set; }

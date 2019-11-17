@@ -1,5 +1,4 @@
-﻿using Contract;
-using Dapper;
+﻿using Dapper;
 using Model;
 using ServiceKarma.Model;
 using System;
@@ -9,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interface;
 
 namespace SQLRepository
 {

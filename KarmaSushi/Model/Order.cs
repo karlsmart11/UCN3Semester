@@ -11,7 +11,7 @@ namespace Model
     public class Order
     {
         /// <summary>
-        /// Unique id
+        /// Unique Id
         /// </summary>
         public int Id { get; set; }
 

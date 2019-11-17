@@ -6,14 +6,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Contract;
 using Dapper;
+using Interface;
 using Model;
 using ServiceKarma.Model;
 
 namespace SQLRepository
 {
-    //Saved for the insert statement to receive the sql identity id
+    //Saved for the insert statement to receive the sql identity Id
     //Remember to do connection.execute(); for insert
     // p.add("@Id", 0, dbType: DBType.Int32, direction: ParameterDirection.Output);
 

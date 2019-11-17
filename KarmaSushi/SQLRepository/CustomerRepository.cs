@@ -5,8 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Contract;
 using Dapper;
+using Interface;
 using Model;
 
 

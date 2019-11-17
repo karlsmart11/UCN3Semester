@@ -1,11 +1,11 @@
-﻿using Contract;
-using Model;
+﻿using Model;
 using ServiceKarma.Model;
 using SQLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Interface;
 
 namespace ServiceKarma.Controller
 {
