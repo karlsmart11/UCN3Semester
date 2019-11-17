@@ -30,9 +30,23 @@ namespace Model
         public Table Table { get; set; }
 
         /// <summary>
+        /// Employee who placed the order for the customer.
+        /// </summary>
+        [DataMember]
+        public Employee Employee { get; set; }
+
+        /// <summary>
         /// List of order lines containing one product and the quantity of that product.
         /// </summary>
         [DataMember]
         public List<OrderLine> OrderLines { get; set; }
+
+        #region Dapper test
+
+        public int OrderLineId { get; set; }
+        public int CustomerId { get; set; }
+        public int EmployeeId { get; set; }
+
+        #endregion
     }
 }

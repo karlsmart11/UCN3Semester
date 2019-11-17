@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Contract;
 using Dapper;
 using Model;
+using ServiceKarma.Model;
 
 namespace SQLRepository
 {
@@ -18,15 +19,23 @@ namespace SQLRepository
 
     public class OrderRepository : IOrder
     {
+        private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
+        private readonly CustomerRepository _customerRepository = new CustomerRepository();
+        //private readonly OrderLineRepository _orderLineRepository = new OrderLineRepository();
+
         public Order GetOrderById(string id)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
-                p.Add("@Id", id);
 
+                p.Add("@Id", id);
                 var result = connection.QuerySingle<Order>("dbo.spOrders_GetById", param: p, commandType: CommandType.StoredProcedure);
-                
+
+                result.Employee = _employeeRepository.GetEmployeeById(result.EmployeeId.ToString());
+                result.Customer = _customerRepository.GetCustomerById(result.CustomerId.ToString());
+                //result.OrderLines = _orderLineRepository.GetOrderLinesById(result.OrderLineId.ToString());
+
                 return result;
             }
         }

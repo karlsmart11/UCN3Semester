@@ -5,7 +5,8 @@ using System.Runtime.Serialization;
 using System.Web;
 
 namespace ServiceKarma.Model
-{   [DataContract]
+{   
+    [DataContract]
     public class OrderLine
     {   [DataMember]
         public int Quantity { get; set; }
