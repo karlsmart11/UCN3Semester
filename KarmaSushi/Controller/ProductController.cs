@@ -1,11 +1,41 @@
-﻿using System;
+﻿using ServiceKarma.Model;
+using SQLRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Interface;
+using Model;
 
-namespace ServiceKarma.Controller
+namespace Controller
 {
-    public class ProductController
+    public class ProductController :  IDisposable
     {
+
+        public Product GetProductByName(string name)
+        {
+            IProduct instance = new ProductRepository();
+            return instance.GetProductByName(name);
+        }
+
+
+        public Product GetProductByPrice(double price)
+        {
+            IProduct instance = new ProductRepository();
+            return instance.GetProductByPrice(price);
+        }
+
+        public Product GetProductByCategory(Category category)
+        {
+            IProduct instance = new ProductRepository();
+            return instance.GetProductByCategory(category);
+        }
+
+
+
+        void IDisposable.Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

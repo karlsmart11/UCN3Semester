@@ -1,11 +1,11 @@
-﻿using Contract;
-using ServiceKarma.Model;
+﻿using ServiceKarma.Model;
 using SQLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interface;
 
 
 namespace Controller
@@ -14,9 +14,9 @@ namespace Controller
     {
         /// <summary>
         /// Method that creates a new instance of the class EmployeeRepository in an IEmployee interface variable
-        /// and return and Employee found by the id
+        /// and return and Employee found by the Id
         /// </summary>
-        /// <param name="id">Id of the wanted employee</param>
+        /// <param Name="id">Id of the wanted employee</param>
         /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {

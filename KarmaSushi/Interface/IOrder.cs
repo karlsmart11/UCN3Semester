@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 
-namespace Contract
+namespace Interface
 {
     public interface IOrder
     {
         /// <summary>
         /// Returns order from database.
-        /// Finding it by id.
+        /// Finding it by Id.
         /// </summary>
-        /// <param name="id">Id of the order to be returned</param>
-        /// <returns></returns>
+        /// <param Name="id">Id of the order to be returned</param>
+        /// <returns>An order</returns>
         Order GetOrderById(string id);
     }
 }

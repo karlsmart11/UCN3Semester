@@ -1,5 +1,4 @@
-﻿using Contract;
-using Dapper;
+﻿using Dapper;
 using ServiceKarma.Model;
 using System;
 using System.Collections.Generic;
@@ -8,17 +7,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interface;
 
 namespace SQLRepository
 {
    public class EmployeeRepository : IEmployee
     {
         /// <summary>
-        /// Method that manage the connection to the database given the parameters and returning an Employee searched by id.
+        /// Method that manage the connection to the database given the parameters and returning an Employee searched by Id.
         /// The word using is use to define which objects are going to release resources(destruct the object) once finished.
         /// The method use stored procedures in the database in this case giving them one parameter
         /// </summary>
-        /// <param name="id">Id of the wanted employee</param>
+        /// <param Name="id">Id of the wanted employee</param>
         /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {

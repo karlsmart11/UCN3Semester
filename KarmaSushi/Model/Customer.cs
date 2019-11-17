@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
+using ServiceKarma.Model;
 
-namespace ServiceKarma.Model
-{
+namespace Model
+{    [DataContract]
     public class Customer
     {
-        public string id { get; set; }
-        public string name { get; set; }
+        [DataMember]
+        public string Id { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
+
+        [DataMember]
         public string PhoneNumber { get; set; }
+
+        [DataMember]
         public string Email { get; set; }
     }
 }
