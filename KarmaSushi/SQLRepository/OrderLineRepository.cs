@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -32,6 +33,24 @@ namespace SQLRepository
 
                 return lines;
             }
+        }
+
+        public OrderLine InsertOrderLine(OrderLine orderLine)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ProductId", orderLine.Product.Id);
+                p.Add("@Quantity", orderLine.Quantity);
+                p.Add("@OrderId", orderLine.OrderId);
+                p.Add("@Id", 0,
+                   dbType: DbType.Int32,
+                   direction: ParameterDirection.Output);
+                orderLine.Id = p.Get<int>("@Id");
+                return orderLine;
+            }
+
+
         }
     }
 }

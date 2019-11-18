@@ -9,6 +9,6 @@ namespace Interface
 {
     public interface ITable
     {
-        int InsertTable(Table table);
+        Table InsertTable(Table table);
     }
 }

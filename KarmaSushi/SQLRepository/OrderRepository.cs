@@ -21,6 +21,7 @@ namespace SQLRepository
         private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
         private readonly CustomerRepository _customerRepository = new CustomerRepository();
         private readonly OrderLineRepository _orderLineRepository = new OrderLineRepository();
+        private readonly TableRepository _tableRepository = new TableRepository();
 
         public Order GetOrderById(string id)
         {
@@ -41,22 +42,18 @@ namespace SQLRepository
                 return order;
             }
         }
-        public int InsertOrder(Order order)
+        public Order InsertOrder(Order order)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
-
-                //var customerIdentity = _customerRepository.InsertCustomer(order.Customer);
-                var employeeIdentity = _employeeRepository.InsertEmployee(order.Employee);
-                
+         
                 p.Add("@Id", 0, 
                     dbType: DbType.Int32,
                     direction: ParameterDirection.Output);
                 p.Add("@Price", order.Price);
                 //p.Add("@Time", order.Time);
-                p.Add("@CustomerId", order.Customer.Id);
-                p.Add("@EmployeeId", order.Employee.Id);
+                
 
                 connection.Execute(
                     sql: "dbo.spOrders_Insert", 
@@ -64,21 +61,22 @@ namespace SQLRepository
                     commandType: CommandType.StoredProcedure);
 
                 //Returned order identity 
-                var orderIdentity = p.Get<int>("@Id");
+                order.Id = p.Get<int>("@Id");
 
                 foreach (var table in order.Tables)
-                {
-                    table.OrderId = orderIdentity;
-                    //var tableId = _tableRepository.InsertTable(table);
+                {   //TODO refactor many to many
+                    table.OrderId = order.Id;
+                   
                 }
+
 
                 foreach (var orderLine in order.OrderLines)
                 {
-                    orderLine.OrderId = orderIdentity;
-                    //var orderLineId = _orderLineRepository.InsertOrderLine(orderLine);
+                    orderLine.OrderId = order.Id;
+                    _orderLineRepository.InsertOrderLine(orderLine);
                 }
 
-                return orderIdentity;
+                return order;
             }
         }
     }
