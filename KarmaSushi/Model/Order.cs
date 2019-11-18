@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using ServiceKarma.Model;
 
 namespace Model
 {
@@ -13,11 +14,6 @@ namespace Model
         /// Unique Id
         /// </summary>
         public int Id { get; set; }
-
-        /// <summary>
-        /// Summed price of all products bought in the order.
-        /// </summary>
-        public decimal Price { get; set; }
 
         /// <summary>
         /// Time when the order was created.
@@ -33,10 +29,10 @@ namespace Model
         public Customer Customer { get; set; }
 
         /// <summary>
-        /// List of tables associated with the order.
+        /// Table at which the order was placed.
         /// </summary>
         [DataMember]
-        public List<Table> Tables { get; set; }
+        public Table Table { get; set; }
 
         /// <summary>
         /// Employee who placed the order for the customer.

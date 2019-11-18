@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controller;
+using Model;
 using ServiceContract;
 using System;
 using System.Collections.Generic;
@@ -6,19 +7,18 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Controller;
 
 namespace Implementation
 {
-    public class CustomerService : ICustomerService
+    public class ProductService : IProductService
     {
-        public Customer GetCustomerById(string id)
+        public Product GetProductByCategory(Category category)
         {
             try
             {
-                using (var instance = new CustomerController())
+                using (var instance = new ProductController())
                 {
-                    return instance.GetCustomerById(id);
+                    return instance.GetProductByCategory(category);
                 }
             }
             catch (Exception ex)
@@ -32,14 +32,33 @@ namespace Implementation
             }
         }
 
-
-        public Customer GetCustomerByName(string name)
+        public Product GetProductById(string id)
         {
             try
             {
-                using (var instance = new CustomerController())
+                using (var instance = new ProductController())
                 {
-                    return instance.GetCustomerByName(name);
+                    return instance.GetProductById(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public Product GetProductByPrice(double price)
+        {
+            try
+            {
+                using (var instance = new ProductController())
+                {
+                    return instance.GetProductByPrice(price);
                 }
             }
             catch (Exception ex)

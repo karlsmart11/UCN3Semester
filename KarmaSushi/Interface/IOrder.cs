@@ -13,15 +13,8 @@ namespace Interface
         /// Returns order from database.
         /// Finding it by Id.
         /// </summary>
-        /// <param name="id">Id of the order to be returned</param>
+        /// <param Name="id">Id of the order to be returned</param>
         /// <returns>An order</returns>
         Order GetOrderById(string id);
-
-        /// <summary>
-        /// Inserts an order and all associated classes into the database
-        /// </summary>
-        /// <param name="order">Order to be inserted into db</param>
-        /// <returns>Identifier</returns>
-        int InsertOrder(Order order);
     }
 }

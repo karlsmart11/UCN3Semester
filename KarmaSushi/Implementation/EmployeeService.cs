@@ -1,6 +1,7 @@
 ﻿using Controller;
 using Model;
 using ServiceContract;
+using ServiceKarma.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Implementation
     class EmployeeService : IEmployeeService
     {
         /// <summary>
-        /// Method that creates an instance of EmployeeController and use the method GetEmployeeById from the controller.
+        /// Method that creates an intance of EmployeeController and use the method GetEmployeeById from the controller.
         /// In case there is an error the try/catch will manage the error and display the custom error store in the class error in Domain layer/Model
         /// to about showing sensitive data to the customer
         /// </summary>

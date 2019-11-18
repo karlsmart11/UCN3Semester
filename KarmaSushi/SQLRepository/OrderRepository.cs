@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,6 +9,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Interface;
 using Model;
+using ServiceKarma.Model;
 
 namespace SQLRepository
 {
@@ -42,6 +42,7 @@ namespace SQLRepository
                 return order;
             }
         }
+<<<<<<< HEAD
 
         public int InsertOrder(Order order)
         {
@@ -81,5 +82,7 @@ namespace SQLRepository
                 return orderIdentity;
             }
         }
+=======
+>>>>>>> b6fdf59282930c86643aead9e5e743f467e8e5c2
     }
 }

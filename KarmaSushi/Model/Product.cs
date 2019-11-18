@@ -5,8 +5,7 @@ using System.Runtime.Serialization;
 using System.Web;
 
 namespace Model
-{   
-    [DataContract]
+{   [DataContract]
     public class Product
     {   [DataMember]
         public string Name { get; set; }
