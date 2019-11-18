@@ -1,5 +1,4 @@
-﻿using ServiceKarma.Model;
-using SQLRepository;
+﻿using SQLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

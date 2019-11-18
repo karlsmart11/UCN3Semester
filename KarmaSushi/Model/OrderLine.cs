@@ -9,6 +9,10 @@ namespace Model
     [DataContract]
     public class OrderLine
     {
+        /// <summary>
+        /// Id of the order line from the db.
+        /// </summary>
+        [DataMember]
         public int Id { get; set; }
 
         /// <summary>

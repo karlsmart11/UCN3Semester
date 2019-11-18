@@ -1,7 +1,6 @@
 ﻿using Controller;
 using Model;
 using ServiceContract;
-using ServiceKarma.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

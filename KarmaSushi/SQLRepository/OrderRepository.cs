@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Dapper;
 using Interface;
 using Model;
-using ServiceKarma.Model;
 
 namespace SQLRepository
 {
@@ -42,8 +41,6 @@ namespace SQLRepository
                 return order;
             }
         }
-<<<<<<< HEAD
-
         public int InsertOrder(Order order)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -57,7 +54,7 @@ namespace SQLRepository
                     dbType: DbType.Int32,
                     direction: ParameterDirection.Output);
                 p.Add("@Price", order.Price);
-                p.Add("@Time", order.Time);
+                //p.Add("@Time", order.Time);
                 p.Add("@CustomerId", order.Customer.Id);
                 p.Add("@EmployeeId", order.Employee.Id);
 
@@ -82,7 +79,5 @@ namespace SQLRepository
                 return orderIdentity;
             }
         }
-=======
->>>>>>> b6fdf59282930c86643aead9e5e743f467e8e5c2
     }
 }
