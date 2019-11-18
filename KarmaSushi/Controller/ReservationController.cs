@@ -7,14 +7,14 @@ using System.Linq;
 using System.Web;
 using Interface;
 
-namespace ServiceKarma.Controller
+namespace Controller
 {
     public class ReservationController : IDisposable
     {
         public Reservation GetByCustomer(Customer customer)
         {
             IReservation instance = new ReservationRepository();
-            return GetByCustomer(customer);
+            return instance.GetByCustomer(customer);
         }
 
 
