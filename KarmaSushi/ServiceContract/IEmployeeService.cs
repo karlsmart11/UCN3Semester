@@ -31,7 +31,7 @@ namespace ServiceContract
         /// <param name="employee"></param>
         /// <returns></returns>
         [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/InsertEmployee/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "/InsertEmployee", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         Employee InsertEmployee(Employee employee);
     }

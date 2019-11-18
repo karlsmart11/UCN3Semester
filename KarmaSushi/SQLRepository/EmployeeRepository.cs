@@ -24,31 +24,36 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
+                connection.Open();
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", id);
 
-                var result = connection.QuerySingle<Employee>("dbo.spEmployee_Insert", param: parameters, commandType: CommandType.StoredProcedure);
+                var result = connection.QuerySingle<Employee>("dbo.spEmployee_GetById", param: parameters, commandType: CommandType.StoredProcedure);
               
                 return result ;
             }
         }
 
-        public int InsertEmployee(Employee employee)
+        public Employee InsertEmployee(Employee employee)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
+                connection.Open();
                 var p = new DynamicParameters();
-                p.Add("@Id",0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+               
                 p.Add("@Name", employee.Name);
                 p.Add("@Phone", employee.Phone);
                 p.Add("@Email", employee.Email);
+                p.Add("@Id", employee.Id, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var employeeIdentity = connection.Execute(
-                    sql: "dbo.spEmployee_Insert",
+                var employeeIdentity = connection.ExecuteScalar(
+                    "dbo.spEmployee_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
+                var pIdEmployee = p.Get<Int32>("Id");
+                employee.Id = pIdEmployee;
 
-                return employeeIdentity;
+                return employee;
             }
         }
     }

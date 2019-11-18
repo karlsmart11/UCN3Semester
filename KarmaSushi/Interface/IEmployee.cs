@@ -16,6 +16,6 @@ namespace Interface
         /// <returns></returns>
         Employee GetEmployeeById(string id);
 
-        int InsertEmployee(Employee employee);
+        Employee InsertEmployee(Employee employee);
     }
 }

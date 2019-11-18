@@ -39,7 +39,7 @@ namespace Implementation
             }
         }
 
-        public int InsertEmployee(Employee employee)
+        public Employee InsertEmployee(Employee employee)
         {
             try
             {

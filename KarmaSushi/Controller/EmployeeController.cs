@@ -24,7 +24,7 @@ namespace Controller
             return instance.GetEmployeeById(id);
         }
 
-        public int InsertEmployee(Employee employee)
+        public Employee InsertEmployee(Employee employee)
         {
             IEmployee instance = new EmployeeRepository();
             return instance.InsertEmployee(employee);
