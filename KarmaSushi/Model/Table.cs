@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace ServiceKarma.Model
+namespace Model
 {   [DataContract]
     public class Table
     {   [DataMember]

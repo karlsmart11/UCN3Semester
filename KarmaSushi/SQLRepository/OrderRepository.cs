@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Dapper;
 using Interface;
 using Model;
-using ServiceKarma.Model;
 
 namespace SQLRepository
 {

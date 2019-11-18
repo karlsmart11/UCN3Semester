@@ -1,11 +1,11 @@
-﻿using ServiceKarma.Model;
-using SQLRepository;
+﻿using SQLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Interface;
+using Model;
 
 
 namespace Controller

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
 
-namespace ServiceKarma.Model
+namespace Model
 {
     [DataContract]
     public class Employee

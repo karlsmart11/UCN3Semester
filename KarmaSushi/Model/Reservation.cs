@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace ServiceKarma.Model
+namespace Model
 {   [DataContract]
     public class Reservation
-    {   [DataMember]
+    {   
+        [DataMember]
         public DateTime Time { get; set; }
         [DataMember]
         public Table Table { get; set; }

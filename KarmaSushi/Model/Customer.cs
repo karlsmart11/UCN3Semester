@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
-using ServiceKarma.Model;
 
 namespace Model
-{    [DataContract]
+{   
+    [DataContract]
     public class Customer
     {
         [DataMember]
