@@ -48,6 +48,10 @@ namespace SQLRepository
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
+
+                //var customerIdentity = _customerRepository.InsertCustomer(Customer);
+                //var employeeIdentity = _employeeRepository.InsertEmployee(Employee);
+                
                 p.Add("@Id", 0, 
                     dbType: DbType.Int32,
                     direction: ParameterDirection.Output);
@@ -56,8 +60,11 @@ namespace SQLRepository
                 p.Add("@CustomerId", order.Customer.Id);
                 p.Add("@EmployeeId", order.Employee.Id);
 
-                var orderIdentity = connection.Execute(sql: "dbo.spOrder_Insert", param: p,
+                connection.Execute(sql: "dbo.spOrder_Insert", param: p,
                     commandType: CommandType.StoredProcedure);
+
+                //Returned order identity 
+                var orderIdentity = p.Get<int>("@Id");
 
                 foreach (var table in order.Tables)
                 {
@@ -65,7 +72,13 @@ namespace SQLRepository
                     //var tableId = _tableRepository.InsertTable(table);
                 }
 
-                return p.Get<int>("@Id");
+                foreach (var orderLine in order.OrderLines)
+                {
+                    orderLine.OrderId = orderIdentity;
+                    //var orderLineId = _orderLineRepository.InsertOrderLine(orderLine);
+                }
+
+                return orderIdentity;
             }
         }
     }

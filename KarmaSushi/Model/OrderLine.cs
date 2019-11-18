@@ -29,6 +29,7 @@ namespace Model
         #region Dapper test
 
         public int ProductId { get; set; }
+        public int OrderId { get; set; }
 
         #endregion
     }
