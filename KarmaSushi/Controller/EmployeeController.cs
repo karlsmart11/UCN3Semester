@@ -24,6 +24,12 @@ namespace Controller
             return instance.GetEmployeeById(id);
         }
 
+        public int InsertEmployee(Employee employee)
+        {
+            IEmployee instance = new EmployeeRepository();
+            return instance.InsertEmployee(employee);
+        }
+
         /// <summary>
         /// IDisposable allows the system to close an unmanaged resource that is not in use anymore
         /// Very normal when working with API

@@ -12,8 +12,10 @@ namespace Interface
         /// <summary>
         /// Method in interface use to return an employee found by the Id
         /// </summary>
-        /// <param Name="id"> Id of the employee store in the database</param>
+        /// <param name="id">Id of the employee store in the database</param>
         /// <returns></returns>
         Employee GetEmployeeById(string id);
+
+        int InsertEmployee(Employee employee);
     }
 }

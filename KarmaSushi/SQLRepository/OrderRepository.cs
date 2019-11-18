@@ -47,8 +47,8 @@ namespace SQLRepository
             {
                 var p = new DynamicParameters();
 
-                //var customerIdentity = _customerRepository.InsertCustomer(Customer);
-                //var employeeIdentity = _employeeRepository.InsertEmployee(Employee);
+                //var customerIdentity = _customerRepository.InsertCustomer(order.Customer);
+                var employeeIdentity = _employeeRepository.InsertEmployee(order.Employee);
                 
                 p.Add("@Id", 0, 
                     dbType: DbType.Int32,
@@ -58,7 +58,9 @@ namespace SQLRepository
                 p.Add("@CustomerId", order.Customer.Id);
                 p.Add("@EmployeeId", order.Employee.Id);
 
-                connection.Execute(sql: "dbo.spOrder_Insert", param: p,
+                connection.Execute(
+                    sql: "dbo.spOrders_Insert", 
+                    param: p,
                     commandType: CommandType.StoredProcedure);
 
                 //Returned order identity 
