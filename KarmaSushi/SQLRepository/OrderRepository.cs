@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -39,6 +40,32 @@ namespace SQLRepository
                 order.OrderLines = _orderLineRepository.GetOrderLinesByOrder(order);
 
                 return order;
+            }
+        }
+
+        public int InsertOrder(Order order)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", 0, 
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Output);
+                p.Add("@Price", order.Price);
+                p.Add("@Time", order.Time);
+                p.Add("@CustomerId", order.Customer.Id);
+                p.Add("@EmployeeId", order.Employee.Id);
+
+                var orderIdentity = connection.Execute(sql: "dbo.spOrder_Insert", param: p,
+                    commandType: CommandType.StoredProcedure);
+
+                foreach (var table in order.Tables)
+                {
+                    table.OrderId = orderIdentity;
+                    //var tableId = _tableRepository.InsertTable(table);
+                }
+
+                return p.Get<int>("@Id");
             }
         }
     }

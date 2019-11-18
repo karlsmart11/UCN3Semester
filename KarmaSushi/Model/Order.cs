@@ -15,6 +15,11 @@ namespace Model
         public int Id { get; set; }
 
         /// <summary>
+        /// Summed price of all products bought in the order.
+        /// </summary>
+        public decimal Price { get; set; }
+
+        /// <summary>
         /// Time when the order was created.
         /// Persistent database handles creation.
         /// </summary>
@@ -28,10 +33,10 @@ namespace Model
         public Customer Customer { get; set; }
 
         /// <summary>
-        /// Table at which the order was placed.
+        /// List of tables associated with the order.
         /// </summary>
         [DataMember]
-        public Table Table { get; set; }
+        public List<Table> Tables { get; set; }
 
         /// <summary>
         /// Employee who placed the order for the customer.
