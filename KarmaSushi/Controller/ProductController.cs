@@ -1,5 +1,4 @@
-﻿using ServiceKarma.Model;
-using SQLRepository;
+﻿using SQLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +10,11 @@ namespace Controller
 {
     public class ProductController :  IDisposable
     {
+        public Product GetProductById(string id)
+        {
+            IProduct instance = new ProductRepository();
+            return instance.GetProductById(id);
+        }
 
         public Product GetProductByName(string name)
         {

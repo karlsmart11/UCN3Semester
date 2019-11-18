@@ -1,11 +1,11 @@
-﻿using ServiceKarma.Model;
-using SQLRepository;
+﻿using SQLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Interface;
+using Model;
 
 
 namespace Controller
@@ -22,6 +22,12 @@ namespace Controller
         {
             IEmployee instance = new EmployeeRepository();
             return instance.GetEmployeeById(id);
+        }
+
+        public int InsertEmployee(Employee employee)
+        {
+            IEmployee instance = new EmployeeRepository();
+            return instance.InsertEmployee(employee);
         }
 
         /// <summary>

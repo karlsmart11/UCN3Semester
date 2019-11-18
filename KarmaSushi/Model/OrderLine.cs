@@ -9,6 +9,10 @@ namespace Model
     [DataContract]
     public class OrderLine
     {
+        /// <summary>
+        /// Id of the order line from the db.
+        /// </summary>
+        [DataMember]
         public int Id { get; set; }
 
         /// <summary>
@@ -29,6 +33,7 @@ namespace Model
         #region Dapper test
 
         public int ProductId { get; set; }
+        public int OrderId { get; set; }
 
         #endregion
     }

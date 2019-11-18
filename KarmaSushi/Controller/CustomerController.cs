@@ -6,7 +6,7 @@ using SQLRepository;
 using Interface;
 using Model;
 
-namespace ServiceKarma.Controller
+namespace Controller
 {
     public class CustomerController : IDisposable
     {

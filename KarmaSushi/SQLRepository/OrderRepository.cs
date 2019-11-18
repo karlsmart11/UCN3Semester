@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Dapper;
 using Interface;
 using Model;
-using ServiceKarma.Model;
 
 namespace SQLRepository
 {
@@ -40,6 +39,46 @@ namespace SQLRepository
                 order.OrderLines = _orderLineRepository.GetOrderLinesByOrder(order);
 
                 return order;
+            }
+        }
+        public int InsertOrder(Order order)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+
+                //var customerIdentity = _customerRepository.InsertCustomer(order.Customer);
+                var employeeIdentity = _employeeRepository.InsertEmployee(order.Employee);
+                
+                p.Add("@Id", 0, 
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Output);
+                p.Add("@Price", order.Price);
+                //p.Add("@Time", order.Time);
+                p.Add("@CustomerId", order.Customer.Id);
+                p.Add("@EmployeeId", order.Employee.Id);
+
+                connection.Execute(
+                    sql: "dbo.spOrders_Insert", 
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+
+                //Returned order identity 
+                var orderIdentity = p.Get<int>("@Id");
+
+                foreach (var table in order.Tables)
+                {
+                    table.OrderId = orderIdentity;
+                    //var tableId = _tableRepository.InsertTable(table);
+                }
+
+                foreach (var orderLine in order.OrderLines)
+                {
+                    orderLine.OrderId = orderIdentity;
+                    //var orderLineId = _orderLineRepository.InsertOrderLine(orderLine);
+                }
+
+                return orderIdentity;
             }
         }
     }

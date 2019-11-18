@@ -3,21 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
-using ServiceKarma.Model;
 
 namespace Model
 {    [DataContract]
     public class Customer
     {
+        /// <summary>
+        /// Id of the customer from the db.
+        /// </summary>
         [DataMember]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
+        /// <summary>
+        /// Name of the customer.
+        /// </summary>
         [DataMember]
         public string Name { get; set; }
 
+        /// <summary>
+        /// The customers phone number.
+        /// </summary>
         [DataMember]
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
 
+        /// <summary>
+        /// The customers email.
+        /// </summary>
         [DataMember]
         public string Email { get; set; }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
 
-namespace ServiceKarma.Model
+namespace Model
 {
     [DataContract]
     public class Employee
@@ -14,16 +14,19 @@ namespace ServiceKarma.Model
         /// </summary>
         [DataMember]
         public int Id { get; set; }
+
         /// <summary>
         /// Name of the employee
         /// </summary>
         [DataMember]
         public string Name { get; set; }
+
         /// <summary>
         /// Email of the employee
         /// </summary>
         [DataMember]
         public string Email { get; set; }
+
         /// <summary>
         /// Phone number of the employee
         /// </summary>

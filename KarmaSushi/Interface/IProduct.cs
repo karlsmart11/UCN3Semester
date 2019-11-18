@@ -1,5 +1,4 @@
-﻿using ServiceKarma.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +12,6 @@ namespace Interface
         Product GetProductByName(string name);
         Product GetProductByPrice(double price);
         Product GetProductByCategory(Category category);
+        Product GetProductById(string id);
     }
 }
