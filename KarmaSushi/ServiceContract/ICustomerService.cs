@@ -14,6 +14,10 @@ namespace ServiceContract
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/GetCustomerById/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         [FaultContract(typeof(Error))]
         Customer GetCustomerById(string id);
 
@@ -21,6 +25,10 @@ namespace ServiceContract
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/GetCustomerByName/{Name}", BodyStyle = WebMessageBodyStyle.Bare)]
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         [FaultContract(typeof(Error))]
         Customer GetCustomerByName(string name);
 

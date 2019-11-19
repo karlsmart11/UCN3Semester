@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Implementation
-{
+{/*
     class TableService : ITable
     {
         public Table InsertTable(Table table)
@@ -28,5 +28,5 @@ namespace Implementation
                     Description = "Exception managed by the administrator"
                 });
             }
-        }
+        } */
     }
