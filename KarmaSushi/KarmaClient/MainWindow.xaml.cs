@@ -19,12 +19,12 @@ namespace KarmaClient
             System.Console.WriteLine("test");
           
 
-            MenuPanel.Children.Add(new Button() { Content = "test" });
-            MenuPanel.Children.Add(new Button() { Content = client.GetOrderById("5").Price.ToString() });
+            MenuPanel.Children.Add(new Button { Content = "test" });
+            MenuPanel.Children.Add(new Button { Content = client.GetOrderById("5").Price.ToString() });
             
             foreach (var currentOrder in client.GetAllOrders())
             {
-                MenuPanel.Children.Add(currentOrder);
+                MenuPanel.Children.Add(new Button { Content = new Button { Content = currentOrder.Time } });
             }
             
         }
