@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -53,8 +54,9 @@ namespace SQLRepository
                     direction: ParameterDirection.Output);
                 p.Add("@Price", order.Price);
                 //p.Add("@Time", order.Time);
+                p.Add("@CustomerId", order.Customer.Id);
+                p.Add("@EmployeeId", order.Employee.Id);
                 
-
                 connection.Execute(
                     sql: "dbo.spOrders_Insert", 
                     param: p,
@@ -64,11 +66,9 @@ namespace SQLRepository
                 order.Id = p.Get<int>("@Id");
 
                 foreach (var table in order.Tables)
-                {   //TODO refactor many to many
-                    table.OrderId = order.Id;
-                   
+                { 
+                    InsertTablesOrders(order, table);
                 }
-
 
                 foreach (var orderLine in order.OrderLines)
                 {
@@ -77,6 +77,22 @@ namespace SQLRepository
                 }
 
                 return order;
+            }
+        }
+
+        public void InsertTablesOrders(Order order, Table table)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@OrderId", order.Id);
+                p.Add("@TableId", table.Id);
+
+                connection.Execute(
+                    sql: "dbo.TablesOrders_Insert",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
             }
         }
     }

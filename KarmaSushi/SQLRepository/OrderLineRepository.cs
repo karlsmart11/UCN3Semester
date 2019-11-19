@@ -46,11 +46,14 @@ namespace SQLRepository
                 p.Add("@Id", 0,
                    dbType: DbType.Int32,
                    direction: ParameterDirection.Output);
+
+                connection.Execute(sql: "dbo.spOrderLine_Insert", 
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+
                 orderLine.Id = p.Get<int>("@Id");
                 return orderLine;
             }
-
-
         }
     }
 }
