@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0d83c9f9-fa8a-4714-a3d3-68da44c58919" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="65aecda2-688f-4dbc-b0fd-5eb45332898a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost/ServiceKarma/OrderService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="c5f018e4-e45b-4bf1-87ac-42f1564930e5" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?wsdl" />
-    <MetadataFile FileName="OrderService.xsd" MetadataType="Schema" ID="02ac3743-586b-4e91-b816-f0360a410183" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd2" />
-    <MetadataFile FileName="OrderService.disco" MetadataType="Disco" ID="c855704c-2170-444c-9a9a-d55f11317921" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?disco" />
-    <MetadataFile FileName="OrderService1.xsd" MetadataType="Schema" ID="5a24c986-cc8c-4f9d-b440-39d673c8ead0" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd1" />
-    <MetadataFile FileName="OrderService2.xsd" MetadataType="Schema" ID="5b4bd683-a558-4e28-9b54-17e8edace114" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd0" />
+    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="f4f80cdd-6221-4d43-9b09-1060bb3e6559" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?wsdl" />
+    <MetadataFile FileName="OrderService.xsd" MetadataType="Schema" ID="486ba4a1-3586-4018-b9b5-bbd78c818a77" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd2" />
+    <MetadataFile FileName="OrderService.disco" MetadataType="Disco" ID="6c3e55e3-87a2-4c7b-81e6-649c62acb8d2" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?disco" />
+    <MetadataFile FileName="OrderService1.xsd" MetadataType="Schema" ID="d2e85404-16ae-4776-ac48-943093484982" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd1" />
+    <MetadataFile FileName="OrderService2.xsd" MetadataType="Schema" ID="37f3ad96-0afb-46d8-abdb-fee4f2538ee1" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

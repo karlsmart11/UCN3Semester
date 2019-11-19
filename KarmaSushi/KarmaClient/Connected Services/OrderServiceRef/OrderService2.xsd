@@ -15,17 +15,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllOrders">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetAllOrdersResult" nillable="true" type="q2:ArrayOfOrder" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InsertOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="order" nillable="true" type="q2:Order" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="order" nillable="true" type="q3:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertOrderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="InsertOrderResult" nillable="true" type="q3:Order" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="InsertOrderResult" nillable="true" type="q4:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
