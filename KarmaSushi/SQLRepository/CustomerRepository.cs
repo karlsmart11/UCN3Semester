@@ -39,5 +39,30 @@ namespace SQLRepository
                 return result;
             }
         }
+
+        public Customer InsertCustomer(Customer customer)
+        {
+
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                connection.Open();
+                var p = new DynamicParameters();
+
+                p.Add("@Name", customer.Name);
+                p.Add("@Phone", customer.Phone);
+                p.Add("@Email", customer.Email);
+                p.Add("@Id", customer.Id, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                var employeeIdentity = connection.Execute(
+                    "dbo.spCustomer_Insert",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+
+                var pIdCustomer = p.Get<Int32>("Id");
+                customer.Id = pIdCustomer;
+
+                return customer;
+            }
+        }
     }
 }

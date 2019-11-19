@@ -21,6 +21,8 @@ namespace Model
         [DataMember]
         public string Name { get; set; }
 
+        //Todo boolean isAvailable for reservation
+
         #region Dapper test
 
         public int OrderId { get; set; }

@@ -46,7 +46,7 @@ namespace SQLRepository
                 p.Add("@Email", employee.Email);
                 p.Add("@Id", employee.Id, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var employeeIdentity = connection.ExecuteScalar(
+                var employeeIdentity = connection.Execute(
                     "dbo.spEmployee_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
