@@ -39,6 +39,7 @@ namespace SQLRepository
                 order.Employee = _employeeRepository.GetEmployeeById(order.EmployeeId.ToString());
                 order.Customer = _customerRepository.GetCustomerById(order.CustomerId.ToString());
                 order.OrderLines = _orderLineRepository.GetOrderLinesByOrder(order);
+                order.Tables = _tableRepository.GetTablesByOrder(order);
 
                 return order;
             }

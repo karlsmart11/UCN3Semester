@@ -9,7 +9,6 @@ using Model;
 
 namespace SQLRepository
 {
-    //TODO: Missing interface, some namespace fuckery is going on
     public class OrderLineRepository : IOrderLine
     {
         private readonly ProductRepository _productRepository = new ProductRepository();

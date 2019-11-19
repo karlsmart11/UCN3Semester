@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SQLRepository
 {   //Todo implement interface itable
-    public class TableRepository 
+    public class TableRepository
     {
         public Table InsertTable(Table table)
         {
@@ -23,11 +23,27 @@ namespace SQLRepository
                     dbType: DbType.Int32,
                     direction: ParameterDirection.Output);
                 parameters.Add("@Name", table.Name);
-                parameters.Add("@OrderId", table.OrderId);
 
-                connection.Execute("dbo.spTable_Insert", param: parameters, commandType: CommandType.StoredProcedure);
+                connection.Execute("dbo.spTable_Insert", param: parameters,
+                    commandType: CommandType.StoredProcedure);
+                
                 table.Id = parameters.Get<int>("@Id");
+                
                 return table;
+            }
+        }
+
+        public List<Table> GetTablesByOrder(Order order)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", order.Id);
+
+                var tables = connection.Query<Table>(sql: "dbo.spTable_GetByOrder", param: p,
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                return tables;
             }
         }
         
