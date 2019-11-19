@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{08340D01-9205-4100-A737-58CE92489730}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarmaClient", "KarmaClient\KarmaClient.csproj", "{3920589F-847E-4B54-B11E-703C0FB667E9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5E477B3F-FD80-4086-A9AF-0EA2CD6305DF} = {5E477B3F-FD80-4086-A9AF-0EA2CD6305DF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

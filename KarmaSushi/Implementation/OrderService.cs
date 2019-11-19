@@ -51,5 +51,25 @@ namespace Implementation
                 });
             }
         }
+
+        public List<Order> GetAllOrders()
+        {
+            try
+            {
+                using (var instance = new OrderController())
+                {
+                    return instance.GetAllOrder();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = e.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
     }
 }

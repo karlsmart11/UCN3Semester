@@ -80,7 +80,26 @@ namespace SQLRepository
                 return order;
             }
         }
+        public List<Order> GetAllOrders()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var allOrders = connection.Query<Order>(sql: "SELECT * FROM Orders").ToList();
 
+                foreach (var order in allOrders)
+                {
+                    if (order.CustomerId != 0)
+                    {
+                        order.Customer = _customerRepository.GetCustomerById(order.CustomerId.ToString());
+                    }
+                    order.Employee = _employeeRepository.GetEmployeeById(order.EmployeeId.ToString());
+                    order.OrderLines = _orderLineRepository.GetOrderLinesByOrder(order);
+                    order.Tables = _tableRepository.GetTablesByOrder(order);
+                }
+
+                return allOrders;
+            }
+        }
         public void InsertTablesOrders(Order order, Table table)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -97,6 +116,10 @@ namespace SQLRepository
             }
         }
 
-      
+        //public int AmountOfOrdersInDb()
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+        //        return connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Orders");
+        //}
     }
 }

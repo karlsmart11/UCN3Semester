@@ -21,7 +21,12 @@ namespace KarmaClient
 
             MenuPanel.Children.Add(new Button() { Content = "test" });
             MenuPanel.Children.Add(new Button() { Content = client.GetOrderById("5").Price.ToString() });
-
+            
+            foreach (var currentOrder in client.GetAllOrders())
+            {
+                MenuPanel.Children.Add(currentOrder);
+            }
+            
         }
     }
 }

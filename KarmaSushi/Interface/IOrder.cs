@@ -16,7 +16,7 @@ namespace Interface
         /// <param name="id">Id of the order to be returned</param>
         /// <returns>An order</returns>
         Order GetOrderById(string id);
-
         Order InsertOrder(Order order);
+        List<Order> GetAllOrders();
     }
 }

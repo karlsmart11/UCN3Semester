@@ -22,6 +22,12 @@ namespace Controller
             return instance.InsertOrder(order);
         }
 
+        public List<Order> GetAllOrder()
+        {
+            IOrder instance = new OrderRepository();
+            return instance.GetAllOrders();
+        }
+
         void IDisposable.Dispose()
         {
             GC.SuppressFinalize(this);
