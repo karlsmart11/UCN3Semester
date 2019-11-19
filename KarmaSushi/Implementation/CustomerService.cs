@@ -52,5 +52,25 @@ namespace Implementation
                 });
             }
         }
+
+        public Customer InsertCustomer(Customer customer)
+        {
+            try
+            {
+                using (var instance = new CustomerController())
+                {
+                    return instance.InsertCustomer(customer);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator "
+                });
+            }
+        }
     }
 }

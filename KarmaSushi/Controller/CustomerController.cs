@@ -23,6 +23,12 @@ namespace Controller
             return instance.GetCustomerByName(name);
         }
 
+        public Customer InsertCustomer(Customer customer)
+        {
+            ICustomer instance = new CustomerRepository();
+            return instance.InsertCustomer(customer);
+        }
+
 
 
 
