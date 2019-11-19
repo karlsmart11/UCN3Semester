@@ -164,6 +164,9 @@ namespace KarmaClient.OrderServiceRef {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -182,6 +185,19 @@ namespace KarmaClient.OrderServiceRef {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
             }
         }
         
@@ -689,6 +705,13 @@ namespace KarmaClient.OrderServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetOrderById", ReplyAction="http://tempuri.org/IOrderService/GetOrderByIdResponse")]
         System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> GetOrderByIdAsync(string id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetAllOrders", ReplyAction="http://tempuri.org/IOrderService/GetAllOrdersResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.OrderServiceRef.Error), Action="http://tempuri.org/IOrderService/GetAllOrdersErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        KarmaClient.OrderServiceRef.Order[] GetAllOrders();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetAllOrders", ReplyAction="http://tempuri.org/IOrderService/GetAllOrdersResponse")]
+        System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order[]> GetAllOrdersAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/InsertOrder", ReplyAction="http://tempuri.org/IOrderService/InsertOrderResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.OrderServiceRef.Error), Action="http://tempuri.org/IOrderService/InsertOrderErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
         KarmaClient.OrderServiceRef.Order InsertOrder(KarmaClient.OrderServiceRef.Order order);
@@ -730,6 +753,14 @@ namespace KarmaClient.OrderServiceRef {
         
         public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> GetOrderByIdAsync(string id) {
             return base.Channel.GetOrderByIdAsync(id);
+        }
+        
+        public KarmaClient.OrderServiceRef.Order[] GetAllOrders() {
+            return base.Channel.GetAllOrders();
+        }
+        
+        public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order[]> GetAllOrdersAsync() {
+            return base.Channel.GetAllOrdersAsync();
         }
         
         public KarmaClient.OrderServiceRef.Order InsertOrder(KarmaClient.OrderServiceRef.Order order) {

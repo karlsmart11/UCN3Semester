@@ -16,6 +16,15 @@
   <wsdl:message name="IOrderService_GetOrderById_ErrorFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q1:Error" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_GetAllOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrders" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_GetAllOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_GetAllOrders_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q2:Error" />
+  </wsdl:message>
   <wsdl:message name="IOrderService_InsertOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertOrder" />
   </wsdl:message>
@@ -23,13 +32,18 @@
     <wsdl:part name="parameters" element="tns:InsertOrderResponse" />
   </wsdl:message>
   <wsdl:message name="IOrderService_InsertOrder_ErrorFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q2:Error" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
   </wsdl:message>
   <wsdl:portType name="IOrderService">
     <wsdl:operation name="GetOrderById">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetOrderById" message="tns:IOrderService_GetOrderById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetOrderByIdResponse" message="tns:IOrderService_GetOrderById_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IOrderService/GetOrderByIdErrorFault" name="ErrorFault" message="tns:IOrderService_GetOrderById_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetAllOrders" message="tns:IOrderService_GetAllOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/GetAllOrdersResponse" message="tns:IOrderService_GetAllOrders_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IOrderService/GetAllOrdersErrorFault" name="ErrorFault" message="tns:IOrderService_GetAllOrders_ErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/InsertOrder" message="tns:IOrderService_InsertOrder_InputMessage" />
@@ -41,6 +55,18 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetOrderById">
       <soap:operation soapAction="http://tempuri.org/IOrderService/GetOrderById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrders">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/GetAllOrders" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
