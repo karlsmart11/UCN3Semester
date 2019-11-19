@@ -32,5 +32,7 @@ namespace Model
         /// </summary>
         [DataMember]
         public string Phone { get; set; }
+
+        
     }
 }

@@ -18,6 +18,7 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
+                connection.Open();
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", id);
 
@@ -31,6 +32,7 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
+                connection.Open();
                 var parameters = new DynamicParameters();
                 parameters.Add("@Name", name);
 
@@ -51,9 +53,10 @@ namespace SQLRepository
                 p.Add("@Name", customer.Name);
                 p.Add("@Phone", customer.Phone);
                 p.Add("@Email", customer.Email);
+                p.Add("@Address", customer.Address);
                 p.Add("@Id", customer.Id, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var employeeIdentity = connection.Execute(
+                var employeeIdentity = connection.ExecuteScalar(
                     "dbo.spCustomer_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);

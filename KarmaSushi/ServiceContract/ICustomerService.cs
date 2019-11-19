@@ -13,17 +13,21 @@ namespace ServiceContract
     {
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetCustomer/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
-
+            UriTemplate = "/GetCustomerById/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))]
         Customer GetCustomerById(string id);
 
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetCustomer/{Name}", BodyStyle = WebMessageBodyStyle.Bare)]
-
+            UriTemplate = "/GetCustomerByName/{Name}", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))]
         Customer GetCustomerByName(string name);
+
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "/InsertCustomer", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        Customer InsertCustomer(Customer customer);
     }
 }
