@@ -35,6 +35,12 @@ namespace Controller
             return instance.GetProductByCategory(category);
         }
 
+        public List <Product> GetAllProducts ()
+        {
+            IProduct instance = new ProductRepository();
+            return instance.GetAllProducts();
+        }
+
 
 
         void IDisposable.Dispose()

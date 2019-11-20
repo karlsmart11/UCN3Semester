@@ -13,5 +13,7 @@ namespace Interface
         Product GetProductByPrice(double price);
         Product GetProductByCategory(Category category);
         Product GetProductById(string id);
+
+        List<Product> GetAllProducts();
     }
 }
