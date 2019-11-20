@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarmaClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="900" Width="1600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -15,34 +15,89 @@
         <TabControl x:Name="TabColumn" Grid.Column="0">
             <TabItem Header="Menu">
                 <ScrollViewer>
-                    <WrapPanel x:Name="MenuPanel" Orientation="Horizontal">                        
-                    </WrapPanel>
+                    <WrapPanel x:Name="MenuPanel" Orientation="Horizontal"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Placeholder">
+                <!-- XAML example of how the Menu buttons with products should be presented -->
                 <Grid>
-                    <Button FontSize="8" Margin="23,10,0,0"/>
+                    <Button x:Name="TestButton" FontSize="8" Margin="23,10,0,0">
+                        <Grid Background="Transparent"
+                              ShowGridLines="True"
+                              Height="{Binding ActualHeight, ElementName=TestButton}"
+                              Width="{Binding ActualWidth, ElementName=TestButton}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Some product name" FontSize="20"/>
+                            <TextBlock Grid.Row="1" FontSize="18"
+                                       TextWrapping="Wrap"
+                                       Margin="4"
+                                       Text="Some Product description. That for some reason is fucking long that it needs to wrap multiple times"/>
+
+                            <Grid Row="2" Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Grid.Column="0" Content="Price: 100"
+                                       FontSize="20" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button x:Name="LargeDescriptionButtonTemplate" Grid.Column="1"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        FontSize="20"
+                                        Content=">>>" Click="LargeDescriptionButtonTemplate_Click" 
+                                        Width="Auto" 
+                                        Height="Auto"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
                 </Grid>
+                <!-- END - XAML example -->
             </TabItem>
         </TabControl>
 
         <Grid Grid.Column="1">
-            <ListBox x:Name="OrderList" HorizontalAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                            <Label Grid.Column="0" Content="{Binding Name}"/>
+                <ListBox x:Name="OrderList" 
+                         HorizontalAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="Transparent" Width="{Binding ActualWidth, ElementName=OrderList}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Name}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Price}" HorizontalAlignment="Right"/>
+                                <Button Grid.Column="2" Width="Auto" Height="Auto"
+                                        HorizontalAlignment="Right"
+                                        Content="X" Background="Red"
+                                        Click="DeleteBtn_Click" Margin="0,0,20,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Button x:Name="CreateOrderBtn" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Click="CreateOrderBtn_Click">
+                        Create Order
+                    </Button>
+                    <Button x:Name="ClearBtn" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Click="ClearBtn_Click" >
+                        Clear
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

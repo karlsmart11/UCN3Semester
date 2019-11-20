@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using KarmaClient.OrderServiceRef;
 using KarmaClient.ProductServiceRef;
+using Product = KarmaClient.ProductServiceRef.Product;
 
 namespace KarmaClient
 {
@@ -10,8 +14,15 @@ namespace KarmaClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ProductServicesClient client = new ProductServicesClient();
-        private List<Product> pList = new List<Product>(); 
+        /// <summary>
+        /// Client reference for the Product service.
+        /// </summary>
+        private readonly ProductServicesClient _client = new ProductServicesClient();
+        /// <summary>
+        /// List holding products to display in list of selected products.
+        /// </summary>
+        private readonly List<Product> _pList = new List<Product>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,66 +31,128 @@ namespace KarmaClient
 
         private void PopulateMenu()
         {
-            foreach (var p in client.GetAllProducts())
+            foreach (var p in _client.GetAllProducts())
             {
-                MenuPanel.Children.Add(new Button { Content = CreateButton(p) });
+                MenuPanel.Children.Add(CreateButton(p));
             }
         }
 
-        //Create menu button object
+        // Create menu button object.
         private Button CreateButton(Product product)
         {
+            // Grid defining the rows of stuff in the button.
             var rows = new Grid
             {
                 RowDefinitions = { new RowDefinition(), new RowDefinition(), new RowDefinition()},
-                
+                Background = Brushes.Transparent,
+                ShowGridLines = true,
+                Height = 300, //Set this to match the height and width of the menuButton
+                Width = 300
             };
 
+            // Grid defining the two columns in the last row of the 'rows' grid.
             var columns = new Grid
             {
-                ColumnDefinitions = {new ColumnDefinition(), new ColumnDefinition()},
-
+                ColumnDefinitions = { new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) },
+                    new ColumnDefinition() },
+                Background = Brushes.Transparent
             };
-            
+
+            var nameLbl = new Label();
+            rows.Children.Add(nameLbl);
+            Grid.SetRow(nameLbl, 0);
+            nameLbl.Content = product.Name;
+
+            var descriptionLbl = new TextBlock{TextWrapping = TextWrapping.Wrap};
+            rows.Children.Add(descriptionLbl);
+            Grid.SetRow(descriptionLbl, 1);
+            // If product.Description <= to 82 char put 
+            descriptionLbl.Text = product.Description == null || product.Description.Length <= 82 ?
+                product.Description : product.Description.Substring(0, Math.Min(82, product.Description.Length));
+
             rows.Children.Add(columns);
             Grid.SetRow(columns, 2);
 
-            var namelbl = new Label();
-            rows.Children.Add(namelbl);
-            Grid.SetRow(namelbl, 0);
-            namelbl.Content = product.Name;
+            var priceLbl = new Label();
+            columns.Children.Add(priceLbl);
+            Grid.SetColumn(priceLbl, 0);
+            priceLbl.Content = product.Price;
 
-            var descriptionlbl = new Label();
-            rows.Children.Add(descriptionlbl);
-            Grid.SetRow(descriptionlbl, 1);
-            descriptionlbl.Content = product.Description;
-
-            var pricelbl = new Label();
-            columns.Children.Add(pricelbl);
-            Grid.SetColumn(pricelbl, 0);
-            descriptionlbl.Content = product.Price;
+            // Small button start--
+            var bigDisBtn = new Button
+            {
+                Content = ">>>",
+                Height = Double.NaN,
+                Width = Double.NaN // Double.NaN = stretch from xaml
+            };
+            columns.Children.Add(bigDisBtn);
+            Grid.SetColumn(bigDisBtn, 1);
+            bigDisBtn.Click += (sender, e) => MessageBox.Show(product.Description);
+            // --End small button
 
             var b = new Button
             {
-                Content = rows
+                Content = rows,
+                //Height = 120,  --Modify the button. Defaults for h+w can be found in App.xaml
+                //Width = 120
             };
 
-            b.Click += new RoutedEventHandler((sender, e) => AddToOrderList(sender, e, product)); 
+            // Attaches an event handler to the buttons click event
+            b.Click += (sender, e) => AddToOrderList(product); 
 
             return b;
         }
 
         ///Adds menu item to order list by id
-        private void AddToOrderList(object sender, RoutedEventArgs e, Product p)
+        private void AddToOrderList(Product p)
         {
-            pList.Add(p);
+            _pList.Add(p);
+
+            //TODO create order line objects.
+
+            UpdateOrderList();
+        }
+
+        private void CreateOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO add order lines to List<OrderLine>. Build Order object, populating all required properties.
+            //Client.InsertOrder(Order)
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var selected in OrderList.SelectedItems)
+            {
+                _pList.Remove((Product)selected);
+            }
+            UpdateOrderList();
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _pList.Clear();
             UpdateOrderList();
         }
 
         private void UpdateOrderList()
         {
             OrderList.ItemsSource = null;
-            OrderList.ItemsSource = pList;            
+            OrderList.ItemsSource = _pList;            
         }
+
+
+
+
+
+
+
+
+
+        // This click event handler is only for demonstration purposes TODO remove when releasing
+        private void LargeDescriptionButtonTemplate_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("The Large Description of the product item goes here");
+        }
+
     }
 }

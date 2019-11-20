@@ -16,12 +16,14 @@
         <Style TargetType="{x:Type Grid}">
             <Setter Property="Background" Value="#FF1F1F20" />
             <Setter Property="Margin" Value="0" />
+            <!--<Setter Property="Height" Value="auto" />-->
+            <!--<Setter Property="Width" Value="auto" />-->
         </Style>
 
         <!-- Label Styling -->
         <Style TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="20" />
+            <!--<Setter Property="FontSize" Value="20" />-->
             <Setter Property="Background" Value="{x:Null}" />
         </Style>
 
@@ -41,6 +43,7 @@
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="4"/>
             <Setter Property="Background" Value="{x:Null}" />
         </Style>
 
@@ -49,7 +52,6 @@
             <Setter Property="Background" Value="#FF3F3F46" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
         </Style>
-
 
         <!-- TabControl Styling -->
         <Style TargetType="{x:Type TabItem}">
@@ -213,8 +215,8 @@
             <Setter Property="Background" Value="#FF202F49" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Width" Value="120" />
-            <Setter Property="Height" Value="120" />
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="300" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
             <Setter Property="Content" Value="NewButton" />
