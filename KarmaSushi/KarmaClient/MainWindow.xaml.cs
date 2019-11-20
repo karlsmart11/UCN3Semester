@@ -125,10 +125,23 @@ namespace KarmaClient
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var selected in OrderList.SelectedItems)
+            // smallDel represents the small X buttons inside list
+            Button smallDel = (Button) sender;
+            if (smallDel != null)
             {
-                _pList.Remove((Product)selected);
+                if (smallDel.DataContext is Product product)
+                {
+                    _pList.Remove(product);
+                }
             }
+            else
+            {
+                foreach (var selected in OrderList.SelectedItems)
+                {
+                    _pList.Remove((Product) selected);
+                }
+            }
+
             UpdateOrderList();
         }
 
