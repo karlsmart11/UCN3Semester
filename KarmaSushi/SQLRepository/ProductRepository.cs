@@ -13,6 +13,7 @@ namespace SQLRepository
 {
     public class ProductRepository : IProduct
     {
+       
         public Product GetProductById(string id)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -67,5 +68,17 @@ namespace SQLRepository
                 return result;
             }
         }
+
+        public List <Product> GetAllProducts ()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var allProducts = connection.Query<Product>(sql: "SELECT * FROM Products").ToList();
+                
+                
+                return allProducts;
+            }
+        }
+
     }
 }

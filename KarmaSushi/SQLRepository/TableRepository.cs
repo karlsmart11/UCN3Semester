@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 
 namespace SQLRepository
-{   //Todo implement interface itable
-    public class TableRepository
+{   
+    public class TableRepository : ITable
     {
         public Table InsertTable(Table table)
         {
@@ -46,6 +46,6 @@ namespace SQLRepository
                 return tables;
             }
         }
-        
+
     }
 }

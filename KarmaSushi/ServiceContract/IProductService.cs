@@ -8,28 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceContract
-{
-    public interface IProductService
-    {
+{ [ServiceContract]
+   public interface IProductService
+    { 
+    [OperationContract]
+    [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetProductBtId/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
+    [FaultContract(typeof(Error))]
+    Product GetProductById(string id);
+
+
+    [OperationContract]
+    [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetProductByName/{Name}", BodyStyle = WebMessageBodyStyle.Bare)]
+    [FaultContract(typeof(Error))]
+    Product GetProductByName(string name);
+
+    [OperationContract]
+    [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetProductByCategory/{Category}", BodyStyle = WebMessageBodyStyle.Bare)]
+    [FaultContract(typeof(Error))]
+    Product GetProductByCategory(Category category);
+
+     [OperationContract]
+    [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetProductByPrice/{Price}", BodyStyle = WebMessageBodyStyle.Bare)]
+    [FaultContract(typeof(Error))]
+    Product GetProductByPrice(double price);
+
+
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetProduct/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
+                    UriTemplate = "/GetProducts/", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] 
+        List<Product> GetAllProducts();
 
-        [FaultContract(typeof(Error))]
-        Product GetProductById(string id);
 
-        [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetProduct/{Price}", BodyStyle = WebMessageBodyStyle.Bare)]
-
-        [FaultContract(typeof(Error))]
-        Product GetProductByPrice(double price);
-
-        [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetProduct/{Price}", BodyStyle = WebMessageBodyStyle.Bare)]
-
-        [FaultContract(typeof(Error))]
-        Product GetProductByCategory(Category category);
     }
+
 }
+
