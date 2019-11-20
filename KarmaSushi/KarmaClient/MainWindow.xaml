@@ -20,12 +20,14 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Placeholder">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid>
+                    <Button FontSize="8" Margin="23,10,0,0" Click="Button_Click"/>
+                </Grid>
             </TabItem>
         </TabControl>
 
         <Grid Grid.Column="1">
-            <ListBox x:Name="OrderList" Grid.Row="1" HorizontalAlignment="Stretch">
+            <ListBox x:Name="OrderList" HorizontalAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="333dcdb7-659b-4b45-93db-6a3c40338825" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ServiceKarma/OrderService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="OrderService.wsdl" MetadataType="Wsdl" ID="68e7bb1f-c50a-4d89-bae2-4529d615b643" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?wsdl" />
+    <MetadataFile FileName="OrderService.xsd" MetadataType="Schema" ID="222fdb96-e782-48c9-846e-d42638cb3696" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd2" />
+    <MetadataFile FileName="OrderService.disco" MetadataType="Disco" ID="f2462bc9-9cb2-412d-8596-b0cda1148b93" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?disco" />
+    <MetadataFile FileName="OrderService1.xsd" MetadataType="Schema" ID="2e8970b5-a0ba-4ba0-a639-9509afd8dc21" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd1" />
+    <MetadataFile FileName="OrderService2.xsd" MetadataType="Schema" ID="b8490a5d-b3f4-4eaa-823c-6e40e00baee0" SourceId="1" SourceUrl="http://localhost/ServiceKarma/OrderService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
