@@ -21,7 +21,7 @@
             </TabItem>
             <TabItem Header="Placeholder">
                 <Grid>
-                    <Button FontSize="8" Margin="23,10,0,0" Click="Button_Click"/>
+                    <Button FontSize="8" Margin="23,10,0,0"/>
                 </Grid>
             </TabItem>
         </TabControl>

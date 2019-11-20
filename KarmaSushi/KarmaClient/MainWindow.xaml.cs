@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
-using KarmaClient.OrderServiceRef;
+using KarmaClient.ProductServiceRef;
 
 namespace KarmaClient
 {
@@ -9,23 +10,20 @@ namespace KarmaClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        ///private readonly List<Button> _MenuItems = new List<Button>;
+        private ProductServicesClient client = new ProductServicesClient();
+        private List<Product> pList = new List<Product>(); 
         public MainWindow()
         {
             InitializeComponent();
+            PopulateMenu();            
+        }
 
-            OrderServiceClient client = new OrderServiceClient();
-
-            System.Console.WriteLine("test");
-          
-
-            MenuPanel.Children.Add(new Button { Content = "test" });
-            MenuPanel.Children.Add(new Button { Content = client.GetOrderById("5").Price.ToString() });
-            
-            foreach (var currentOrder in client.GetAllOrders())
+        private void PopulateMenu()
+        {
+            foreach (var p in client.GetAllProducts())
             {
-                MenuPanel.Children.Add(new Button { Content = new Button { Content = currentOrder.Time, FontSize = 8} });
-            }        
+                MenuPanel.Children.Add(new Button { Content = CreateButton(p) });
+            }
         }
 
         //Create menu button object
@@ -66,21 +64,22 @@ namespace KarmaClient
                 Content = rows
             };
 
-            b.Click += RoutedEventHandler(addToOrderList);
+            b.Click += new RoutedEventHandler((sender, e) => AddToOrderList(sender, e, product)); 
 
             return b;
         }
 
         ///Adds menu item to order list by id
-        private void addToOrderList(object sender, RoutedEventArgs e)
+        private void AddToOrderList(object sender, RoutedEventArgs e, Product p)
         {
-            
-            return;
+            pList.Add(p);
+            UpdateOrderList();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UpdateOrderList()
         {
-            
+            OrderList.ItemsSource = null;
+            OrderList.ItemsSource = pList;            
         }
     }
 }
