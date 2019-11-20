@@ -12,26 +12,6 @@ namespace Implementation
 {
     public class ProductService : IProductService
     {
-        public Product GetProductByCategory(Category category)
-        {
-            try
-            {
-                using (var instance = new ProductController())
-                {
-                    return instance.GetProductByCategory(category);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new FaultException<Error>(new Error()
-                {
-                    CodigoError = "10001",
-                    Mensaje = ex.Message,
-                    Description = "Exception managed by the administrator"
-                });
-            }
-        }
-
         public Product GetProductById(string id)
         {
             try
@@ -52,6 +32,48 @@ namespace Implementation
             }
         }
 
+        public Product GetProductByName(string name)
+        {
+            try
+            {
+                using (var instance = new ProductController())
+                {
+                    return instance.GetProductByName(name);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public Product GetProductByCategory(Category category)
+        {
+            try
+            {
+                using (var instance = new ProductController())
+                {
+                    return instance.GetProductByCategory(category);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+
+
+        }
+
         public Product GetProductByPrice(double price)
         {
             try
@@ -59,6 +81,26 @@ namespace Implementation
                 using (var instance = new ProductController())
                 {
                     return instance.GetProductByPrice(price);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public List <Product> GetAllProducts()
+        {
+            try
+            {
+                using (var instance = new ProductController())
+                {
+                    return instance.GetAllProducts();
                 }
             }
             catch (Exception ex)

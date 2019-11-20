@@ -13,7 +13,7 @@ namespace SQLRepository
 {
     public class ProductRepository : IProduct
     {
-        private readonly ProductRepository _productRepository = new ProductRepository();
+       
         public Product GetProductById(string id)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
