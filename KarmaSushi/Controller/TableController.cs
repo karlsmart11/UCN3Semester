@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    class TableController : IDisposable
+    public class TableController : IDisposable
     {
         public Table InsertTable (Table table)
         {

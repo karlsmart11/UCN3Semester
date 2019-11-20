@@ -1,22 +1,24 @@
-﻿using Interface;
+﻿using Controller;
 using Model;
+using ServiceContract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Implementation
-{/*
-    class TableService : ITable
+{
+    class TableService : ITableServices
     {
         public Table InsertTable(Table table)
         {
             try
-            {   //Todo table controller
+            {
                 using (var instance = new TableController())
                 {
-                    return instance.GetOrderById(id);
+                    return instance.InsertTable(table);
                 }
             }
             catch (Exception ex)
@@ -28,5 +30,7 @@ namespace Implementation
                     Description = "Exception managed by the administrator"
                 });
             }
-        } */
+        }
     }
+}
+    

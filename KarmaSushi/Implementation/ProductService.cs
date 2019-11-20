@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Implementation
 {
-    public class ProductService : IProductService
+    public class ProductService : IProductServices
     {
         public Product GetProductById(string id)
         {
@@ -51,7 +51,7 @@ namespace Implementation
                 });
             }
         }
-
+        /*
         public Product GetProductByCategory(Category category)
         {
             try
@@ -92,9 +92,9 @@ namespace Implementation
                     Description = "Exception managed by the administrator"
                 });
             }
-        }
+        }*/
 
-        public List <Product> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             try
             {

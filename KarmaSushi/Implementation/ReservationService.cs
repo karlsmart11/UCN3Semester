@@ -1,9 +1,4 @@
-﻿using ServiceKarma.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using ServiceContract;
 using Model;
 using Controller;
@@ -11,7 +6,7 @@ using System.ServiceModel;
 
 namespace Implementation
 {
-    public class ReservationService : IReservationService
+    public class ReservationService : IReservationServices
     {
         public Reservation GetByCustomer(Customer customer)
         {

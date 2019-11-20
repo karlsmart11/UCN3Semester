@@ -46,7 +46,9 @@
     <Compile Include="ICustomerService.cs" />
     <Compile Include="IEmployeeService.cs" />
     <Compile Include="IOrderService.cs" />
-    <Compile Include="ITable.cs" />
+    <Compile Include="IProductServices.cs" />
+    <Compile Include="IReservationServices.cs" />
+    <Compile Include="ITableServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

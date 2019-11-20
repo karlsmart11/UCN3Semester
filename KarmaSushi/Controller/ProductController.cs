@@ -22,7 +22,7 @@ namespace Controller
             return instance.GetProductByName(name);
         }
 
-
+        /*
         public Product GetProductByPrice(double price)
         {
             IProduct instance = new ProductRepository();
@@ -34,8 +34,8 @@ namespace Controller
             IProduct instance = new ProductRepository();
             return instance.GetProductByCategory(category);
         }
-
-        public List <Product> GetAllProducts ()
+        */
+        public List<Product> GetAllProducts ()
         {
             IProduct instance = new ProductRepository();
             return instance.GetAllProducts();

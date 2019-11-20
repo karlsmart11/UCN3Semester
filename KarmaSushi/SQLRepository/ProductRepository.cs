@@ -30,18 +30,7 @@ namespace SQLRepository
             }
         }
 
-        public Product GetProductByCategory(Category category)
-        {
-            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Category", category);
-
-                var result = connection.QuerySingle<Product>("dbo.spProduct_GetByCategory", param: parameters, commandType: CommandType.StoredProcedure);
-
-                return result;
-            }
-        }
+       
 
         public Product GetProductByName(string name)
         {
@@ -55,7 +44,7 @@ namespace SQLRepository
                 return result;
             }
         }
-
+/*
         public Product GetProductByPrice(double price)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -67,15 +56,17 @@ namespace SQLRepository
 
                 return result;
             }
-        }
+        }*/
 
-        public List <Product> GetAllProducts ()
+        public List<Product> GetAllProducts ()
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                var allProducts = connection.Query<Product>(sql: "SELECT * FROM Products").ToList();
-                
-                
+                connection.Open();
+                var allProducts = connection.Query<Product>(sql: "SELECT * FROM Product").ToList();
+               
+
+
                 return allProducts;
             }
         }

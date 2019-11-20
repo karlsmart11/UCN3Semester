@@ -45,7 +45,10 @@
     <Compile Include="CustomerService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="OrderService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationService.cs" />
+    <Compile Include="TableServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller.csproj">
