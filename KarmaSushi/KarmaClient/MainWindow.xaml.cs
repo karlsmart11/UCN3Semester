@@ -43,7 +43,10 @@ namespace KarmaClient
             // Grid defining the rows of stuff in the button.
             var rows = new Grid
             {
-                RowDefinitions = { new RowDefinition(), new RowDefinition(), new RowDefinition()},
+                RowDefinitions = { 
+                    new RowDefinition(), 
+                    new RowDefinition { Height = new GridLength(3, GridUnitType.Star) },
+                    new RowDefinition()},
                 Background = Brushes.Transparent,
                 ShowGridLines = true,
                 Height = 300, //Set this to match the height and width of the menuButton
@@ -53,7 +56,8 @@ namespace KarmaClient
             // Grid defining the two columns in the last row of the 'rows' grid.
             var columns = new Grid
             {
-                ColumnDefinitions = { new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) },
+                ColumnDefinitions = {
+                    new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) },
                     new ColumnDefinition() },
                 Background = Brushes.Transparent
             };
@@ -67,8 +71,8 @@ namespace KarmaClient
             rows.Children.Add(descriptionLbl);
             Grid.SetRow(descriptionLbl, 1);
             // If product.Description <= to 82 char put 
-            descriptionLbl.Text = product.Description == null || product.Description.Length <= 82 ?
-                product.Description : product.Description.Substring(0, Math.Min(82, product.Description.Length));
+            descriptionLbl.Text = product.Description == null || product.Description.Length <= 178 ?
+                product.Description : product.Description.Substring(0, Math.Min(178, product.Description.Length)) + ". . .";
 
             rows.Children.Add(columns);
             Grid.SetRow(columns, 2);
