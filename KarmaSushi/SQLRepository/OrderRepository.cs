@@ -26,7 +26,7 @@ namespace SQLRepository
 
         public Order GetOrderById(string id)
         {
-            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            using (IDbConnection connection =  new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", id);

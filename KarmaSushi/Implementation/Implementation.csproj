@@ -43,8 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
-    <Compile Include="EmployeeService.cs" />
-    <Compile Include="OrderService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservationService.cs" />
@@ -62,6 +60,10 @@
     <ProjectReference Include="..\ServiceContract\ServiceContract.csproj">
       <Project>{32ca725a-b92a-44e6-99e2-136e52e14a2a}</Project>
       <Name>ServiceContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLRepository\SQLRepository.csproj">
+      <Project>{A265454A-6146-49C7-813C-BF9422C972AC}</Project>
+      <Name>SQLRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

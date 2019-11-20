@@ -5,14 +5,23 @@ using System.Web;
 using SQLRepository;
 using Interface;
 using Model;
+using System.Text;
 
 namespace Controller
-{
+{ 
     public class CustomerController : IDisposable
     {
+
+        
+        
+        public CustomerController()
+        {
+         
+        }
+
         public Customer GetCustomerById (string id)
         {
-            ICustomer instance = new CustomerRepository();
+            ICustomer instance =  new CustomerRepository();
             return instance.GetCustomerById(id);
         }
 

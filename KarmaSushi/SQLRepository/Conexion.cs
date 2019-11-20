@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace SQLRepository
 {
-    class Conexion
+    public static class Conexion
     {
         /// <summary>
         /// Method that returns a connectionstring mainly use when working with the database

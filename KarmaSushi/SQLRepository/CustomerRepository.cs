@@ -14,9 +14,19 @@ namespace SQLRepository
 {
     public class CustomerRepository : ICustomer
     {
+        StringBuilder connString = new StringBuilder("Data Source = kraka.ucn.dk;");
+        //private string conn = Conexion.GetConnectionString();
+
+        public CustomerRepository()
+        {
+            connString.Append("Initial Catalog = dmab0918_1074178;");
+            connString.Append("Persist Security Info = True;");
+            connString.Append("User Id = dmab0918_1074178;");
+            connString.Append("Password = Password1!");
+        }
         public Customer GetCustomerById(string id)
         {
-            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            using (IDbConnection connection = new SqlConnection(connString.ToString()))
             {
                 connection.Open();
                 var parameters = new DynamicParameters();

@@ -12,6 +12,17 @@ namespace Controller
 {
    public class EmployeeController : IDisposable
     {
+        public EmployeeController()
+        {
+
+        }
+
+        public EmployeeController(IEmployee employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
+
+        IEmployee _employeeRepository = null;
         /// <summary>
         /// Method that creates a new instance of the class EmployeeRepository in an IEmployee interface variable
         /// and return and Employee found by the Id
@@ -20,7 +31,7 @@ namespace Controller
         /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {
-            IEmployee instance = new EmployeeRepository();
+            IEmployee instance = _employeeRepository ?? new EmployeeRepository();
             return instance.GetEmployeeById(id);
         }
 

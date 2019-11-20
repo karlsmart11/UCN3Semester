@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Implementation
 {
-    class EmployeeService : IEmployeeService
+    class EmployeeManager : IEmployeeService
     {
         /// <summary>
         /// Method that creates an instance of EmployeeController and use the method GetEmployeeById from the controller.

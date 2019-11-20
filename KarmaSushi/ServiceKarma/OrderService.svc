@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.OrderService" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.OrderManager" %>
