@@ -20,10 +20,11 @@
             <!--<Setter Property="Width" Value="auto" />-->
         </Style>
 
+        
         <!-- Label Styling -->
         <Style TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White" />
-            <!--<Setter Property="FontSize" Value="20" />-->
+            <Setter Property="FontSize" Value="10" />
             <Setter Property="Background" Value="{x:Null}" />
         </Style>
 

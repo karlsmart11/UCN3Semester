@@ -17,11 +17,13 @@ namespace KarmaClient
         /// <summary>
         /// Client reference for the Product service.
         /// </summary>
-        private readonly ProductServicesClient _client = new ProductServicesClient();
+        private readonly ProductServicesClient _pClient = new ProductServicesClient();
+        private readonly OrderServiceClient _oClient = new OrderServiceClient();
         /// <summary>
         /// List holding products to display in list of selected products.
         /// </summary>
         private readonly List<Product> _pList = new List<Product>();
+        private readonly List<OrderLine> _oList = new List<OrderLine>();
 
         public MainWindow()
         {
@@ -31,7 +33,7 @@ namespace KarmaClient
 
         private void PopulateMenu()
         {
-            foreach (var p in _client.GetAllProducts())
+            foreach (var p in _pClient.GetAllProducts())
             {
                 MenuPanel.Children.Add(CreateButton(p));
             }
@@ -120,7 +122,21 @@ namespace KarmaClient
         private void CreateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
             //TODO add order lines to List<OrderLine>. Build Order object, populating all required properties.
-            //Client.InsertOrder(Order)
+            var o = new Order();
+
+            foreach (Product p in _pList)
+            {
+                var op = new OrderServiceRef.Product();
+                op.Price = p.Price;
+                op.Name = p.Name;
+                op.Id = p.Id;
+
+                _oList.Add(new OrderLine { Product = op});
+            }
+
+            o.OrderLines = _oList;
+
+            _oClient.InsertOrder(o);
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
@@ -156,13 +172,6 @@ namespace KarmaClient
             OrderList.ItemsSource = null;
             OrderList.ItemsSource = _pList;            
         }
-
-
-
-
-
-
-
 
 
         // This click event handler is only for demonstration purposes TODO remove when releasing
