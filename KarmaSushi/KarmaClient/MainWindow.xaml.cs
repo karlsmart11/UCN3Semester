@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -122,21 +123,47 @@ namespace KarmaClient
         private void CreateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
             //TODO add order lines to List<OrderLine>. Build Order object, populating all required properties.
-            var o = new Order();
-
-            foreach (Product p in _pList)
+            if (_pList.Count > 0)
             {
-                var op = new OrderServiceRef.Product();
-                op.Price = p.Price;
-                op.Name = p.Name;
-                op.Id = p.Id;
+                var sum = new decimal(0.0);
+                foreach (var p in _pList)
+                {
+                    //TODO Refactor p.price and order.price to matching type
+                    sum =+ (decimal) p.Price;
 
-                _oList.Add(new OrderLine { Product = op});
+                    var op = new OrderServiceRef.Product
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Description = p.Description,
+                        Price = p.Price
+                    };
+
+                    _oList.Add(new OrderLine
+                    {
+                        Product = op, 
+                        Quantity = _pList.Count(x => x == p)
+                    });
+                }
+
+                //TODO Find a way to attach tables
+                var selectedTables = new List<Table>{new Table{Id = 1}, new Table{Id = 2}};
+
+                var o = new Order
+                {
+                    Price = sum,
+                    Employee = new Employee{Id = 1}, //TODO Find way to attach real employee
+                    Tables = selectedTables.ToArray(),
+                    OrderLines = _oList.ToArray()
+                };
+
+                _oClient.InsertOrder(o);
+            }
+            else
+            {
+                MessageBox.Show("No products selected");
             }
 
-            o.OrderLines = _oList;
-
-            _oClient.InsertOrder(o);
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)

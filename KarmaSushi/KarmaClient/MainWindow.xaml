@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarmaClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1600">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -64,11 +64,22 @@
         <Grid Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
+                    <!--<RowDefinition/>-->
                     <RowDefinition Height="9*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                
+                <!--<Grid Grid.Row="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="EmpIdTxt" Width="Auto" BorderBrush="Black" BorderThickness="2">EmployeeId</TextBox>
+                    <TextBox x:Name="TableIdTxt" Grid.Column="1" Width="Auto" BorderBrush="Black" BorderThickness="2">TableID</TextBox>
+                </Grid>-->
 
                 <ListBox x:Name="OrderList" 
+                         Grid.Row="0"
                          HorizontalAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
