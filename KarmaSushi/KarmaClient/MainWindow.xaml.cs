@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.Remoting.Messaging;
+using System.ServiceModel.Description;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,17 +22,25 @@ namespace KarmaClient
         /// Client reference for the Product service.
         /// </summary>
         private readonly ProductServicesClient _pClient = new ProductServicesClient();
+        /// <summary>
+        /// Client reference for the Order service.
+        /// </summary>
         private readonly OrderServiceClient _oClient = new OrderServiceClient();
         /// <summary>
         /// List holding products to display in list of selected products.
         /// </summary>
         private readonly List<Product> _pList = new List<Product>();
+        /// <summary>
+        /// List holding order lines used when creating order to assign quantity to products.
+        /// </summary>
         private readonly List<OrderLine> _oList = new List<OrderLine>();
+        //private readonly List<Employee> _eList = new List<Employee>();
 
         public MainWindow()
         {
             InitializeComponent();
-            PopulateMenu();            
+            PopulateMenu();
+            PopulateDropMenu();
         }
 
         private void PopulateMenu()
@@ -38,6 +49,18 @@ namespace KarmaClient
             {
                 MenuPanel.Children.Add(CreateButton(p));
             }
+        }
+        private void PopulateDropMenu()
+        {
+            //Placeholder until correct implementation
+            foreach (var p in _pClient.GetAllProducts())
+            {
+                EmpDropMenu.Items.Add(new MenuItem { Header = "_" + p.Name, IsCheckable = true });
+            }
+            //foreach (var e in _eClient.GetAllEmployees())
+            //{
+            //    EmpDropMenu.Items.Add(new MenuItem{Header = "_" + e.Name, IsCheckable = true});
+            //}
         }
 
         // Create menu button object.
@@ -157,7 +180,11 @@ namespace KarmaClient
                     OrderLines = _oList.ToArray()
                 };
 
-                _oClient.InsertOrder(o);
+                //var finishOrderWindow = new FinishOrderWindow{ CurrentOrder = o, ComboboxData = eClient.GetAllEmployees(), ListData = tClient.GetAllAvailableTables()};
+                //finishOrderWindow.Show();
+
+                //TODO do this in new window
+                //_oClient.InsertOrder(o);
             }
             else
             {
