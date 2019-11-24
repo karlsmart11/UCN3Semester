@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Implementation
 {
-    class TableService : ITableServices
+    public class TableService : ITableServices
     {
         public Table InsertTable(Table table)
         {
@@ -19,6 +19,46 @@ namespace Implementation
                 using (var instance = new TableController())
                 {
                     return instance.InsertTable(table);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public List<Table> GetTablesByOrder(Order order)
+        {
+            try
+            {
+                using (var instance = new TableController())
+                {
+                    return instance.GetTablesByOrder(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public List<Table> GetAllTables()
+        {
+            try
+            {
+                using (var instance = new TableController())
+                {
+                    return instance.GetAllTables();
                 }
             }
             catch (Exception ex)

@@ -26,7 +26,7 @@ namespace ServiceContract
         Employee GetEmployeeById(string id);
 
         /// <summary>
-        /// TODO Figure out a way to handle the UriTemplate with an object. Probably also need to change WebGet to WebInvoke
+        /// Inserts an employee into the database with all needed members set
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
@@ -34,5 +34,13 @@ namespace ServiceContract
         [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "/InsertEmployee", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         Employee InsertEmployee(Employee employee);
+
+        [OperationContract]
+        [WebGet(RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetAllEmployees", 
+            BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        List<Employee> GetAllEmployees();
     }
 }

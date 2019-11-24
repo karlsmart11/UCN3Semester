@@ -30,8 +30,6 @@ namespace SQLRepository
             }
         }
 
-       
-
         public Product GetProductByName(string name)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -62,10 +60,7 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                connection.Open();
                 var allProducts = connection.Query<Product>(sql: "SELECT * FROM Product").ToList();
-               
-
 
                 return allProducts;
             }

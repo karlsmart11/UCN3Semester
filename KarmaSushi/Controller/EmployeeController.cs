@@ -12,22 +12,20 @@ namespace Controller
 {
    public class EmployeeController : IDisposable
     {
-        public EmployeeController()
-        {
+        private readonly IEmployee _employeeRepository = null;
 
-        }
+        public EmployeeController() { }
 
         public EmployeeController(IEmployee employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
 
-        IEmployee _employeeRepository = null;
         /// <summary>
         /// Method that creates a new instance of the class EmployeeRepository in an IEmployee interface variable
         /// and return and Employee found by the Id
         /// </summary>
-        /// <param Name="id">Id of the wanted employee</param>
+        /// <param name="id">Id of the wanted employee</param>
         /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {
@@ -40,6 +38,13 @@ namespace Controller
             IEmployee instance = new EmployeeRepository();
             return instance.InsertEmployee(employee);
         }
+
+        public List<Employee> GetAllEmployees()
+        {
+            IEmployee instance = _employeeRepository ?? new EmployeeRepository();
+            return instance.GetAllEmployees();
+        }
+
 
         /// <summary>
         /// IDisposable allows the system to close an unmanaged resource that is not in use anymore

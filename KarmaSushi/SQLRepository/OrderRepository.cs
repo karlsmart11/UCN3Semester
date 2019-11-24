@@ -110,7 +110,7 @@ namespace SQLRepository
                 p.Add("@TableId", table.Id);
 
                 connection.Execute(
-                    sql: "dbo.TablesOrders_Insert",
+                    sql: "dbo.spTablesOrders_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
             }

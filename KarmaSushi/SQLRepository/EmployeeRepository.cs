@@ -56,5 +56,15 @@ namespace SQLRepository
                 return employee;
             }
         }
+
+        public List<Employee> GetAllEmployees()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var allEmployees = connection.Query<Employee>(sql: "SELECT * FROM Employee").ToList();
+
+                return allEmployees;
+            }
+        }
     }
 }
