@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using KarmaClient.OrderServiceRef;
+using KarmaClient.ProductServiceRef;
+using Product = KarmaClient.ProductServiceRef.Product;
 using Table = KarmaClient.OrderServiceRef.Table;
 
 namespace KarmaClient
@@ -21,19 +23,72 @@ namespace KarmaClient
     /// </summary>
     public partial class FinishOrderWindow : Window
     {
+
+        #region For testing
+        private readonly ProductServicesClient _pClient = new ProductServicesClient();
+        private readonly List<Product> _availableTables;
+        private readonly List<Product> _selectedTables = new List<Product>();
+        #endregion
+
+        /// <summary>
+        /// Client reference for the Order service.
+        /// </summary>
+        private readonly OrderServiceClient _oClient = new OrderServiceClient();
         public Order CurrentOrder { get; set; }
-        public List<Product> ComboboxData { get; set; }
+        public List<Employee> ComboboxData { get; set; } 
         public List<Table> ListData { get; set; }
+
 
         public FinishOrderWindow()
         {
             InitializeComponent();
-            PopulateEmployeeBox();
+            _availableTables = _pClient.GetAllProducts().ToList();
+            PopulateLists();
         }
 
-        private void PopulateEmployeeBox()
+        private void PopulateLists()
         {
-            EmployeeComboBox.ItemsSource = ComboboxData;
+            EmployeeComboBox.ItemsSource = null;
+            EmployeeComboBox.ItemsSource = _pClient.GetAllProducts();
+            //EmployeeComboBox.ItemsSource = ComboboxData;
+
+            TableListBox.ItemsSource = null;
+            TableListBox.ItemsSource = _availableTables;
+            //TableListBox.ItemsSource = ListData;
+
+            SelectedTablesListBox.ItemsSource = null;
+            SelectedTablesListBox.ItemsSource = _selectedTables;
+        }
+
+        private void SelectTableBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO change type to table
+            foreach (Product selectedTable in TableListBox.SelectedItems)
+            {
+                _selectedTables.Add(selectedTable);
+                _availableTables.Remove(_availableTables.Find(x => x == selectedTable));
+            }
+            PopulateLists();
+        }
+
+        private void RemoveTableBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            //TODO change type to table
+            foreach (Product selectedTable in SelectedTablesListBox.SelectedItems)
+            {
+                _availableTables.Add(selectedTable);
+                _selectedTables.Remove(_selectedTables.Find(x => x == selectedTable));
+            }
+            PopulateLists();
+        }
+
+        private void CreateOrderBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            CurrentOrder.Employee = (Employee) EmployeeComboBox.SelectionBoxItem;
+            //CurrentOrder.Tables = _selectedTables.ToArray();
+            _oClient.InsertOrder(CurrentOrder);
+
+            this.Close();
         }
     }
 }

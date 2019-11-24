@@ -23,10 +23,6 @@ namespace KarmaClient
         /// </summary>
         private readonly ProductServicesClient _pClient = new ProductServicesClient();
         /// <summary>
-        /// Client reference for the Order service.
-        /// </summary>
-        private readonly OrderServiceClient _oClient = new OrderServiceClient();
-        /// <summary>
         /// List holding products to display in list of selected products.
         /// </summary>
         private readonly List<Product> _pList = new List<Product>();
@@ -40,7 +36,6 @@ namespace KarmaClient
         {
             InitializeComponent();
             PopulateMenu();
-            PopulateDropMenu();
         }
 
         private void PopulateMenu()
@@ -50,19 +45,7 @@ namespace KarmaClient
                 MenuPanel.Children.Add(CreateButton(p));
             }
         }
-        private void PopulateDropMenu()
-        {
-            //Placeholder until correct implementation
-            foreach (var p in _pClient.GetAllProducts())
-            {
-                EmpDropMenu.Items.Add(new MenuItem { Header = "_" + p.Name, IsCheckable = true });
-            }
-            //foreach (var e in _eClient.GetAllEmployees())
-            //{
-            //    EmpDropMenu.Items.Add(new MenuItem{Header = "_" + e.Name, IsCheckable = true});
-            //}
-        }
-
+        
         // Create menu button object.
         private Button CreateButton(Product product)
         {
@@ -96,8 +79,8 @@ namespace KarmaClient
             var descriptionLbl = new TextBlock{TextWrapping = TextWrapping.Wrap};
             rows.Children.Add(descriptionLbl);
             Grid.SetRow(descriptionLbl, 1);
-            // If product.Description <= to 82 char put 
-            descriptionLbl.Text = product.Description == null || product.Description.Length <= 178 ?
+            // If product.Description <= to 178 char display the whole description in button else display the first 178 char
+            descriptionLbl.Text = product.Description.Length <= 178 ?
                 product.Description : product.Description.Substring(0, Math.Min(178, product.Description.Length)) + ". . .";
 
             rows.Children.Add(columns);
@@ -181,10 +164,8 @@ namespace KarmaClient
                 };
 
                 //var finishOrderWindow = new FinishOrderWindow{ CurrentOrder = o, ComboboxData = eClient.GetAllEmployees(), ListData = tClient.GetAllAvailableTables()};
-                //finishOrderWindow.Show();
-
-                //TODO do this in new window
-                //_oClient.InsertOrder(o);
+                var finishOrderWindow = new FinishOrderWindow();
+                finishOrderWindow.Show();
             }
             else
             {
