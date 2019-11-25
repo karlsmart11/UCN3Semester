@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EmployeeManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/EmployeeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/EmployeeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/EmployeeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEmployeeService_GetEmployeeById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeById" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_GetEmployeeById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_GetEmployeeById_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q1:Error" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_InsertEmployee_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertEmployee" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_InsertEmployee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertEmployeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_InsertEmployee_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q2:Error" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_GetAllEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_GetAllEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEmployeeService_GetAllEmployees_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
+  </wsdl:message>
+  <wsdl:portType name="IEmployeeService">
+    <wsdl:operation name="GetEmployeeById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmployeeService/GetEmployeeById" message="tns:IEmployeeService_GetEmployeeById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmployeeService/GetEmployeeByIdResponse" message="tns:IEmployeeService_GetEmployeeById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEmployeeService/GetEmployeeByIdErrorFault" name="ErrorFault" message="tns:IEmployeeService_GetEmployeeById_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertEmployee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmployeeService/InsertEmployee" message="tns:IEmployeeService_InsertEmployee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmployeeService/InsertEmployeeResponse" message="tns:IEmployeeService_InsertEmployee_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEmployeeService/InsertEmployeeErrorFault" name="ErrorFault" message="tns:IEmployeeService_InsertEmployee_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEmployeeService/GetAllEmployees" message="tns:IEmployeeService_GetAllEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEmployeeService/GetAllEmployeesResponse" message="tns:IEmployeeService_GetAllEmployees_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEmployeeService/GetAllEmployeesErrorFault" name="ErrorFault" message="tns:IEmployeeService_GetAllEmployees_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEmployeeService" type="tns:IEmployeeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmployeeById">
+      <soap:operation soapAction="http://tempuri.org/IEmployeeService/GetEmployeeById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEmployee">
+      <soap:operation soapAction="http://tempuri.org/IEmployeeService/InsertEmployee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <soap:operation soapAction="http://tempuri.org/IEmployeeService/GetAllEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EmployeeManager">
+    <wsdl:port name="BasicHttpBinding_IEmployeeService" binding="tns:BasicHttpBinding_IEmployeeService">
+      <soap:address location="http://localhost/ServiceKarma/EmployeeService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -10,7 +10,7 @@ using ServiceContract;
 
 namespace Implementation
 {
-    class OrderManager : IOrderService
+    public class OrderManager : IOrderService
     {
         public Order GetOrderById(string id)
         {

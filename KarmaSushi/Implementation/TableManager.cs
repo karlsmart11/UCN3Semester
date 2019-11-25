@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controller;
+using Model;
 using ServiceContract;
 using System;
 using System.Collections.Generic;
@@ -6,19 +7,18 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Controller;
 
 namespace Implementation
 {
-    public class CustomerService : ICustomerService
+    public class TableManager : ITableServices
     {
-        public Customer GetCustomerById(string id)
+        public Table InsertTable(Table table)
         {
             try
             {
-                using (var instance = new CustomerController())
+                using (var instance = new TableController())
                 {
-                    return instance.GetCustomerById(id);
+                    return instance.InsertTable(table);
                 }
             }
             catch (Exception ex)
@@ -32,14 +32,13 @@ namespace Implementation
             }
         }
 
-
-        public Customer GetCustomerByName(string name)
+        public List<Table> GetTablesByOrder(Order order)
         {
             try
             {
-                using (var instance = new CustomerController())
+                using (var instance = new TableController())
                 {
-                    return instance.GetCustomerByName(name);
+                    return instance.GetTablesByOrder(order);
                 }
             }
             catch (Exception ex)
@@ -53,13 +52,13 @@ namespace Implementation
             }
         }
 
-        public Customer InsertCustomer(Customer customer)
+        public List<Table> GetAllTables()
         {
             try
             {
-                using (var instance = new CustomerController())
+                using (var instance = new TableController())
                 {
-                    return instance.InsertCustomer(customer);
+                    return instance.GetAllTables();
                 }
             }
             catch (Exception ex)
@@ -68,9 +67,10 @@ namespace Implementation
                 {
                     CodigoError = "10001",
                     Mensaje = ex.Message,
-                    Description = "Exception managed by the administrator "
+                    Description = "Exception managed by the administrator"
                 });
             }
         }
     }
 }
+    

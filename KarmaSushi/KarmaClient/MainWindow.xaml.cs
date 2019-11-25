@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KarmaClient.ProductServiceRef;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -7,9 +8,8 @@ using System.ServiceModel.Description;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using KarmaClient.OrderServiceRef;
-using KarmaClient.ProductServiceRef;
 using Product = KarmaClient.ProductServiceRef.Product;
+using KarmaClient.OrderServiceRef;
 
 namespace KarmaClient
 {
@@ -52,8 +52,8 @@ namespace KarmaClient
             // Grid defining the rows of stuff in the button.
             var rows = new Grid
             {
-                RowDefinitions = { 
-                    new RowDefinition(), 
+                RowDefinitions = {
+                    new RowDefinition(),
                     new RowDefinition { Height = new GridLength(3, GridUnitType.Star) },
                     new RowDefinition()},
                 Background = Brushes.Transparent,
@@ -76,7 +76,7 @@ namespace KarmaClient
             Grid.SetRow(nameLbl, 0);
             nameLbl.Content = product.Name;
 
-            var descriptionLbl = new TextBlock{TextWrapping = TextWrapping.Wrap};
+            var descriptionLbl = new TextBlock { TextWrapping = TextWrapping.Wrap };
             rows.Children.Add(descriptionLbl);
             Grid.SetRow(descriptionLbl, 1);
             // If product.Description <= to 178 char display the whole description in button else display the first 178 char
@@ -111,7 +111,7 @@ namespace KarmaClient
             };
 
             // Attaches an event handler to the buttons click event
-            b.Click += (sender, e) => AddToOrderList(product); 
+            b.Click += (sender, e) => AddToOrderList(product);
 
             return b;
         }
@@ -177,7 +177,7 @@ namespace KarmaClient
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             // smallDel represents the small X buttons inside list
-            Button smallDel = (Button) sender;
+            Button smallDel = (Button)sender;
             if (smallDel != null)
             {
                 if (smallDel.DataContext is Product product)
@@ -189,7 +189,7 @@ namespace KarmaClient
             {
                 foreach (var selected in OrderList.SelectedItems)
                 {
-                    _pList.Remove((Product) selected);
+                    _pList.Remove((Product)selected);
                 }
             }
 
@@ -205,7 +205,7 @@ namespace KarmaClient
         private void UpdateOrderList()
         {
             OrderList.ItemsSource = null;
-            OrderList.ItemsSource = _pList;            
+            OrderList.ItemsSource = _pList;
         }
 
 

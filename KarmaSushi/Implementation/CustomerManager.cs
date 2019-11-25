@@ -13,19 +13,6 @@ namespace Implementation
 {
     public class CustomerManager : ICustomerService
     {
-        public CustomerManager()
-        {
-        }
-
-        public CustomerManager(CustomerRepository customerRepository)
-        {
-            _CustomerRepository = customerRepository;
-        }
-
-        CustomerRepository _CustomerRepository = null;
-
-
-
         public Customer GetCustomerById(string id)
         {
             try
@@ -69,7 +56,22 @@ namespace Implementation
 
         public Customer InsertCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var instance = new CustomerController())
+                {
+                    return instance.InsertCustomer(customer);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator "
+                });
+            }
         }
     }
 }

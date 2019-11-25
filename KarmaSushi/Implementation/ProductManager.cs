@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Implementation
 {
-    public class ProductService : IProductServices
+    public class ProductManager : IProductServices
     {
         public Product GetProductById(string id)
         {
