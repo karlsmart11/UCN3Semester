@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.CustomerService" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.CustomerManager" %>
