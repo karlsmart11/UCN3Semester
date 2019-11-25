@@ -2,10 +2,8 @@
 using System.Linq;
 using System.Windows;
 using KarmaClient.OrderServiceRef;
-using KarmaClient.ProductServiceRef;
 using KarmaClient.EmployeeServiceRef;
 using KarmaClient.TableServiceRef;
-using Product = KarmaClient.ProductServiceRef.Product;
 using Table = KarmaClient.TableServiceRef.Table;
 using Employee = KarmaClient.EmployeeServiceRef.Employee;
 
@@ -16,32 +14,48 @@ namespace KarmaClient
     /// </summary>
     public partial class FinishOrderWindow : Window
     {
-
-        #region For testing
-        private readonly List<Table> _availableTables;
-        private readonly List<Table> _selectedTables = new List<Table>();
-        #endregion
-
         /// <summary>
         /// Client reference for the Order service.
         /// </summary>
         private readonly OrderServiceClient _oClient = new OrderServiceClient();
+        /// <summary>
+        /// Client reference for the Employee service.
+        /// </summary>
         private readonly EmployeeServiceClient _eClient = new EmployeeServiceClient();
+        /// <summary>
+        /// Client reference for the Table service.
+        /// </summary>
         private readonly TableServicesClient _tClient = new TableServicesClient();
+        /// <summary>
+        /// List of all available tables from the database.
+        /// </summary>
+        private readonly List<Table> _availableTables;
+        /// <summary>
+        /// List of tables selected from available tables. To be saved with the Order.
+        /// </summary>
+        private readonly List<Table> _selectedTables = new List<Table>();
+
+        /// <summary>
+        /// Half finished order with missing fields that needs to be set
+        /// </summary>
         public Order CurrentOrder { get; set; }
 
         public FinishOrderWindow()
         {
             InitializeComponent();
             _availableTables = _tClient.GetAllTables();
+            PopulateComboBox();
             PopulateLists();
+        }
+
+        private void PopulateComboBox()
+        {
+            EmployeeComboBox.ItemsSource = null;
+            EmployeeComboBox.ItemsSource = _eClient.GetAllEmployees();
         }
 
         private void PopulateLists()
         {
-            EmployeeComboBox.ItemsSource = null;
-            EmployeeComboBox.ItemsSource = _eClient.GetAllEmployees();
-
             TableListBox.ItemsSource = null;
             TableListBox.ItemsSource = _availableTables;
 
@@ -73,36 +87,34 @@ namespace KarmaClient
         {
             if (_selectedTables.Count != 0)
             {
-                var selectedEmp = (Employee)EmployeeComboBox.SelectedItem;
-                var oe = new OrderServiceRef.Employee
+                // Cast from EmployeeServiceRef.Employee to OrderServiceRef.Employee type.
+                var selectedEmp = (Employee) EmployeeComboBox.SelectedItem;
+                // Sets the Orders Employee with selected Employee.
+                CurrentOrder.Employee = new OrderServiceRef.Employee
                 {
-                    Id = selectedEmp.Id,
-                    Name = selectedEmp.Name,
-                    Phone = selectedEmp.Phone,
+                    Id = selectedEmp.Id, 
+                    Name = selectedEmp.Name, 
+                    Phone = selectedEmp.Phone, 
                     Email = selectedEmp.Email
                 };
-                CurrentOrder.Employee = oe;
-                var ots = new List<OrderServiceRef.Table>();
-                foreach (var t in _selectedTables)
-                {
-                    var ot = new OrderServiceRef.Table
+
+                // Linq method casts each selected table from TableServiceRef.Table to OrderServiceRef.Table type.
+                CurrentOrder.Tables = _selectedTables.Select(
+                    t => new OrderServiceRef.Table
                     {
                         Id = t.Id,
                         Name = t.Name
-                    };
-                    ots.Add(ot);
-                }
-                CurrentOrder.Tables = ots.ToArray();
+                    }).ToArray();
                 
+                // Inserts finished Order into database.
                 _oClient.InsertOrder(CurrentOrder);
-                    
+                
                 this.Close();
             } 
             else
             {
                 MessageBox.Show("Choose a table");
             }
-
         }
-}
+    }
 }
