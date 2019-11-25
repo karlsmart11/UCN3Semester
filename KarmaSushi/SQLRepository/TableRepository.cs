@@ -47,5 +47,14 @@ namespace SQLRepository
             }
         }
 
+        public List<Table> GetAllTables()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var allTables = connection.Query<Table>(sql: "SELECT * FROM Table").ToList();
+
+                return allTables;
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@
                 <MenuItem Header="_Cancel reservation" />
                 <MenuItem Header="_Modify reservation" />
             </MenuItem>
+          
         </Menu>
 
         <Grid>
@@ -68,6 +69,7 @@
                     </Grid>
                     <!-- END - XAML example -->
                 </TabItem>
+             
             </TabControl>
 
             <Grid Grid.Column="1">

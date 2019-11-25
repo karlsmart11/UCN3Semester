@@ -10,5 +10,7 @@ namespace Interface
     public interface ITable
     {
         Table InsertTable(Table table);
+        List<Table> GetTablesByOrder(Order order);
+        List<Table> GetAllTables();
     }
 }

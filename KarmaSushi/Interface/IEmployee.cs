@@ -15,7 +15,7 @@ namespace Interface
         /// <param name="id">Id of the employee store in the database</param>
         /// <returns></returns>
         Employee GetEmployeeById(string id);
-
         Employee InsertEmployee(Employee employee);
+        List<Employee> GetAllEmployees();
     }
 }

@@ -15,10 +15,19 @@ namespace Controller
         {
             ITable instance = new TableRepository();
             return instance.InsertTable(table);
-
         }
 
+        public List<Table> GetTablesByOrder(Order order)
+        {
+            ITable instance = new TableRepository();
+            return instance.GetTablesByOrder(order);
+        }
 
+        public List<Table> GetAllTables()
+        {
+            ITable instance = new TableRepository();
+            return instance.GetAllTables();
+        }
 
         void IDisposable.Dispose()
         {
