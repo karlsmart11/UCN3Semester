@@ -71,11 +71,38 @@ namespace KarmaClient
 
         private void CreateOrderBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            //    CurrentOrder.Employee = (Employee) EmployeeComboBox.SelectionBoxItem;
-            //    //CurrentOrder.Tables = _selectedTables.ToArray();
-            //    _oClient.InsertOrder(CurrentOrder);
+            if (_selectedTables.Count != 0)
+            {
+                var selectedEmp = (Employee)EmployeeComboBox.SelectedItem;
+                var oe = new OrderServiceRef.Employee
+                {
+                    Id = selectedEmp.Id,
+                    Name = selectedEmp.Name,
+                    Phone = selectedEmp.Phone,
+                    Email = selectedEmp.Email
+                };
+                CurrentOrder.Employee = oe;
+                var ots = new List<OrderServiceRef.Table>();
+                foreach (var t in _selectedTables)
+                {
+                    var ot = new OrderServiceRef.Table
+                    {
+                        Id = t.Id,
+                        Name = t.Name
+                    };
+                    ots.Add(ot);
+                }
+                CurrentOrder.Tables = ots.ToArray();
+                
+                _oClient.InsertOrder(CurrentOrder);
+                    
+                this.Close();
+            } 
+            else
+            {
+                MessageBox.Show("Choose a table");
+            }
 
-            //    this.Close();
         }
 }
 }

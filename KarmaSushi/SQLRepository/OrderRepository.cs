@@ -55,7 +55,14 @@ namespace SQLRepository
                     direction: ParameterDirection.Output);
                 p.Add("@Price", order.Price);
                 //p.Add("@Time", order.Time);
-                p.Add("@CustomerId", order.Customer.Id);
+                if (order.Customer == null)
+                {
+                    p.Add("@CustomerId", 1);
+                }
+                else
+                {
+                    p.Add("@CustomerId", order.Customer.Id);
+                }
                 p.Add("@EmployeeId", order.Employee.Id);
                 
                 connection.Execute(

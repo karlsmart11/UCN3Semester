@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Controller.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

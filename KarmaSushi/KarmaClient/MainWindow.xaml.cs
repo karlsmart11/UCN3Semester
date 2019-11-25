@@ -135,7 +135,7 @@ namespace KarmaClient
                 foreach (var p in _pList)
                 {
                     //TODO Refactor p.price and order.price to matching type
-                    sum =+ (decimal) p.Price;
+                    sum = sum + (decimal) p.Price;
 
                     var op = new OrderServiceRef.Product
                     {
@@ -163,8 +163,7 @@ namespace KarmaClient
                     OrderLines = _oList.ToArray()
                 };
 
-                //var finishOrderWindow = new FinishOrderWindow{ CurrentOrder = o, ComboboxData = eClient.GetAllEmployees(), ListData = tClient.GetAllAvailableTables()};
-                var finishOrderWindow = new FinishOrderWindow();
+                var finishOrderWindow = new FinishOrderWindow { CurrentOrder = o };
                 finishOrderWindow.Show();
             }
             else
