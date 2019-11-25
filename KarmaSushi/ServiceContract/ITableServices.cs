@@ -19,11 +19,12 @@ namespace ServiceContract
         [FaultContract(typeof(Error))]  
         Table InsertTable(Table table);
 
-        [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetTablesByOrder/", BodyStyle = WebMessageBodyStyle.Bare)]
-        [FaultContract(typeof(Error))] //Fault contract allows you to customize the error messages
-        List<Table> GetTablesByOrder(Order order);
+        //TODO Fix me
+        //[OperationContract]
+        //[WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        //    UriTemplate = "/GetTablesByOrder/", BodyStyle = WebMessageBodyStyle.Bare)]
+        //[FaultContract(typeof(Error))] //Fault contract allows you to customize the error messages
+        //List<Table> GetTablesByOrder(Order order);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,

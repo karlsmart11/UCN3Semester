@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.TableService" CodeBehind="TableService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Implementation.TableManager" %>

@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using KarmaClient.OrderServiceRef;
 using KarmaClient.ProductServiceRef;
 using KarmaClient.EmployeeServiceRef;
+using KarmaClient.TableServiceRef;
 using Product = KarmaClient.ProductServiceRef.Product;
-using Table = KarmaClient.OrderServiceRef.Table;
+using Table = KarmaClient.TableServiceRef.Table;
 using Employee = KarmaClient.EmployeeServiceRef.Employee;
 
 namespace KarmaClient
@@ -27,9 +18,8 @@ namespace KarmaClient
     {
 
         #region For testing
-        private readonly ProductServicesClient _pClient = new ProductServicesClient();
-        private readonly List<Product> _availableTables;
-        private readonly List<Product> _selectedTables = new List<Product>();
+        private readonly List<Table> _availableTables;
+        private readonly List<Table> _selectedTables = new List<Table>();
         #endregion
 
         /// <summary>
@@ -37,14 +27,13 @@ namespace KarmaClient
         /// </summary>
         private readonly OrderServiceClient _oClient = new OrderServiceClient();
         private readonly EmployeeServiceClient _eClient = new EmployeeServiceClient();
+        private readonly TableServicesClient _tClient = new TableServicesClient();
         public Order CurrentOrder { get; set; }
-        public List<Table> ListData { get; set; }
-
 
         public FinishOrderWindow()
         {
             InitializeComponent();
-            _availableTables = _pClient.GetAllProducts().ToList();
+            _availableTables = _tClient.GetAllTables();
             PopulateLists();
         }
 
@@ -55,7 +44,6 @@ namespace KarmaClient
 
             TableListBox.ItemsSource = null;
             TableListBox.ItemsSource = _availableTables;
-            //TableListBox.ItemsSource = ListData;
 
             SelectedTablesListBox.ItemsSource = null;
             SelectedTablesListBox.ItemsSource = _selectedTables;
@@ -63,8 +51,7 @@ namespace KarmaClient
 
         private void SelectTableBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO change type to table
-            foreach (Product selectedTable in TableListBox.SelectedItems)
+            foreach (Table selectedTable in TableListBox.SelectedItems)
             {
                 _selectedTables.Add(selectedTable);
                 _availableTables.Remove(_availableTables.Find(x => x == selectedTable));
@@ -74,8 +61,7 @@ namespace KarmaClient
 
         private void RemoveTableBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO change type to table
-            foreach (Product selectedTable in SelectedTablesListBox.SelectedItems)
+            foreach (Table selectedTable in SelectedTablesListBox.SelectedItems)
             {
                 _availableTables.Add(selectedTable);
                 _selectedTables.Remove(_selectedTables.Find(x => x == selectedTable));

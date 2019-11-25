@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fa361763-b121-4bfd-9a02-0310db969b43" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ServiceKarma/TableService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TableService.xsd" MetadataType="Schema" ID="d6bdc70d-da38-4bd7-90c0-fab21febb698" SourceId="1" SourceUrl="http://localhost/ServiceKarma/TableService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TableManager.wsdl" MetadataType="Wsdl" ID="0bca31de-2873-42d6-b486-35fe7d9e3a34" SourceId="1" SourceUrl="http://localhost/ServiceKarma/TableService.svc?wsdl" />
+    <MetadataFile FileName="TableService1.xsd" MetadataType="Schema" ID="74ba481c-fc29-435b-afaa-b113603bebe4" SourceId="1" SourceUrl="http://localhost/ServiceKarma/TableService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TableService2.xsd" MetadataType="Schema" ID="8cd198d9-1963-43f9-991f-65bac98c89b5" SourceId="1" SourceUrl="http://localhost/ServiceKarma/TableService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TableService.disco" MetadataType="Disco" ID="f11cdbef-4bde-4e18-bfd5-6d5748cf0e5d" SourceId="1" SourceUrl="http://localhost/ServiceKarma/TableService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

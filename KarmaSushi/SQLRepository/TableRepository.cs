@@ -51,7 +51,7 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                var allTables = connection.Query<Table>(sql: "SELECT * FROM Table").ToList();
+                var allTables = connection.Query<Table>(sql: "SELECT * FROM [dmab0918_1074178].[dbo].[Table]").ToList();
 
                 return allTables;
             }
