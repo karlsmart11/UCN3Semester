@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace KarmaClient
 {
     /// <summary>
-    /// Interaction logic for Tables.xaml
+    /// Interaction logic for TableWalkIn.xaml
     /// </summary>
-    public partial class Tables : Window
+    public partial class TableWalkIn : Window
     {
-        public Tables()
+        public TableWalkIn()
         {
             InitializeComponent();
         }
