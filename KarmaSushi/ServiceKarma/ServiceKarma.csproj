@@ -65,6 +65,7 @@
     <Content Include="EmployeeService.svc" />
     <Content Include="OrderService.svc" />
     <Content Include="ProductService.svc" />
+    <Content Include="TableService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
