@@ -13,8 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using KarmaClient.OrderServiceRef;
 using KarmaClient.ProductServiceRef;
+using KarmaClient.EmployeeServiceRef;
 using Product = KarmaClient.ProductServiceRef.Product;
 using Table = KarmaClient.OrderServiceRef.Table;
+using Employee = KarmaClient.EmployeeServiceRef.Employee;
 
 namespace KarmaClient
 {
@@ -34,8 +36,8 @@ namespace KarmaClient
         /// Client reference for the Order service.
         /// </summary>
         private readonly OrderServiceClient _oClient = new OrderServiceClient();
+        private readonly EmployeeServiceClient _eClient = new EmployeeServiceClient();
         public Order CurrentOrder { get; set; }
-        public List<Employee> ComboboxData { get; set; } 
         public List<Table> ListData { get; set; }
 
 
@@ -49,8 +51,7 @@ namespace KarmaClient
         private void PopulateLists()
         {
             EmployeeComboBox.ItemsSource = null;
-            EmployeeComboBox.ItemsSource = _pClient.GetAllProducts();
-            //EmployeeComboBox.ItemsSource = ComboboxData;
+            EmployeeComboBox.ItemsSource = _eClient.GetAllEmployees();
 
             TableListBox.ItemsSource = null;
             TableListBox.ItemsSource = _availableTables;
@@ -84,11 +85,11 @@ namespace KarmaClient
 
         private void CreateOrderBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            CurrentOrder.Employee = (Employee) EmployeeComboBox.SelectionBoxItem;
-            //CurrentOrder.Tables = _selectedTables.ToArray();
-            _oClient.InsertOrder(CurrentOrder);
+            //    CurrentOrder.Employee = (Employee) EmployeeComboBox.SelectionBoxItem;
+            //    //CurrentOrder.Tables = _selectedTables.ToArray();
+            //    _oClient.InsertOrder(CurrentOrder);
 
-            this.Close();
+            //    this.Close();
         }
-    }
+}
 }

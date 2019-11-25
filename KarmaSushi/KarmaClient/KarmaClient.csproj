@@ -69,6 +69,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Connected Services\EmployeeServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\OrderServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -105,6 +110,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\EmployeeServiceRef\EmployeeManager.wsdl" />
+    <None Include="Connected Services\EmployeeServiceRef\EmployeeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmployeeServiceRef\EmployeeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmployeeServiceRef\EmployeeService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmployeeServiceRef\KarmaClient.EmployeeServiceRef.Employee.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\OrderServiceRef\KarmaClient.OrderServiceRef.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -143,6 +161,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\EmployeeServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\OrderServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\ProductServiceRef\" />
   </ItemGroup>
@@ -172,6 +191,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ProductServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmployeeServiceRef\EmployeeService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmployeeServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmployeeServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmployeeServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
