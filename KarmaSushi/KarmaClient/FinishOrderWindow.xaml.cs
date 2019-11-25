@@ -85,7 +85,7 @@ namespace KarmaClient
 
         private void CreateOrderBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_selectedTables.Count != 0)
+            if (_selectedTables.Count > 0)
             {
                 // Cast from EmployeeServiceRef.Employee to OrderServiceRef.Employee type.
                 var selectedEmp = (Employee) EmployeeComboBox.SelectedItem;
@@ -98,7 +98,8 @@ namespace KarmaClient
                     Email = selectedEmp.Email
                 };
 
-                // Linq method casts each selected table from TableServiceRef.Table to OrderServiceRef.Table type.
+                // Linq method casts each selected table from TableServiceRef.Table to OrderServiceRef.Table type,
+                // and sets the Orders Tables property with the created list.
                 CurrentOrder.Tables = _selectedTables.Select(
                     t => new OrderServiceRef.Table
                     {
