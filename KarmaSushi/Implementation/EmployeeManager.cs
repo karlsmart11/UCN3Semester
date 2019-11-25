@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Implementation
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeManager : IEmployeeService
     {
         public Employee GetEmployeeById(string id)
         {

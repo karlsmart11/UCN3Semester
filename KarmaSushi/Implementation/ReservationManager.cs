@@ -6,7 +6,7 @@ using System.ServiceModel;
 
 namespace Implementation
 {
-    public class ReservationService : IReservationServices
+    public class ReservationManager : IReservationServices
     {
         public Reservation GetByCustomer(Customer customer)
         {
