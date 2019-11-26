@@ -148,8 +148,9 @@ namespace KarmaClient
                     _oList.Add(new OrderLine
                     {
                         Product = op, 
-                        Quantity = _pList.Count(x => x == p)
+                        Quantity = _pList.Count(x => x == p)                                               
                     });
+                    _pList.Remove(_pList.Find(x => x == p));
                 }
 
                 //TODO Find a way to attach tables
