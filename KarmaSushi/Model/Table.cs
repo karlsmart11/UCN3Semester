@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Web;
+﻿using System.Runtime.Serialization;
 
 namespace Model
 {   
@@ -21,12 +17,10 @@ namespace Model
         [DataMember]
         public string Name { get; set; }
 
-        //Todo boolean isAvailable for reservation
-
-        #region Dapper test
-
-        public int OrderId { get; set; }
-
-        #endregion
+        /// <summary>
+        /// Amount of seats available at the table.
+        /// </summary>
+        [DataMember]
+        public int Seats { get; set; }
     }
 }

@@ -1,14 +1,10 @@
 ﻿using Dapper;
 using Interface;
 using Model;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace SQLRepository
 {   
@@ -23,6 +19,7 @@ namespace SQLRepository
                     dbType: DbType.Int32,
                     direction: ParameterDirection.Output);
                 parameters.Add("@Name", table.Name);
+                parameters.Add("@Seats", table.Seats);
 
                 connection.Execute("dbo.spTable_Insert", param: parameters,
                     commandType: CommandType.StoredProcedure);
