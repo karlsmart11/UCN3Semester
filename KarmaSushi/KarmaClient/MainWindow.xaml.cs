@@ -132,10 +132,12 @@ namespace KarmaClient
             if (_pList.Count > 0)
             {
                 var sum = new decimal(0.0);
-                foreach (var p in _pList)
+
+                for(int i = 0; i < _pList.Count; i++)
                 {
-                    //TODO Refactor p.price and order.price to matching type
-                    sum = sum + (decimal) p.Price;
+                    var p = _pList[i];
+
+                    sum = sum + (decimal)p.Price;
 
                     var op = new OrderServiceRef.Product
                     {
@@ -147,11 +149,19 @@ namespace KarmaClient
 
                     _oList.Add(new OrderLine
                     {
-                        Product = op, 
-                        Quantity = _pList.Count(x => x == p)                                               
+                        Product = op,
+                        Quantity = _pList.Count(x => x == p)
                     });
                     _pList.Remove(_pList.Find(x => x == p));
                 }
+
+                foreach (var p in _pList)
+                {
+                    //TODO Refactor p.price and order.price to matching type
+                    
+                }
+
+                
 
                 //TODO Find a way to attach tables
                 var selectedTables = new List<Table>{new Table{Id = 1}, new Table{Id = 2}};
