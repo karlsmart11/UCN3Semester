@@ -17,5 +17,14 @@ namespace ServiceContract
                 UriTemplate = "/GetReservationByCustomer/{Customer}", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))]
         Reservation GetByCustomer(Customer customer);
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            Method = "POST", 
+            UriTemplate = "/InsertOrder", 
+            BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        Reservation InsertReservation(Reservation reservation);
     }
 }

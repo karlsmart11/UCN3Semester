@@ -28,7 +28,7 @@ namespace Model
         /// TODO Should probably be a list of tables
         /// </summary>
         [DataMember]
-        public Table Table { get; set; }
+        public List<Table> Tables { get; set; }
         
         /// <summary>
         /// Employee who placed the reservation.

@@ -28,5 +28,24 @@ namespace Implementation
             }
 
         }
+        public Reservation InsertReservation(Reservation reservation)
+        {
+            try
+            {
+                using (var instance = new ReservationController())
+                {
+                    return instance.InsertReservation(reservation);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
     }
 }

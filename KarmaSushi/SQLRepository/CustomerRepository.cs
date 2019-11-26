@@ -14,19 +14,9 @@ namespace SQLRepository
 {
     public class CustomerRepository : ICustomer
     {
-        StringBuilder connString = new StringBuilder("Data Source = kraka.ucn.dk;");
-        //private string conn = Conexion.GetConnectionString();
-
-        public CustomerRepository()
-        {
-            connString.Append("Initial Catalog = dmab0918_1074178;");
-            connString.Append("Persist Security Info = True;");
-            connString.Append("User Id = dmab0918_1074178;");
-            connString.Append("Password = Password1!");
-        }
         public Customer GetCustomerById(string id)
         {
-            using (IDbConnection connection = new SqlConnection(connString.ToString()))
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 connection.Open();
                 var parameters = new DynamicParameters();
@@ -46,7 +36,10 @@ namespace SQLRepository
                 var parameters = new DynamicParameters();
                 parameters.Add("@Name", name);
 
-                var result = connection.QuerySingle<Customer>("dbo.spCustomer_GetByName", param: parameters, commandType: CommandType.StoredProcedure);
+                var result = connection.QuerySingle<Customer>(
+                    sql: "dbo.spCustomer_GetByName",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure);
 
                 return result;
             }
@@ -71,8 +64,7 @@ namespace SQLRepository
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
-                var pIdCustomer = p.Get<Int32>("Id");
-                customer.Id = pIdCustomer;
+                customer.Id = p.Get<int>("@Id");
 
                 return customer;
             }

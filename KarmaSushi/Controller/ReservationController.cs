@@ -16,7 +16,12 @@ namespace Controller
             return instance.GetByCustomer(customer);
         }
 
-
+        public Reservation InsertReservation(Reservation reservation)
+        {
+            //TODO Handle already existing customer. Maybe by phone.
+            IReservation instance = new ReservationRepository();
+            return instance.InsertReservation(reservation);
+        }
 
         void IDisposable.Dispose()
         {
