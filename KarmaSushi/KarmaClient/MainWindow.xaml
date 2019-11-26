@@ -27,7 +27,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TabControl x:Name="TabColumn" Grid.Column="0">
+            <TabControl x:Name="CategoryTabs" Grid.Column="0">
                 <TabItem Header="Menu">
                     <ScrollViewer>
                         <WrapPanel x:Name="MenuPanel" Orientation="Horizontal" />
@@ -80,19 +80,9 @@
             <Grid Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <!--<RowDefinition/>-->
                         <RowDefinition Height="9*" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-
-                    <!--<Grid Grid.Row="0" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="EmpIdTxt" Width="Auto" BorderBrush="Black" BorderThickness="2">EmployeeId</TextBox>
-                    <TextBox x:Name="TableIdTxt" Grid.Column="1" Width="Auto" BorderBrush="Black" BorderThickness="2">TableID</TextBox>
-                </Grid>-->
 
                     <ListBox x:Name="OrderList"
                              Grid.Row="0"
@@ -109,7 +99,7 @@
                                     <TextBlock Grid.Column="1" Text="{Binding Price}" HorizontalAlignment="Right" />
                                     <Button Grid.Column="2" Width="Auto" Height="Auto"
                                             HorizontalAlignment="Right"
-                                            Content="X" Background="Red"
+                                            Content="X" Background="#202F49"
                                             Click="DeleteBtn_Click" Margin="0,0,20,0" />
                                 </Grid>
                             </DataTemplate>
@@ -122,7 +112,7 @@
                             Create Order
                         </Button>
                         <Button x:Name="ClearBtn" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                Width="Auto" Height="Auto" Click="ClearBtn_Click">
+                                Width="{Binding ActualWidth, ElementName=CreateOrderBtn}" Height="Auto" Click="ClearBtn_Click">
                             Clear
                         </Button>
                     </StackPanel>

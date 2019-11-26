@@ -7,9 +7,12 @@ using System.Runtime.Remoting.Messaging;
 using System.ServiceModel.Description;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using Product = KarmaClient.ProductServiceRef.Product;
 using KarmaClient.OrderServiceRef;
+using Category = KarmaClient.ProductServiceRef.Category;
+using Table = KarmaClient.OrderServiceRef.Table;
 
 namespace KarmaClient
 {
@@ -30,21 +33,52 @@ namespace KarmaClient
         /// List holding order lines used when creating order to assign quantity to products.
         /// </summary>
         private readonly List<OrderLine> _oList = new List<OrderLine>();
-        //private readonly List<Employee> _eList = new List<Employee>();
+        /// <summary>
+        /// List of all products from the db.
+        /// Optimizes code to not call GetAllProducts multiple times.
+        /// </summary>
+        private readonly List<Product> _allProducts;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _allProducts = _pClient.GetAllProducts().ToList();
+            
             PopulateMenu();
+            //PopulateCategoryTabs();
         }
 
         private void PopulateMenu()
         {
-            foreach (var p in _pClient.GetAllProducts())
+            foreach (var p in _allProducts)
             {
                 MenuPanel.Children.Add(CreateButton(p));
             }
         }
+        //private void PopulateCategoryTabs()
+        //{
+        //    foreach (var product in _allProducts)
+        //    {
+        //        CategoryTabs.Items.Add(new TabItem { Header = product.Category.Name, Name = product.Category.Name });
+        //        var catList = new List<Category>();
+        //        //catList = _pClient.GetAllProducts();
+        //    }
+
+        //    foreach (var tab in CategoryTabs.Items)
+        //    {
+        //        var currTab = tab as TabItem;
+
+        //        var buttonStack = new StackPanel();
+
+        //        foreach (var p in _allProducts.Where(x => x.Category.Name == currTab.Name.ToString()))
+        //        {
+        //            buttonStack.Children.Add(CreateButton(p));
+        //        }
+
+        //        currTab.Content = buttonStack;
+        //    }
+        //}
         
         // Create menu button object.
         private Button CreateButton(Product product)

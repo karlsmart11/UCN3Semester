@@ -28,6 +28,9 @@ namespace KarmaClient.TableServiceRef {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SeatsField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -60,6 +63,19 @@ namespace KarmaClient.TableServiceRef {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Seats {
+            get {
+                return this.SeatsField;
+            }
+            set {
+                if ((this.SeatsField.Equals(value) != true)) {
+                    this.SeatsField = value;
+                    this.RaisePropertyChanged("Seats");
                 }
             }
         }
