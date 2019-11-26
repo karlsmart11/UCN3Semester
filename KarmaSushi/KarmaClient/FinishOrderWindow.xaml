@@ -26,7 +26,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <ListBox x:Name="TableListBox" Grid.Column="0">
+            <ListBox x:Name="TableListBox" Grid.Column="0" SelectionMode="Multiple">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
@@ -48,7 +48,7 @@
                 </StackPanel>
             </Grid>
 
-            <ListBox x:Name="SelectedTablesListBox" Grid.Column="2">
+            <ListBox x:Name="SelectedTablesListBox" Grid.Column="2" SelectionMode="Multiple">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
