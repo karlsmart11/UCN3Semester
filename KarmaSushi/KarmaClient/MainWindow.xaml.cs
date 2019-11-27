@@ -46,7 +46,7 @@ namespace KarmaClient
             _allProducts = _pClient.GetAllProducts().ToList();
             
             PopulateMenu();
-            //PopulateCategoryTabs();
+            PopulateCategoryTabs();
         }
 
         private void PopulateMenu()
@@ -56,30 +56,29 @@ namespace KarmaClient
                 MenuPanel.Children.Add(CreateButton(p));
             }
         }
-        //private void PopulateCategoryTabs()
-        //{
-        //    foreach (var product in _allProducts)
-        //    {
-        //        CategoryTabs.Items.Add(new TabItem { Header = product.Category.Name, Name = product.Category.Name });
-        //        var catList = new List<Category>();
-        //        //catList = _pClient.GetAllProducts();
-        //    }
+        private void PopulateCategoryTabs()
+        {
+            foreach (var product in _allProducts)
+            {
+                CategoryTabs.Items.Add(new TabItem { Header = product.Category.Name, Name = product.Category.Name });
+            }
 
-        //    foreach (var tab in CategoryTabs.Items)
-        //    {
-        //        var currTab = tab as TabItem;
+            // Starts at i=2 so that the Menu tab doesn't get overridden.
+            for (var i = 2; i < CategoryTabs.Items.Count; i++)
+            {
+                var t = CategoryTabs.Items[i] as TabItem;
 
-        //        var buttonStack = new StackPanel();
+                var buttonStack = new StackPanel();
 
-        //        foreach (var p in _allProducts.Where(x => x.Category.Name == currTab.Name.ToString()))
-        //        {
-        //            buttonStack.Children.Add(CreateButton(p));
-        //        }
+                foreach (var p in _allProducts.Where(x => x.Category.Name == t.Name))
+                {
+                    buttonStack.Children.Add(CreateButton(p));
+                }
 
-        //        currTab.Content = buttonStack;
-        //    }
-        //}
-        
+                t.Content = buttonStack;
+            }
+        }
+
         // Create menu button object.
         private Button CreateButton(Product product)
         {
