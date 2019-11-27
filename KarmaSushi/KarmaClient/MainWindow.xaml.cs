@@ -64,7 +64,7 @@ namespace KarmaClient
             }
 
             // Starts at i=2 so that the Menu tab doesn't get overridden.
-            for (var i = 2; i < CategoryTabs.Items.Count; i++)
+            for (var i = 1; i < CategoryTabs.Items.Count; i++)
             {
                 var t = CategoryTabs.Items[i] as TabItem;
 

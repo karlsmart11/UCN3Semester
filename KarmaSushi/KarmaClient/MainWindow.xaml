@@ -33,48 +33,6 @@
                         <WrapPanel x:Name="MenuPanel" Orientation="Horizontal" />
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Placeholder">
-                    <!-- XAML example of how the Menu buttons with products should be presented -->
-                    <Grid>
-                        <Button x:Name="TestButton" FontSize="8" Margin="23,10,0,0">
-                            <Grid Background="Transparent"
-                                  ShowGridLines="True"
-                                  Height="{Binding ActualHeight, ElementName=TestButton}"
-                                  Width="{Binding ActualWidth, ElementName=TestButton}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="3*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="Some product name" FontSize="20" />
-                                <TextBlock Grid.Row="1" FontSize="18"
-                                           TextWrapping="Wrap"
-                                           Margin="4"
-                                           Text="Some Product description. That for some reason is fucking long that it needs to wrap multiple times" />
-
-                                <Grid Row="2" Background="Transparent">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0" Content="Price: 100"
-                                           FontSize="20"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Button x:Name="LargeDescriptionButtonTemplate" Grid.Column="1"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            FontSize="20"
-                                            Content=">>>" Click="LargeDescriptionButtonTemplate_Click"
-                                            Width="Auto"
-                                            Height="Auto" />
-                                </Grid>
-                            </Grid>
-                        </Button>
-                    </Grid>
-                    <!-- END - XAML example -->
-                </TabItem>
-             
             </TabControl>
 
             <Grid Grid.Column="1">

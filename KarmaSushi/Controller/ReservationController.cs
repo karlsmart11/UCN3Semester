@@ -18,7 +18,6 @@ namespace Controller
 
         public Reservation InsertReservation(Reservation reservation)
         {
-            //TODO Handle already existing customer. Maybe by phone.
             IReservation instance = new ReservationRepository();
             return instance.InsertReservation(reservation);
         }
