@@ -44,6 +44,7 @@
 
                     <Button x:Name="SelectTableBtn" Height="auto" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SelectTableBtn_Click">Select</Button>
                     <Button x:Name="RemoveTableBtn" Height="auto" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RemoveTableBtn_OnClick">Remove</Button>
+                    <Button x:Name="AddCommentBtn" Height="auto" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddCommentBtn_OnClick">Add comment</Button>
                     <Button x:Name="CreateOrderBtn" Height="auto" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="CreateOrderBtn_OnClick">Create order</Button>
                 </StackPanel>
             </Grid>
