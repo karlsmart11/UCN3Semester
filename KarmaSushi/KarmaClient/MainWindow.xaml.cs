@@ -2,16 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.Remoting.Messaging;
-using System.ServiceModel.Description;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using Product = KarmaClient.ProductServiceRef.Product;
 using KarmaClient.OrderServiceRef;
-using Category = KarmaClient.ProductServiceRef.Category;
 using Table = KarmaClient.OrderServiceRef.Table;
 
 namespace KarmaClient
