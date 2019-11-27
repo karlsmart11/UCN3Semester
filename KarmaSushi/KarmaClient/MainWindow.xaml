@@ -32,72 +32,20 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TabControl x:Name="TabColumn" Grid.Column="0">
+            <TabControl x:Name="CategoryTabs" Grid.Column="0">
                 <TabItem Header="Menu">
                     <ScrollViewer>
                         <WrapPanel x:Name="MenuPanel" Orientation="Horizontal" />
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Placeholder">
-                    <!-- XAML example of how the Menu buttons with products should be presented -->
-                    <Grid>
-                        <Button x:Name="TestButton" FontSize="8" Margin="23,10,0,0">
-                            <Grid Background="Transparent"
-                                  ShowGridLines="True"
-                                  Height="{Binding ActualHeight, ElementName=TestButton}"
-                                  Width="{Binding ActualWidth, ElementName=TestButton}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="3*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="Some product name" FontSize="20" />
-                                <TextBlock Grid.Row="1" FontSize="18"
-                                           TextWrapping="Wrap"
-                                           Margin="4"
-                                           Text="Some Product description. That for some reason is fucking long that it needs to wrap multiple times" />
-
-                                <Grid Row="2" Background="Transparent">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0" Content="Price: 100"
-                                           FontSize="20"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Button x:Name="LargeDescriptionButtonTemplate" Grid.Column="1"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            FontSize="20"
-                                            Content=">>>" Click="LargeDescriptionButtonTemplate_Click"
-                                            Width="Auto"
-                                            Height="Auto" />
-                                </Grid>
-                            </Grid>
-                        </Button>
-                    </Grid>
-                    <!-- END - XAML example -->
-                </TabItem>
-             
             </TabControl>
 
             <Grid Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <!--<RowDefinition/>-->
                         <RowDefinition Height="9*" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-
-                    <!--<Grid Grid.Row="0" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="EmpIdTxt" Width="Auto" BorderBrush="Black" BorderThickness="2">EmployeeId</TextBox>
-                    <TextBox x:Name="TableIdTxt" Grid.Column="1" Width="Auto" BorderBrush="Black" BorderThickness="2">TableID</TextBox>
-                </Grid>-->
 
                     <ListBox x:Name="OrderList"
                              Grid.Row="0"
@@ -114,7 +62,7 @@
                                     <TextBlock Grid.Column="1" Text="{Binding Price}" HorizontalAlignment="Right" />
                                     <Button Grid.Column="2" Width="Auto" Height="Auto"
                                             HorizontalAlignment="Right"
-                                            Content="X" Background="Red"
+                                            Content="X" Background="#202F49"
                                             Click="DeleteBtn_Click" Margin="0,0,20,0" />
                                 </Grid>
                             </DataTemplate>
@@ -127,7 +75,7 @@
                             Create Order
                         </Button>
                         <Button x:Name="ClearBtn" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                Width="Auto" Height="Auto" Click="ClearBtn_Click">
+                                Width="{Binding ActualWidth, ElementName=CreateOrderBtn}" Height="Auto" Click="ClearBtn_Click">
                             Clear
                         </Button>
                     </StackPanel>

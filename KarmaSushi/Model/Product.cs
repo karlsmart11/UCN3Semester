@@ -40,7 +40,12 @@ namespace Model
         /// </summary>
         [DataMember]
         public Category Category { get; set; }
-    }
 
-    public enum Category { Appetizer, MainCourse, Dessert };
+        #region Dapper test
+
+        public int CategoryId { get; set; }
+
+        #endregion
+    }
+    //public enum Category { Appetizer, MainCourse, Dessert };
 }
