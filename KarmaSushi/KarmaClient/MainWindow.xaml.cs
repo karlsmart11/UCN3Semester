@@ -53,12 +53,13 @@ namespace KarmaClient
         }
         private void PopulateCategoryTabs()
         {
+            // Creates the individual tabs for the category. And sets their headers to the name of the category.
             foreach (var product in _allProducts)
             {
                 CategoryTabs.Items.Add(new TabItem { Header = product.Category.Name, Name = product.Category.Name });
             }
 
-            // Starts at i=2 so that the Menu tab doesn't get overridden.
+            // Starts at i=1 so that the Menu tab doesn't get overridden.
             for (var i = 1; i < CategoryTabs.Items.Count; i++)
             {
                 var t = CategoryTabs.Items[i] as TabItem;
