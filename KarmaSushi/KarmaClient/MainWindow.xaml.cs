@@ -225,5 +225,10 @@ namespace KarmaClient
             MessageBox.Show("The Large Description of the product item goes here");
         }
 
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+            var orderWindow = new OrderWindow();
+            orderWindow.Show();
+        }
     }
 }

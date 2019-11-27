@@ -26,13 +26,13 @@ namespace SQLRepository
 
         public Order GetOrderById(string id)
         {
-            using (IDbConnection connection =  new SqlConnection(Conexion.GetConnectionString()))
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", id);
 
                 var order = connection.QuerySingle<Order>(
-                    sql: "dbo.spOrders_GetById", 
+                    sql: "dbo.spOrders_GetById",
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
@@ -49,17 +49,17 @@ namespace SQLRepository
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
-         
-                p.Add("@Id", 0, 
+
+                p.Add("@Id", 0,
                     dbType: DbType.Int32,
                     direction: ParameterDirection.Output);
                 p.Add("@Price", order.Price);
                 //p.Add("@Time", order.Time);
                 p.Add("@CustomerId", order.Customer?.Id ?? 1);
                 p.Add("@EmployeeId", order.Employee.Id);
-                
+
                 connection.Execute(
-                    sql: "dbo.spOrders_Insert", 
+                    sql: "dbo.spOrders_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
@@ -67,7 +67,7 @@ namespace SQLRepository
                 order.Id = p.Get<int>("@Id");
 
                 foreach (var table in order.Tables)
-                { 
+                {
                     InsertTablesOrders(order, table);
                 }
 
@@ -116,10 +116,15 @@ namespace SQLRepository
             }
         }
 
+      
+
+
+           
+        }
+
         //public int AmountOfOrdersInDb()
         //{
         //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
         //        return connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Orders");
         //}
     }
-}

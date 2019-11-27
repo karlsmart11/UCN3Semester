@@ -448,6 +448,9 @@ namespace KarmaClient.OrderServiceRef {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SeatsField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -480,6 +483,19 @@ namespace KarmaClient.OrderServiceRef {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Seats {
+            get {
+                return this.SeatsField;
+            }
+            set {
+                if ((this.SeatsField.Equals(value) != true)) {
+                    this.SeatsField = value;
+                    this.RaisePropertyChanged("Seats");
                 }
             }
         }
@@ -718,6 +734,13 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/InsertOrder", ReplyAction="http://tempuri.org/IOrderService/InsertOrderResponse")]
         System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> InsertOrderAsync(KarmaClient.OrderServiceRef.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetOrderByDate", ReplyAction="http://tempuri.org/IOrderService/GetOrderByDateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.OrderServiceRef.Error), Action="http://tempuri.org/IOrderService/GetOrderByDateErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        KarmaClient.OrderServiceRef.Order[] GetOrderByDate(string date);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetOrderByDate", ReplyAction="http://tempuri.org/IOrderService/GetOrderByDateResponse")]
+        System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order[]> GetOrderByDateAsync(string date);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -769,6 +792,14 @@ namespace KarmaClient.OrderServiceRef {
         
         public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> InsertOrderAsync(KarmaClient.OrderServiceRef.Order order) {
             return base.Channel.InsertOrderAsync(order);
+        }
+        
+        public KarmaClient.OrderServiceRef.Order[] GetOrderByDate(string date) {
+            return base.Channel.GetOrderByDate(date);
+        }
+        
+        public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order[]> GetOrderByDateAsync(string date) {
+            return base.Channel.GetOrderByDateAsync(date);
         }
     }
 }

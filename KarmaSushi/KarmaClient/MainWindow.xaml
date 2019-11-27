@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarmaClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top" IsMainMenu="True" FontSize="12" Foreground="White">
             <MenuItem Header="_Reservations">
@@ -14,10 +14,15 @@
                 <MenuItem Header="_Modify reservation" />
             </MenuItem>
 
+            <MenuItem  x:Name="_Orders" Click="Order_Click" Header="_Orders">
+              
+            </MenuItem>
+
             <MenuItem Header="_Tables">
                 <MenuItem Header="_Create Reservation" />
                 <MenuItem Header="_Walk-in" />
             </MenuItem>
+            
 
         </Menu>
 
