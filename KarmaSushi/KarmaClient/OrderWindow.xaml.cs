@@ -24,7 +24,10 @@ namespace KarmaClient
     {
         public static OrderServiceRef.OrderServiceClient proxyOder = new OrderServiceRef.OrderServiceClient();
         public static Order[] arrayOrder = proxyOder.GetAllOrders();
-       // public static OrderLine[] arrayOrderLine = proxyOder.
+        public int selecetedId = -1;
+        public List<int> IdOrdersList;
+
+
         public OrderWindow()
         {
             InitializeComponent();
@@ -39,12 +42,12 @@ namespace KarmaClient
 
             DataTable dt = setUpDataGrid();
 
-           
 
             try
             {
 
-                List<int> IdOrdersList = new List<int>();
+                IdOrdersList = new List<int>();
+                List<string> ListOfOrdersLines = new List<string>();
                 foreach (var item in arrayOrder)
             {
 
@@ -52,17 +55,28 @@ namespace KarmaClient
 
                 DateTime dateNow = DateTime.Today;
 
-                int result = DateTime.Compare(date.Date, dateNow.Date);
+                    ListBox listBox = new ListBox();
+                    TextBox textBoxProductsName = new TextBox();
+                    int result = DateTime.Compare(date.Date, dateNow.Date);
                 if (result==0)
                 {
-                    DataRow newRow = dt.NewRow();
-                    newRow[0] = item.Price.ToString();
-                    newRow[1] = date;
-                    newRow[2] = item.Customer.Name.ToString();
-                    newRow[3] = item.Employee.Name.ToString();
-                    IdOrdersList.Add(item.Id);
-                    dt.Rows.Add(newRow);
-                }
+
+
+                        DataRow newRow = dt.NewRow();
+                        newRow[0] = item.Price.ToString();
+                        newRow[1] = date;
+                        newRow[2] = item.Customer.Name.ToString();
+                        newRow[3] = item.Employee.Name.ToString();
+                        IdOrdersList.Add(item.Id);
+                        foreach (var orderLinesItem in item.OrderLines)
+                        {
+                            textBoxProductsName.Text += (orderLinesItem.Product.Name.ToString() + " X ");
+                            textBoxProductsName.Text += (orderLinesItem.Quantity.ToString() + " \n");
+                        }
+
+                        newRow[4] = textBoxProductsName.Text;
+                        dt.Rows.Add(newRow);
+                    }
                
             }
 
@@ -89,24 +103,38 @@ namespace KarmaClient
 
             try
             {
+                IdOrdersList = new List<int>();
+                List<string> ListOfOrdersLines = new List<string>();
 
-                List<int> IdOrdersList = new List<int>();
+             
                 foreach (var item in arrayOrder)
                 {
 
                     DateTime date = item.Time;
 
                     DateTime dateNow = DataSelected.SelectedDate.Value;
-                    
+                   
                     int result = DateTime.Compare(date.Date, dateNow.Date);
+
+                    ListBox listBox = new ListBox();
+                    TextBox textBoxProductsName = new TextBox();
                     if (result == 0)
                     {
+
                         DataRow newRow = dt.NewRow();
                         newRow[0] = item.Price.ToString();
                         newRow[1] = date;
                         newRow[2] = item.Customer.Name.ToString();
                         newRow[3] = item.Employee.Name.ToString();
                         IdOrdersList.Add(item.Id);
+                        foreach (var orderLinesItem in item.OrderLines)
+                        {
+                            textBoxProductsName.Text+=(orderLinesItem.Product.Name.ToString()+" X ");
+                            textBoxProductsName.Text += (orderLinesItem.Quantity.ToString() + " \n");
+                        }
+
+                        newRow[4] = textBoxProductsName.Text;
+                      
                         dt.Rows.Add(newRow);
                     }
 
@@ -126,20 +154,48 @@ namespace KarmaClient
         public DataTable setUpDataGrid()
         {
             DataTable dt = new DataTable();
+           
           
             DataColumn Price = new DataColumn("Price", typeof(decimal));
             DataColumn Time = new DataColumn("Time", typeof(DateTime));
             DataColumn Customer = new DataColumn("Customer", typeof(string));
             DataColumn Employee = new DataColumn("Employee", typeof(string));
-
+            DataColumn Products = new DataColumn("Product", typeof(string));
            
+
+
             dt.Columns.Add(Price);
             dt.Columns.Add(Time);
             dt.Columns.Add(Customer);
             dt.Columns.Add(Employee);
-          
+            dt.Columns.Add(Products);
+           
+
             return dt;
 
         }
+
+        private void GridOrder_CurrentCellChanged(object sender, EventArgs e)
+        {
+            int currentRowIndex = GridOrder.Items.IndexOf(GridOrder.CurrentItem);
+            if (currentRowIndex >= 0)
+            {
+                selecetedId = IdOrdersList[currentRowIndex];
+                Test.Content = currentRowIndex;
+                TestOrderLineId.Content = selecetedId;
+            }
+            else
+            {
+               
+                Test.Content = currentRowIndex;
+                TestOrderLineId.Content = selecetedId;
+
+            }
+           
+
+
+        }
+
+      
     }
 }
