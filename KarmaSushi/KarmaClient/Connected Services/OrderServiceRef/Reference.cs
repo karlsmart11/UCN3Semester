@@ -662,24 +662,11 @@ namespace KarmaClient.OrderServiceRef {
         }
         
 
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
+      
+       
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
+      
         
 
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -695,18 +682,7 @@ namespace KarmaClient.OrderServiceRef {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
+    
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
