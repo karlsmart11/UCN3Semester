@@ -26,6 +26,8 @@ namespace SQLRepository
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
+                product.Category = GetCategoryById(product.CategoryId);
+
                 return product;
             }
         }
