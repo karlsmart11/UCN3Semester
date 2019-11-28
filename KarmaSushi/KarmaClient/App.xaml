@@ -87,7 +87,7 @@
         <Style TargetType="{x:Type TabControl}">
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="0"></Setter>
+            <Setter Property="Margin" Value="0"/>
         </Style>
 
         <!-- ComboBox Styling /missing mods to disabled styling for Karma -->

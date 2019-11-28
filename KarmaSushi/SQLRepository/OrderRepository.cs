@@ -58,6 +58,9 @@ namespace SQLRepository
                 p.Add("@CustomerId", order.Customer?.Id ?? 1);
                 p.Add("@EmployeeId", order.Employee.Id);
 
+                p.Add("@Comment", order.Comment);
+                
+
                 connection.Execute(
                     sql: "dbo.spOrders_Insert",
                     param: p,
