@@ -1,15 +1,4 @@
-﻿@using KarmaWeb.ProductServiceRef
-@model IEnumerable<KarmaWeb.ProductServiceRef.Product>
-
-@functions {
-    private readonly List<Product> _cart = new List<Product>();
-    protected  void btnAdd_Click(object sender, EventArgs e)
-    {
-        var p = new Product {Id=100, Name = "TestProduct", Description = "DescriptionTest", Price = 321, Category = new Category{Id = 100, Name = "TestCategory"}};
-        _cart.Add(p);
-    }
-
-}
+﻿@model IEnumerable<KarmaWeb.ProductServiceRef.Product>
 
 <h2>Menu</h2>
 
@@ -46,49 +35,11 @@
                 <input type="number" name="Quantity" value="1" min="1" max="99" />
             </td>
             <td>
-                <asp:button runat="server" id="btnAdd" class="btn btn-default" OnClick="btnAdd_Click">Add</asp:button>
+                <a href="@Url.Action("Buy", "Cart", new {id = item.Id})">Add to cart</a>
+                @*<asp:button runat="server" id="btnAdd" class="btn btn-default" OnClick="btnAdd_Click">Add</asp:button>*@
                 @*@Html.ActionLink("Select", "Select", new { id=item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id=item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            </td>
-        </tr>
-    }
-</table>
-
-<h2>Basket</h2>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            Quantity
-        </th>
-    </tr>
-    
-    @foreach (var item in _cart)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price) Kr.
-            </td>
-            <td>
-                TODO: Qty
-            </td>
-            <td>
-                <asp:button runat="server" id="btnRemove" class="btn btn-default">Remove</asp:button>
             </td>
         </tr>
     }
