@@ -18,8 +18,8 @@ namespace Interface
         Order GetOrderById(string id);
         Order InsertOrder(Order order);
         List<Order> GetAllOrders();
-    
 
+        Order ModifyOrder(Order order);
 
     }
 }

@@ -640,7 +640,6 @@ namespace KarmaClient.OrderServiceRef {
     [System.Runtime.Serialization.DataContractAttribute(Name="Category", Namespace="http://schemas.datacontract.org/2004/07/Model")]
     [System.SerializableAttribute()]
     public partial class Category : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -661,14 +660,6 @@ namespace KarmaClient.OrderServiceRef {
             }
         }
         
-
-      
-       
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-      
-        
-
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
             get {
@@ -682,7 +673,18 @@ namespace KarmaClient.OrderServiceRef {
             }
         }
         
-    
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
@@ -795,6 +797,13 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/InsertOrder", ReplyAction="http://tempuri.org/IOrderService/InsertOrderResponse")]
         System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> InsertOrderAsync(KarmaClient.OrderServiceRef.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/ModifyOrder", ReplyAction="http://tempuri.org/IOrderService/ModifyOrderResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.OrderServiceRef.Error), Action="http://tempuri.org/IOrderService/ModifyOrderErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        KarmaClient.OrderServiceRef.Order ModifyOrder(KarmaClient.OrderServiceRef.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/ModifyOrder", ReplyAction="http://tempuri.org/IOrderService/ModifyOrderResponse")]
+        System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> ModifyOrderAsync(KarmaClient.OrderServiceRef.Order order);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -846,6 +855,14 @@ namespace KarmaClient.OrderServiceRef {
         
         public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> InsertOrderAsync(KarmaClient.OrderServiceRef.Order order) {
             return base.Channel.InsertOrderAsync(order);
+        }
+        
+        public KarmaClient.OrderServiceRef.Order ModifyOrder(KarmaClient.OrderServiceRef.Order order) {
+            return base.Channel.ModifyOrder(order);
+        }
+        
+        public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> ModifyOrderAsync(KarmaClient.OrderServiceRef.Order order) {
+            return base.Channel.ModifyOrderAsync(order);
         }
     }
 }

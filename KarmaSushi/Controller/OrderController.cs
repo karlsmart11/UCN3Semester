@@ -40,6 +40,10 @@ namespace Controller
             return _orderRepository.GetAllOrders();
         }
 
+        public Order  ModifyOrder(Order order)
+        {
+            return _orderRepository.ModifyOrder(order);
+        }
        
 
         void IDisposable.Dispose()
