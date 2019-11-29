@@ -17,10 +17,15 @@ namespace Model
         [DataMember]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Amount of seats available at the table.
-        /// </summary>
         [DataMember]
         public int Seats { get; set; }
+
+       
+
+        #region Dapper test
+
+        public int OrderId { get; set; }
+
+        #endregion
     }
 }

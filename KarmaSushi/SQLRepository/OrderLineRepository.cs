@@ -9,7 +9,7 @@ using Model;
 
 namespace SQLRepository
 {
-    public class OrderLineRepository : IOrderLine
+    public class OrderLineRepository : IOrderLineRepository
     {
         private readonly ProductRepository _productRepository = new ProductRepository();
 

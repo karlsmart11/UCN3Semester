@@ -10,34 +10,22 @@ namespace Controller
 {
     public class OrderController : IDisposable
     {
-        public OrderController()
-        {
-            _orderRepository = new OrderRepository();
-        }
-
-        public OrderController(IOrder orderRepository)
-        {
-            _orderRepository = orderRepository;
-        }
-
-        IOrder _orderRepository = null;
-
         public Order GetOrderById(string id)
         {
-           
-            return _orderRepository.GetOrderById(id);
+            IOrderRepository instance = new OrderRepository();
+            return instance.GetOrderById(id);
         }
 
         public Order InsertOrder(Order order)
         {
-           
-            return _orderRepository.InsertOrder(order);
+            IOrderRepository instance = new OrderRepository();
+            return instance.InsertOrder(order);
         }
 
         public List<Order> GetAllOrder()
         {
-     
-            return _orderRepository.GetAllOrders();
+            IOrderRepository instance = new OrderRepository();
+            return instance.GetAllOrders();
         }
 
        

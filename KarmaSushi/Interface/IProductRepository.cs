@@ -7,7 +7,7 @@ using Model;
 
 namespace Interface
 {
-    public interface IProduct
+    public interface IProductRepository
     {
         Product GetProductByName(string name);
       /*  Product GetProductByPrice(double price);
