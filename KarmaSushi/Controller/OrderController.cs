@@ -15,12 +15,12 @@ namespace Controller
             _orderRepository = new OrderRepository();
         }
 
-        public OrderController(IOrder orderRepository)
+        public OrderController(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        IOrder _orderRepository = null;
+        IOrderRepository _orderRepository = null;
 
         public Order GetOrderById(string id)
         {

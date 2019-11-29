@@ -7,7 +7,7 @@ using Model;
 
 namespace Interface
 {
-    public interface IOrder
+    public interface IOrderRepository
     {
         /// <summary>
         /// Returns order from database.

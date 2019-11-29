@@ -11,7 +11,7 @@ using Model;
 
 namespace SQLRepository
 {
-    public class ProductRepository : IProduct
+    public class ProductRepository : IProductRepository
     {
        
         public Product GetProductById(string id)

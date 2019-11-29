@@ -11,19 +11,28 @@ namespace Controller
 { 
     public class CustomerController : IDisposable
     {
+        private readonly ICustomerRepository _customerRepository;
+
+        public CustomerController() { }
+
+        public CustomerController(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
         public Customer GetCustomerById (string id)
         {
-            ICustomer instance =  new CustomerRepository();
+            ICustomerRepository instance =  new CustomerRepository();
             return instance.GetCustomerById(id);
         }
         public Customer GetCustomerByName (string name)
         {
-            ICustomer instance = new CustomerRepository();
+            ICustomerRepository instance = new CustomerRepository();
             return instance.GetCustomerByName(name);
         }
         public Customer InsertCustomer(Customer customer)
         {
-            ICustomer instance = new CustomerRepository();
+            ICustomerRepository instance = new CustomerRepository();
             return instance.InsertCustomer(customer);
         }
         

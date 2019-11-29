@@ -7,7 +7,7 @@ using Model;
 
 namespace Interface
 {
-    public interface IOrderLine
+    public interface IOrderLineRepository
     {
         /// <summary>
         /// Returns a list of order lines associated with a specific order.

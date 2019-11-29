@@ -11,7 +11,7 @@ using Interface;
 
 namespace SQLRepository
 {
-    public class ReservationRepository : IReservation
+    public class ReservationRepository : IReservationRepository
     {
         public Reservation GetByCustomer(Customer customer)
         {

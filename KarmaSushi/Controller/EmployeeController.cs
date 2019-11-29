@@ -12,11 +12,11 @@ namespace Controller
 {
    public class EmployeeController : IDisposable
     {
-        private readonly IEmployee _employeeRepository = null;
+        private readonly IEmployeeRepository _employeeRepository = null;
 
         public EmployeeController() { }
 
-        public EmployeeController(IEmployee employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
@@ -29,19 +29,19 @@ namespace Controller
         /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {
-            IEmployee instance = _employeeRepository ?? new EmployeeRepository();
+            IEmployeeRepository instance = _employeeRepository ?? new EmployeeRepository();
             return instance.GetEmployeeById(id);
         }
 
         public Employee InsertEmployee(Employee employee)
         {
-            IEmployee instance = new EmployeeRepository();
+            IEmployeeRepository instance = new EmployeeRepository();
             return instance.InsertEmployee(employee);
         }
 
         public List<Employee> GetAllEmployees()
         {
-            IEmployee instance = _employeeRepository ?? new EmployeeRepository();
+            IEmployeeRepository instance = _employeeRepository ?? new EmployeeRepository();
             return instance.GetAllEmployees();
         }
 
