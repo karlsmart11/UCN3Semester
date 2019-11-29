@@ -30,7 +30,8 @@ namespace Controller
 
         public Order  ModifyOrder(Order order)
         {
-            return _orderRepository.ModifyOrder(order);
+            IOrderRepository instance = new OrderRepository();
+            return instance.ModifyOrder(order);
         }
        
 

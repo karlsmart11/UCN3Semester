@@ -39,7 +39,7 @@ namespace KarmaClient
             getOrder(order);
             populateEmployeeCB();
             PopulateFields();
-            PopulateDataGrid();
+            //PopulateDataGrid();
           
         }
 
