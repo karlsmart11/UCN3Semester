@@ -26,10 +26,11 @@ namespace SQLRepository
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
+                product.Category = GetCategoryById(product.CategoryId);
+
                 return product;
             }
         }
-
         public Product GetProductByName(string name)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -42,29 +43,46 @@ namespace SQLRepository
                 return result;
             }
         }
-/*
-        public Product GetProductByPrice(double price)
-        {
-            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Price", price);
-
-                var result = connection.QuerySingle<Product>("dbo.spProduct_GetByPrice", param: parameters, commandType: CommandType.StoredProcedure);
-
-                return result;
-            }
-        }*/
-
         public List<Product> GetAllProducts ()
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var allProducts = connection.Query<Product>(sql: "SELECT * FROM Product").ToList();
 
+                foreach (var product in allProducts)
+                {
+                    product.Category = GetCategoryById(product.CategoryId);
+                }
+
                 return allProducts;
             }
         }
+        private Category GetCategoryById(int productCategoryId)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", productCategoryId);
 
+                var cat = connection.QuerySingle<Category>(
+                    sql: "dbo.spCategory_GetById",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+
+                return cat;
+            }
+        }
+        //public Product GetProductByPrice(double price)
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+        //    {
+        //        var parameters = new DynamicParameters();
+        //        parameters.Add("@Price", price);
+
+        //        var result = connection.QuerySingle<Product>("dbo.spProduct_GetByPrice", param: parameters, commandType: CommandType.StoredProcedure);
+
+        //        return result;
+        //    }
+        //}
     }
 }

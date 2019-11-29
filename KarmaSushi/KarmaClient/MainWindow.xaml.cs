@@ -2,14 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.Remoting.Messaging;
-using System.ServiceModel.Description;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Product = KarmaClient.ProductServiceRef.Product;
 using KarmaClient.OrderServiceRef;
+using Table = KarmaClient.OrderServiceRef.Table;
 
 namespace KarmaClient
 {
@@ -30,22 +28,53 @@ namespace KarmaClient
         /// List holding order lines used when creating order to assign quantity to products.
         /// </summary>
         private readonly List<OrderLine> _oList = new List<OrderLine>();
-        //private readonly List<Employee> _eList = new List<Employee>();
+        /// <summary>
+        /// List of all products from the db.
+        /// Optimizes code to not call GetAllProducts multiple times.
+        /// </summary>
+        private readonly List<Product> _allProducts;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _allProducts = _pClient.GetAllProducts().ToList();
+            
             PopulateMenu();
+            PopulateCategoryTabs();
         }
 
         private void PopulateMenu()
         {
-            foreach (var p in _pClient.GetAllProducts())
+            foreach (var p in _allProducts)
             {
                 MenuPanel.Children.Add(CreateButton(p));
             }
         }
-        
+        private void PopulateCategoryTabs()
+        {
+            // Creates the individual tabs for the category. And sets their headers to the name of the category.
+            foreach (var product in _allProducts)
+            {
+                CategoryTabs.Items.Add(new TabItem { Header = product.Category.Name, Name = product.Category.Name });
+            }
+
+            // Starts at i=1 so that the Menu tab doesn't get overridden.
+            for (var i = 1; i < CategoryTabs.Items.Count; i++)
+            {
+                var t = CategoryTabs.Items[i] as TabItem;
+
+                var buttonStack = new StackPanel();
+
+                foreach (var p in _allProducts.Where(x => x.Category.Name == t.Name))
+                {
+                    buttonStack.Children.Add(CreateButton(p));
+                }
+
+                t.Content = buttonStack;
+            }
+        }
+
         // Create menu button object.
         private Button CreateButton(Product product)
         {
@@ -120,22 +149,20 @@ namespace KarmaClient
         private void AddToOrderList(Product p)
         {
             _pList.Add(p);
-
-            //TODO create order line objects.
-
             UpdateOrderList();
         }
 
         private void CreateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO add order lines to List<OrderLine>. Build Order object, populating all required properties.
             if (_pList.Count > 0)
             {
                 var sum = new decimal(0.0);
-                foreach (var p in _pList)
+
+                for(var i = 0; i < _pList.Count; i++)
                 {
-                    //TODO Refactor p.price and order.price to matching type
-                    sum = sum + (decimal) p.Price;
+                    var p = _pList[i];
+
+                    sum += (decimal)p.Price;
 
                     var op = new OrderServiceRef.Product
                     {
@@ -147,19 +174,15 @@ namespace KarmaClient
 
                     _oList.Add(new OrderLine
                     {
-                        Product = op, 
+                        Product = op,
                         Quantity = _pList.Count(x => x == p)
                     });
+                    _pList.Remove(_pList.Find(x => x == p));
                 }
-
-                //TODO Find a way to attach tables
-                var selectedTables = new List<Table>{new Table{Id = 1}, new Table{Id = 2}};
 
                 var o = new Order
                 {
                     Price = sum,
-                    Employee = new Employee{Id = 1}, //TODO Find way to attach real employee
-                    Tables = selectedTables.ToArray(),
                     OrderLines = _oList.ToArray()
                 };
 
@@ -176,7 +199,7 @@ namespace KarmaClient
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             // smallDel represents the small X buttons inside list
-            Button smallDel = (Button)sender;
+            var smallDel = (Button)sender;
             if (smallDel != null)
             {
                 if (smallDel.DataContext is Product product)
@@ -206,6 +229,7 @@ namespace KarmaClient
             OrderList.ItemsSource = null;
             OrderList.ItemsSource = _pList;
         }
+
 
 
         // This click event handler is only for demonstration purposes TODO remove when releasing

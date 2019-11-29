@@ -87,7 +87,7 @@
         <Style TargetType="{x:Type TabControl}">
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="0"></Setter>
+            <Setter Property="Margin" Value="0"/>
         </Style>
 
         <!-- ComboBox Styling /missing mods to disabled styling for Karma -->
@@ -209,9 +209,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+<!--Style DatePicker-->
+        <Style TargetType="{x:Type DatePicker}">
+            <Style.Resources>
+                <Style TargetType="Button"/>
+            </Style.Resources>
+        </Style>
 
         <!-- Button Styling -->
-        <Style TargetType="{x:Type Button}">
+        <Style  TargetType="{x:Type Button}">
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Background" Value="#FF202F49" />
             <Setter Property="HorizontalAlignment" Value="Left" />

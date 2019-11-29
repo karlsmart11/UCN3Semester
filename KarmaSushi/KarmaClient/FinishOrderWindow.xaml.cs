@@ -36,7 +36,7 @@ namespace KarmaClient
         private readonly List<Table> _selectedTables = new List<Table>();
 
         /// <summary>
-        /// Half finished order with missing fields that needs to be set
+        /// Half finished order with missing fields that needs to be set.
         /// </summary>
         public Order CurrentOrder { get; set; }
 
@@ -114,8 +114,14 @@ namespace KarmaClient
             } 
             else
             {
-                MessageBox.Show("Choose a table");
+                MessageBox.Show("Choose at least one table");
             }
+        }
+
+        private void AddCommentBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            var cw = new CommentWindow { CurrentOrder = CurrentOrder };
+            cw.Show();
         }
     }
 }

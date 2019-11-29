@@ -10,5 +10,6 @@ namespace Interface
     public interface IReservation
     {
         Reservation GetByCustomer(Customer customer);
+        Reservation InsertReservation(Reservation reservation);
     }
 }

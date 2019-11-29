@@ -25,5 +25,50 @@ namespace SQLRepository
                 return result;
             }
         }
+
+        public Reservation InsertReservation(Reservation reservation)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                p.Add("@Time", reservation.Time);
+                p.Add("@CustomerId", reservation.Customer?.Id ?? 1);
+                p.Add("@EmployeeId", reservation.Employee.Id);
+
+                connection.Execute(
+                    sql: "dbo.spReservation_Insert",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+
+                //Returned reservation identity
+                reservation.Id = p.Get<int>("@Id");
+
+                foreach (var table in reservation.Tables)
+                {
+                    InsertReservedTable(reservation, table);
+                }
+
+                return reservation;
+            }
+        }
+
+
+
+        public void InsertReservedTable(Reservation reservation, Table table)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@ReservationId", reservation.Id);
+                p.Add("@TableId", table.Id);
+
+                connection.Execute(
+                    sql: "dbo.spReservedTable_Insert",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
