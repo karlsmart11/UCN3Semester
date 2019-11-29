@@ -498,6 +498,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style DatePicker-->
+        <Style TargetType="{x:Type DatePicker}">
+            <Style.Resources>
+                <Style TargetType="Button"/>
+            </Style.Resources>
+        </Style>
 
     </Application.Resources>
 </Application>

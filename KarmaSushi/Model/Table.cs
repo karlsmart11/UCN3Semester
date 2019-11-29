@@ -21,7 +21,10 @@ namespace Model
         [DataMember]
         public string Name { get; set; }
 
-        //Todo boolean isAvailable for reservation
+        [DataMember]
+        public int Seats { get; set; }
+
+       
 
         #region Dapper test
 

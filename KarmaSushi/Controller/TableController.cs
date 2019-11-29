@@ -17,11 +17,18 @@ namespace Controller
             return instance.InsertTable(table);
         }
 
+        public List <Table> GetTablesBySeats(int seats)
+        {
+            ITable instance = new TableRepository();
+            return instance.GetTablesBySeats(seats);
+        }
+
         public List<Table> GetTablesByOrder(Order order)
         {
             ITable instance = new TableRepository();
             return instance.GetTablesByOrder(order);
         }
+
 
         public List<Table> GetAllTables()
         {

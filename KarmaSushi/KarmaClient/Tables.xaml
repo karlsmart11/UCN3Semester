@@ -5,47 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarmaClient"
         mc:Ignorable="d"
-        Title="Create table reservation" Height="450" Width="748.8">
-    <Grid>
-        <Grid HorizontalAlignment="Left" Height="297" VerticalAlignment="Top" Width="264" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
-            <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="90,62,0,0" VerticalAlignment="Top" Width="164"/>
+        Title="Create table reservation" Height="539.6" Width="836">
+    <Grid Margin="0,0,-6.4,-0.2">
+        <Grid HorizontalAlignment="Left" Height="368" VerticalAlignment="Top" Width="336" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="90,62,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="90,94,0,0" VerticalAlignment="Top" Width="164"/>
+            <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="90,94,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,122,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="90,126,0,0" VerticalAlignment="Top" Width="164"/>
+            <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="90,126,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="34,10,0,0" TextWrapping="Wrap" Text="Customer Information" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,153,0,0" TextWrapping="Wrap" Text="Guests" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtGuests" HorizontalAlignment="Left" Height="23" Margin="90,157,0,0" VerticalAlignment="Top" Width="164"/>
+            <TextBox x:Name="txtGuests" HorizontalAlignment="Left" Height="23" Margin="90,157,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,184,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtTimeStart" HorizontalAlignment="Left" Height="23" Margin="90,187,0,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.903,1.757"/>
-            <TextBox x:Name="txtTimeEnd" HorizontalAlignment="Left" Height="23" Margin="188,187,0,0" VerticalAlignment="Top" Width="66"/>
-            <TextBlock HorizontalAlignment="Left" Margin="172,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="21" Width="16" Text="-"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,216,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="132,216,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="188,216,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="101,243,0,0" TextWrapping="Wrap" Text="dd" VerticalAlignment="Top" FontSize="12"/>
-            <TextBlock HorizontalAlignment="Left" Margin="153,243,0,0" TextWrapping="Wrap" Text="mm" VerticalAlignment="Top" FontSize="12"/>
-            <ComboBox x:Name="txtDay" HorizontalAlignment="Left" Margin="90,221,0,0" VerticalAlignment="Top" Width="37" Height="22"/>
-            <ComboBox x:Name="txtMonth" HorizontalAlignment="Left" Margin="145,220,0,0" VerticalAlignment="Top" Width="37" Height="22"/>
-            <TextBlock HorizontalAlignment="Left" Margin="216,243,0,0" TextWrapping="Wrap" Text="yyyy" VerticalAlignment="Top" FontSize="12"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,283,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top"/>
+            <DatePicker x:Name="txtDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Margin="90,287,0,0" Width="165" Background="White" Foreground="White" FontSize="20"/>
+            <TextBlock HorizontalAlignment="Left" Margin="179,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="27" Width="5" Text=":"/>
+            <TextBlock HorizontalAlignment="Left" Margin="179,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="27" Width="5" Text=":"/>
+            <Button x:Name="btnCheck" HorizontalAlignment="Left" Margin="227,324,0,0" VerticalAlignment="Top" Width="75" Height="36" Click="btnCheck_Click"/>
 
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="297" Margin="284,10,0,0" VerticalAlignment="Top" Width="448">
+        <Grid HorizontalAlignment="Left" Height="439" Margin="351,10,0,0" VerticalAlignment="Top" Width="456">
             <TextBlock HorizontalAlignment="Left" Margin="159,10,0,0" TextWrapping="Wrap" Text="Available Tables" VerticalAlignment="Top"/>
-            <DataGrid x:Name="availableTables" HorizontalAlignment="Left" Height="201" Margin="10,42,0,0" VerticalAlignment="Top" Width="432" SelectionChanged="DataGrid_SelectionChanged" FontSize="16" Cursor="Arrow"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,263,0,0" TextWrapping="Wrap" Text="Selected Tables :" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtSelectedTables" HorizontalAlignment="Left" Height="23" Margin="168,266,0,0" VerticalAlignment="Top" Width="164"/>
+            <TextBox x:Name="txtSelectedTables" HorizontalAlignment="Left" Height="36" Margin="10,294,0,0" VerticalAlignment="Top" Width="436" FontSize="16" TextChanged="txtSelectedTables_TextChanged"/>
+            <ListBox x:Name="availableTables" Grid.Row="0" SelectionMode="Multiple" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="436" Margin="10,58,0,0" FontSize="16" SelectionChanged="availableTables_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent" Width="{Binding ActualWidth, ElementName=availableTables}"  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding Seats}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
-        <ComboBox x:Name="txtYear" HorizontalAlignment="Left" Margin="209,229,0,0" VerticalAlignment="Top" Width="55" Height="22"/>
-        <Grid HorizontalAlignment="Left" Height="61" Margin="274,349,0,0" VerticalAlignment="Top" Width="458">
-            <Button x:Name="btnCreate" HorizontalAlignment="Left" Height="35" Margin="350,10,0,0" VerticalAlignment="Top" Width="85" Content="Create"/>
-            <Button x:Name="btnCancel" HorizontalAlignment="Left" Height="35" Margin="242,10,0,0" VerticalAlignment="Top" Width="85" Content="Cancel"/>
+        <Grid HorizontalAlignment="Left" Height="61" Margin="351,449,0,-0.2" VerticalAlignment="Top" Width="458">
+            <Button x:Name="btnCreate" HorizontalAlignment="Left" Height="35" Margin="350,10,0,0" VerticalAlignment="Top" Width="85" Content="Create" Click="btnCreate_Click"/>
+            <Button x:Name="btnCancel" HorizontalAlignment="Left" Height="35" Margin="242,10,0,0" VerticalAlignment="Top" Width="85" Content="Cancel" Click="btnCancel_Click"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="64" Margin="10,307,0,0" VerticalAlignment="Top" Width="269">
+        <Grid HorizontalAlignment="Left" Height="103" Margin="10,378,0,0" VerticalAlignment="Top" Width="269">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Employee" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cbxEmployee" HorizontalAlignment="Left" Margin="115,11,0,0" VerticalAlignment="Top" Width="134" Height="26"/>
+            <ComboBox x:Name="cbxEmployee"  HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="167" Height="41"  SelectionChanged="cbxEmployee_SelectionChanged" RenderTransformOrigin="0.107,0.792" FontSize="14">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+
+
+
+            </ComboBox>
         </Grid>
+        <ComboBox x:Name="cbxStartTimeM" HorizontalAlignment="Left" Height="43" Margin="199,197,0,0" VerticalAlignment="Top" Width="80"  SelectionChanged="cbxStartTimeM_SelectionChanged"/>
+        <ComboBox x:Name="cbxEndTimeM" HorizontalAlignment="Left" Height="37" Margin="199,245,0,0" VerticalAlignment="Top" Width="80" />
+        <ComboBox x:Name="cbxStartTimeH" HorizontalAlignment="Left" Height="43" Margin="99,197,0,0" VerticalAlignment="Top" Width="80" SelectionChanged="cbxStartTimeH_SelectionChanged"/>
+        <ComboBox x:Name="cbxEndTimeH" HorizontalAlignment="Left" Height="37" Margin="99,245,0,0" VerticalAlignment="Top" Width="80"/>
 
     </Grid>
 </Window>

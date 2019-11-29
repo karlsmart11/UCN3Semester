@@ -214,5 +214,16 @@ namespace KarmaClient
             MessageBox.Show("The Large Description of the product item goes here");
         }
 
+       
+        private void Tables_Reservation_Click(object sender, RoutedEventArgs e)
+        {
+            Tables tableWindow = new Tables();
+            tableWindow.Show();
+        }
+
+        private void OrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

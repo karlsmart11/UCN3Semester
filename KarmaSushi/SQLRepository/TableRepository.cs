@@ -56,5 +56,17 @@ namespace SQLRepository
                 return allTables;
             }
         }
+
+        public List<Table> GetTablesBySeats(int seats)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+  
+                var allTablesSeats = connection.Query<Table>(sql: "dbo.spTable_GetByOrder", param: seats,
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                return allTablesSeats;
+            }
+        }
     }
 }

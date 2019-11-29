@@ -8,16 +8,14 @@
         Title="MainWindow" Height="600" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" IsMainMenu="True" FontSize="12" Foreground="White">
-            <MenuItem Header="_Reservations">
-                <MenuItem Header="_Create reservation" />
-                <MenuItem Header="_Cancel reservation" />
+             <MenuItem Header="_Reservations" >
+                <MenuItem x:Name="Tables_Reservation" Header="_Create reservation" Click="Tables_Reservation_Click"/>
                 <MenuItem Header="_Modify reservation" />
+                <MenuItem Header="_Cancel reservation" />
+                
             </MenuItem>
 
-            <MenuItem Header="_Tables">
-                <MenuItem Header="_Create Reservation" />
-                <MenuItem Header="_Walk-in" />
-            </MenuItem>
+           
 
         </Menu>
 
@@ -96,7 +94,7 @@
 
                     <ListBox x:Name="OrderList"
                              Grid.Row="0"
-                             HorizontalAlignment="Stretch">
+                             HorizontalAlignment="Stretch" SelectionChanged="OrderList_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Background="Transparent" Width="{Binding ActualWidth, ElementName=OrderList}">
