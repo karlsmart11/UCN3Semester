@@ -12,11 +12,11 @@ namespace ServiceContract
     public interface IReservationServices
     {
 
-        [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-                UriTemplate = "/GetReservationByCustomer/{Customer}", BodyStyle = WebMessageBodyStyle.Bare)]
-        [FaultContract(typeof(Error))]
-        Reservation GetByCustomer(Customer customer);
+        //[OperationContract]
+        //[WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        //        UriTemplate = "/GetReservationByCustomer/{Customer}", BodyStyle = WebMessageBodyStyle.Bare)]
+        //[FaultContract(typeof(Error))]
+        //Reservation GetByCustomer(Customer customer);
 
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json,

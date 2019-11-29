@@ -19,7 +19,7 @@ namespace Controller
 
         public List <Table> GetTablesBySeats(int seats)
         {
-            ITable instance = new TableRepository();
+            ITableRepository instance = new TableRepository();
             return instance.GetTablesBySeats(seats);
         }
 

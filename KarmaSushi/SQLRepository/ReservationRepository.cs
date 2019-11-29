@@ -13,18 +13,18 @@ namespace SQLRepository
 {
     public class ReservationRepository : IReservationRepository
     {
-        public Reservation GetByCustomer(Customer customer)
-        {
-            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Customer", customer);
+        //public Reservation GetByCustomer(Customer customer)
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+        //    {
+        //        var parameters = new DynamicParameters();
+        //        parameters.Add("@Customer", customer);
 
-                var result = connection.QuerySingle<Reservation>("dbo.spReservation_GetByCustomer", param: parameters, commandType: CommandType.StoredProcedure);
+        // DENNE LINJE VIRKER 0%       var result = connection.QuerySingle<Reservation>("dbo.spReservation_GetByCustomer", param: parameters, commandType: CommandType.StoredProcedure);
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
 
         public Reservation InsertReservation(Reservation reservation)
         {

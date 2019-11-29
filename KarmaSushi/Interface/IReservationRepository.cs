@@ -9,7 +9,7 @@ namespace Interface
 {
     public interface IReservationRepository
     {
-        Reservation GetByCustomer(Customer customer);
+        //Reservation GetByCustomer(Customer customer);
         Reservation InsertReservation(Reservation reservation);
     }
 }

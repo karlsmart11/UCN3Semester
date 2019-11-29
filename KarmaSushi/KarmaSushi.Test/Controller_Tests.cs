@@ -7,6 +7,7 @@ using SQLRepository;
 using Controller;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarmaSushi.Test
 {
@@ -90,23 +91,15 @@ namespace KarmaSushi.Test
         }
 
         [TestMethod]
-        public void TestReservationByCustomer()
-        {
-            //TODO
-            ReservationController reservationController = new ReservationController();
-            CustomerController customerController = new CustomerController();
-
-            var c = customerController.GetCustomerById("1");
-
-            var r = reservationController.GetByCustomer(c);
-
-            Assert.IsTrue(r.Customer.Id == 1);
-        }
-
-        [TestMethod]
         public void TestTableByOrder()
         {
-            //TODO
+            TableController tableController = new TableController();
+            OrderController orderController = new OrderController();
+
+            var o = orderController.GetOrderById("7");
+            var tables = tableController.GetTablesByOrder(o);
+
+            Assert.IsTrue(tables.Any());
         }
 
         [TestMethod]

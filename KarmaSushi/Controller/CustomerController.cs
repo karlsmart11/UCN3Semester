@@ -11,15 +11,6 @@ namespace Controller
 { 
     public class CustomerController : IDisposable
     {
-        private readonly ICustomerRepository _customerRepository;
-
-        public CustomerController() { }
-
-        public CustomerController(ICustomerRepository customerRepository)
-        {
-            _customerRepository = customerRepository;
-        }
-
         public Customer GetCustomerById (string id)
         {
             ICustomerRepository instance =  new CustomerRepository();
