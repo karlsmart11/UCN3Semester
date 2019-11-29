@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using KarmaWeb.OrderServiceRef;
 using KarmaWeb.ProductServiceRef;
 
 namespace KarmaWeb.Controllers
@@ -17,13 +16,65 @@ namespace KarmaWeb.Controllers
         // GET: Order
         public ActionResult Index()
         {
+            if (Session["cart"] == null)
+            {
+                var cart = new List<OrderLine>();
+                Session["cart"] = cart;
+            }
+
             return View(_pClient.GetAllProducts());
         }
 
-        //public ActionResult Select(string id)
-        //{
-        //    return RedirectToAction("Index", _pClient.GetProductById(id));
-        //}
+        public ActionResult Buy(string id)
+        {
+            var refP = _pClient.GetProductById(id);
+            var p = ParseProduct(refP);
+
+            var cart = (List<OrderLine>) Session["cart"];
+            var index = IsExist(id);
+            if (index != -1)
+            {
+                cart[index].Quantity++;
+            }
+            else
+            {
+                cart.Add(new OrderLine {Product = ParseProduct(_pClient.GetProductById(id)), Quantity = 1});
+            }
+
+            Session["cart"] = cart;
+            
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Remove(string id)
+        {
+            var cart = (List<OrderLine>)Session["cart"];
+            var index = IsExist(id);
+            cart.RemoveAt(index);
+            Session["cart"] = cart;
+            return Redirect("Index");
+        }
+
+        private static OrderServiceRef.Product ParseProduct(ProductServiceRef.Product p)
+        {
+            var orderProduct = new OrderServiceRef.Product()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price
+            };
+            return orderProduct;
+        }
+
+        private int IsExist(string id)
+        {
+            var cart = (List<OrderLine>)Session["cart"];
+            for (var i = 0; i < cart.Count; i++)
+                if (cart[i].Product.Id.Equals(int.Parse(id)))
+                    return i;
+            return -1;
+        }
 
         #region Boilerplate MVC controller
 
