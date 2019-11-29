@@ -184,6 +184,13 @@ namespace KarmaClient.TableServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetAllTables", ReplyAction="http://tempuri.org/ITableServices/GetAllTablesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAllTablesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetTablesBySeats", ReplyAction="http://tempuri.org/ITableServices/GetTablesBySeatsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.TableServiceRef.Error), Action="http://tempuri.org/ITableServices/GetTablesBySeatsErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetTablesBySeats(int seats);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetTablesBySeats", ReplyAction="http://tempuri.org/ITableServices/GetTablesBySeatsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetTablesBySeatsAsync(int seats);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -227,6 +234,14 @@ namespace KarmaClient.TableServiceRef {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAllTablesAsync() {
             return base.Channel.GetAllTablesAsync();
+        }
+        
+        public System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetTablesBySeats(int seats) {
+            return base.Channel.GetTablesBySeats(seats);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetTablesBySeatsAsync(int seats) {
+            return base.Channel.GetTablesBySeatsAsync(seats);
         }
     }
 }

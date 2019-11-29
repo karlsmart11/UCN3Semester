@@ -7,7 +7,7 @@ using Model;
 
 namespace Interface
 {
-    public interface IEmployee
+    public interface IEmployeeRepository
     {
         /// <summary>
         /// Method in interface use to return an employee found by the Id

@@ -11,7 +11,7 @@ using Model;
 
 namespace SQLRepository
 {
-    public class ProductRepository : IProduct
+    public class ProductRepository : IProductRepository
     {
        
         public Product GetProductById(string id)
@@ -25,6 +25,8 @@ namespace SQLRepository
                     sql:"dbo.spProduct_GetById",
                     param: p,
                     commandType: CommandType.StoredProcedure);
+
+                product.Category = GetCategoryById(product.CategoryId);
 
                 return product;
             }

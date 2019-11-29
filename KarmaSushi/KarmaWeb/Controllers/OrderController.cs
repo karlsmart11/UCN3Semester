@@ -20,6 +20,11 @@ namespace KarmaWeb.Controllers
             return View(_pClient.GetAllProducts());
         }
 
+        //public ActionResult Select(string id)
+        //{
+        //    return RedirectToAction("Index", _pClient.GetProductById(id));
+        //}
+
         #region Boilerplate MVC controller
 
         // GET: Order/Details/5

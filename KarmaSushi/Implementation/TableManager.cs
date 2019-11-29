@@ -71,6 +71,26 @@ namespace Implementation
                 });
             }
         }
+        public List<Table> GetTablesBySeats(int seats)
+        {
+            try
+            {
+                using (var instance = new TableController())
+                {
+                    return instance.GetTablesBySeats(seats);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
     }
 }
     

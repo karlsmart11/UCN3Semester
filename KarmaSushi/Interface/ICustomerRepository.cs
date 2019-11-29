@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace Interface
 {  
     
-    public interface ICustomer
+    public interface ICustomerRepository
     {
        Customer GetCustomerById(string id);
        Customer GetCustomerByName(string name);

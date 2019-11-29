@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace SQLRepository
 {   
-    public class TableRepository : ITable
+    public class TableRepository : ITableRepository
     {
         public Table InsertTable(Table table)
         {
@@ -51,6 +51,18 @@ namespace SQLRepository
                 var allTables = connection.Query<Table>(sql: "SELECT * FROM [dmab0918_1074178].[dbo].[Table]").ToList();
 
                 return allTables;
+            }
+        }
+
+        public List<Table> GetTablesBySeats(int seats)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+  
+                var allTablesSeats = connection.Query<Table>(sql: "dbo.spTable_GetByOrder", param: seats,
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                return allTablesSeats;
             }
         }
     }

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    public interface ITable
+    public interface ITableRepository
     {
         Table InsertTable(Table table);
+
+        List<Table> GetTablesBySeats(int seats);
         List<Table> GetTablesByOrder(Order order);
         List<Table> GetAllTables();
     }

@@ -28,8 +28,14 @@ namespace ServiceContract
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetTables/", BodyStyle = WebMessageBodyStyle.Bare)]
+            UriTemplate = "/GetAllTables/", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] //Fault contract allows you to customize the error messages
         List<Table> GetAllTables();
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetTablesBySeats/", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] //Fault contract allows you to customize the error messages
+        List<Table> GetTablesBySeats(int seats);
     }
 }
