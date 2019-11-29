@@ -210,11 +210,11 @@
             </Setter>
         </Style>
 <!--Style DatePicker-->
-        <Style TargetType="{x:Type DatePicker}">
+        <!--<Style TargetType="{x:Type DatePicker}">
             <Style.Resources>
                 <Style TargetType="Button"/>
             </Style.Resources>
-        </Style>
+        </Style>-->
 
         <!-- Button Styling -->
         <Style  TargetType="{x:Type Button}">
