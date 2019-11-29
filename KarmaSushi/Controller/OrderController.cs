@@ -28,6 +28,11 @@ namespace Controller
             return instance.GetAllOrders();
         }
 
+        public Order  ModifyOrder(Order order)
+        {
+            IOrderRepository instance = new OrderRepository();
+            return instance.ModifyOrder(order);
+        }
        
 
         void IDisposable.Dispose()

@@ -46,12 +46,33 @@ namespace SQLRepository
                    dbType: DbType.Int32,
                    direction: ParameterDirection.Output);
 
-                connection.Execute(sql: "dbo.spOrderLine_Insert", 
+                connection.Execute(sql: "dbo.spOrderLine_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
                 orderLine.Id = p.Get<int>("@Id");
                 return orderLine;
+            }
+        }
+
+        public OrderLine ModifyOrderLine(OrderLine orderLine)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+                var p = new DynamicParameters();
+
+                p.Add("@Id", orderLine.Id);
+                p.Add("@ProductId", orderLine.Product.Id);
+                p.Add("@Quantity", orderLine.Quantity);
+
+
+                var result = conexion.Execute("dbo.spOrderLine_Update", param: p , commandType: CommandType.StoredProcedure);
+             
+                return  orderLine;
+
+
+
             }
         }
     }

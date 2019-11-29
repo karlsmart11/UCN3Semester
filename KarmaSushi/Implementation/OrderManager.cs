@@ -72,6 +72,26 @@ namespace Implementation
             }
         }
 
-       
+        public Order ModifyOrder(Order order)
+        {
+            try
+            {
+                using (var instance = new OrderController())
+                {
+                    return instance.ModifyOrder(order);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = e.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+
     }
 }
