@@ -73,9 +73,12 @@ namespace SQLRepository
                 //Returned order identity 
                 order.Id = p.Get<int>("@Id");
 
-                foreach (var table in order.Tables)
+                if (order.Tables != null)
                 {
-                    InsertTablesOrders(order, table);
+                    foreach (var table in order.Tables)
+                    {
+                        InsertTablesOrders(order, table);
+                    }
                 }
 
                 foreach (var orderLine in order.OrderLines)

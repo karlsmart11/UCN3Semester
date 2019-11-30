@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using KarmaWeb.OrderServiceRef;
@@ -11,11 +12,17 @@ namespace KarmaWeb.Controllers
         /// <summary>
         /// Client reference for the Product service.
         /// </summary>
-        private readonly ProductServicesClient _pClient = new ProductServicesClient();  
+        private readonly ProductServicesClient _pClient = new ProductServicesClient();
+        private readonly OrderServiceClient _oClient = new OrderServiceClient();
 
         // GET: Order
         public ActionResult Index()
         {
+            //if (Session["sum"] == null)
+            //{
+            //    Session["sum"] = ((List<OrderLine>)Session["cart"]).Sum(x => x.Product.Price);
+            //}
+
             if (Session["cart"] == null)
             {
                 var cart = new List<OrderLine>();
@@ -25,13 +32,13 @@ namespace KarmaWeb.Controllers
             return View(_pClient.GetAllProducts());
         }
 
-        public ActionResult Buy(string id)
+        public ActionResult ToCart(string id)
         {
             var refP = _pClient.GetProductById(id);
             var p = ParseProduct(refP);
 
             var cart = (List<OrderLine>) Session["cart"];
-            var index = IsExist(id);
+            var index = DoesProductExist(id);
             if (index != -1)
             {
                 cart[index].Quantity++;
@@ -49,10 +56,24 @@ namespace KarmaWeb.Controllers
         public ActionResult Remove(string id)
         {
             var cart = (List<OrderLine>)Session["cart"];
-            var index = IsExist(id);
+            var index = DoesProductExist(id);
             cart.RemoveAt(index);
             Session["cart"] = cart;
-            return Redirect("Index");
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddOrder(List<OrderLine> lines)
+        {
+            //TODO handle customer + employee + tables maybe handled??
+            //var currentCart = Session["cart"] as List<OrderLine>;
+            //if ((currentCart ?? throw new InvalidOperationException()).Any())
+            //{
+            //    _oClient.InsertOrder(new Order
+            //    {
+            //        OrderLines = lines
+            //    });
+            //}
+            return RedirectToAction("Index", "Home");
         }
 
         private static OrderServiceRef.Product ParseProduct(ProductServiceRef.Product p)
@@ -67,7 +88,7 @@ namespace KarmaWeb.Controllers
             return orderProduct;
         }
 
-        private int IsExist(string id)
+        private int DoesProductExist(string id)
         {
             var cart = (List<OrderLine>)Session["cart"];
             for (var i = 0; i < cart.Count; i++)
