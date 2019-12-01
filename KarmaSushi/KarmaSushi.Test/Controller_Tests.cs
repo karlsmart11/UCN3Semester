@@ -7,119 +7,105 @@ using SQLRepository;
 using Controller;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarmaSushi.Test
 {
     [TestClass]
     public class ControllerTests
-    { 
+    {
         [TestMethod]
-        public void TestKrakaConnString()
+        public void TestCustomerById()
         {
-            StringBuilder connString = new StringBuilder("Data Source = kraka.ucn.dk;");
-            connString.Append("Initial Catalog = dmab0918_1074178;");
-            connString.Append("Persist Security Info = True;");
-            connString.Append("User Id = dmab0918_1074178;");
-            connString.Append("Password = Password1!");
+            CustomerController customerController = new CustomerController();
 
-            var x = Conexion.GetConnectionString();
+            var c = customerController.GetCustomerById("1");
 
-            Assert.AreEqual(x, connString);
+            Assert.IsTrue(c.Id == 1);
         }
 
         [TestMethod]
-        public void TestGetEmployee()
+        public void TestCustomerByName()
         {
-            Mock<IEmployee> mock = new Mock<IEmployee>();
+            CustomerController customerController = new CustomerController();
 
-            Employee employee = new Employee()
-            {
-                Id = 1,
-                Name = "Jonas",
-                Email = "jonas@mail.dk",
-                Phone = "42234188",
-            };
+            var c = customerController.GetCustomerByName("julian");
 
-            mock.Setup(obj => obj.GetEmployeeById("1")).Returns(employee);
-
-            EmployeeController employeeController = new EmployeeController(mock.Object);
-
-            Employee employee1 = employeeController.GetEmployeeById("1");
+            Assert.IsTrue(c.Name == "julian");
         }
 
         [TestMethod]
-        public void TestInsertOrder()
+        public void TestEmployyeById()
         {
-            //Arrange
-            Mock<IOrder> mock = new Mock<IOrder>();
+            EmployeeController employeeController = new EmployeeController();
 
-            var t = new Table
-            {
-                Id = 1,
-                Name = "Bord 1"
-            };
+            var e = employeeController.GetEmployeeById("1");
 
-            var p = new Product {
-                Id = 1,
-                Name = "Sushiroll",
-                Description = "Lækkert",
-                Price = 25
-            };
+            Assert.IsTrue(e.Id == 1);
+        }
 
-            var ol = new OrderLine {
-                Product = p,
-                Quantity = 4
-            };
+        [TestMethod]
+        public void TestGetAllEmployee()
+        {
+            //TODO
+        }
 
-            Order order = new Order
-            {
-                Id = 420,
-                Price = 2,
-                Time = DateTime.Now,
-                Tables = new List<Table> { t },
-                Customer = new Customer { Id = 1 },
-                Employee = new Employee { Id = 1, Name = "Emma", Email = "emma@mail.gypsy", Phone = "42042042" },
-                OrderLines = new List<OrderLine> { ol }
-            };
-        
-            //Act
-            mock.Setup(obj => obj.InsertOrder(order)).Returns(order);
+        [TestMethod]
+        public void TestOrderById()
+        {
+            OrderController orderController = new OrderController();
 
-            OrderController orderController = new OrderController(mock.Object);
+            var o = orderController.GetOrderById("5");
 
-            orderController.InsertOrder(order);
-
-            //Assert
-            Assert.AreEqual(420, order.Id);
+            Assert.IsTrue(o.Id == 5);
+            Assert.IsTrue(o.CustomerId == 1);
+            Assert.IsTrue(o.EmployeeId == 1);
         }
 
         [TestMethod]
         public void TestGetAllOrders()
         {
-            Mock<IOrder> mock = new Mock<IOrder>();
-
-            List<Order> orders = new List<Order>();
-
-            mock.Setup(obj => obj.GetAllOrders()).Returns(orders);
-
-            OrderController orderController = new OrderController(mock.Object);
-
-            orderController.GetAllOrder();
+            //TODO
         }
 
         [TestMethod]
-        public void TestGetAllProducts()
+        public void TestProductById()
         {
-            Mock<IProduct> mock = new Mock<IProduct>();
+            ProductController productController = new ProductController();
 
-            List<Product> products = new List<Product>();
+            var p = productController.GetProductById("1");
 
-            mock.Setup(obj => obj.GetAllProducts()).Returns(products);
-
-            ProductController productController = new ProductController(mock.Object);
-
-            productController.GetAllProducts();
+            Assert.IsTrue(p.Id == 1);
+            Assert.IsTrue(p.CategoryId == 1);
         }
-        
+
+        [TestMethod]
+        public void TestProductByName()
+        {
+            ProductController productController = new ProductController();
+
+            var p = productController.GetProductByName("SomeProduct");
+
+            Assert.IsTrue(p.Name == "SomeProduct");
+            Assert.IsTrue(p.CategoryId == 1);
+        }
+
+        [TestMethod]
+        public void TestTableByOrder()
+        {
+            TableController tableController = new TableController();
+            OrderController orderController = new OrderController();
+
+            var o = orderController.GetOrderById("7");
+            var tables = tableController.GetTablesByOrder(o);
+
+            Assert.IsTrue(tables.Any());
+        }
+
+        [TestMethod]
+        public void TestGetAllTables()
+        {
+            //TODO
+        }
     }
 }

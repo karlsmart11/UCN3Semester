@@ -23,7 +23,7 @@ namespace KarmaClient
     public partial class OrderWindow : Window
     {
         public static OrderServiceRef.OrderServiceClient proxyOder = new OrderServiceRef.OrderServiceClient();
-        public static Order[] arrayOrder = proxyOder.GetAllOrders();
+        public  Order[] arrayOrder = proxyOder.GetAllOrders();
         public int selecetedId = -1;
         public List<int> IdOrdersList;
 
@@ -65,7 +65,14 @@ namespace KarmaClient
                         DataRow newRow = dt.NewRow();
                         newRow[0] = item.Price.ToString();
                         newRow[1] = date;
-                        newRow[2] = item.Customer.Name.ToString();
+                        if (item.Customer != null)
+                        {
+                            newRow[2] = item.Customer.Name.ToString();
+                        }
+                        else
+                        {
+                            newRow[2] = null;
+                        }
                         newRow[3] = item.Employee.Name.ToString();
                         IdOrdersList.Add(item.Id);
                         foreach (var orderLinesItem in item.OrderLines)
@@ -124,7 +131,15 @@ namespace KarmaClient
                         DataRow newRow = dt.NewRow();
                         newRow[0] = item.Price.ToString();
                         newRow[1] = date;
-                        newRow[2] = item.Customer.Name.ToString();
+                        if (item.Customer != null)
+                        {
+                            newRow[2] = item.Customer.Name.ToString();
+                        }
+                        else
+                        {
+                            newRow[2] = null;
+                        }
+                        
                         newRow[3] = item.Employee.Name.ToString();
                         IdOrdersList.Add(item.Id);
                         foreach (var orderLinesItem in item.OrderLines)
@@ -196,6 +211,21 @@ namespace KarmaClient
 
         }
 
-      
+        private void ModityOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (selecetedId != -1)
+            {
+                Order order = proxyOder.GetOrderById(selecetedId.ToString());
+                ModifyOrderWindow modifyOrderWindow = new ModifyOrderWindow(order);
+                modifyOrderWindow.Show();
+                selecetedId = -1;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No order selected");
+            }
+    }
     }
 }

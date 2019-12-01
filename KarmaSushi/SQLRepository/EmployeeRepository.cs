@@ -11,7 +11,7 @@ using Model;
 
 namespace SQLRepository
 {
-   public class EmployeeRepository : IEmployee
+   public class EmployeeRepository : IEmployeeRepository
     {
         /// <summary>
         /// Method that manage the connection to the database given the parameters and returning an Employee searched by Id.

@@ -13,26 +13,26 @@ namespace Controller
     {
         public Table InsertTable (Table table)
         {
-            ITable instance = new TableRepository();
+            ITableRepository instance = new TableRepository();
             return instance.InsertTable(table);
         }
 
         public List <Table> GetTablesBySeats(int seats)
         {
-            ITable instance = new TableRepository();
+            ITableRepository instance = new TableRepository();
             return instance.GetTablesBySeats(seats);
         }
 
         public List<Table> GetTablesByOrder(Order order)
         {
-            ITable instance = new TableRepository();
+            ITableRepository instance = new TableRepository();
             return instance.GetTablesByOrder(order);
         }
 
 
         public List<Table> GetAllTables()
         {
-            ITable instance = new TableRepository();
+            ITableRepository instance = new TableRepository();
             return instance.GetAllTables();
         }
 

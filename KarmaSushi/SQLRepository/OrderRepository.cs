@@ -17,7 +17,7 @@ namespace SQLRepository
     //Remember to do connection.execute(); for insert
     // p.add("@Id", 0, dbType: DBType.Int32, direction: ParameterDirection.Output);
 
-    public class OrderRepository : IOrder
+    public class OrderRepository : IOrderRepository
     {
         private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
         private readonly CustomerRepository _customerRepository = new CustomerRepository();
@@ -37,7 +37,11 @@ namespace SQLRepository
                     commandType: CommandType.StoredProcedure);
 
                 order.Employee = _employeeRepository.GetEmployeeById(order.EmployeeId.ToString());
-                order.Customer = _customerRepository.GetCustomerById(order.CustomerId.ToString());
+                if (order.CustomerId != 0)
+                {
+                    order.Customer = _customerRepository.GetCustomerById(order.CustomerId.ToString());
+                }
+               
                 order.OrderLines = _orderLineRepository.GetOrderLinesByOrder(order);
                 order.Tables = _tableRepository.GetTablesByOrder(order);
 
@@ -69,9 +73,12 @@ namespace SQLRepository
                 //Returned order identity 
                 order.Id = p.Get<int>("@Id");
 
-                foreach (var table in order.Tables)
+                if (order.Tables != null)
                 {
-                    InsertTablesOrders(order, table);
+                    foreach (var table in order.Tables)
+                    {
+                        InsertTablesOrders(order, table);
+                    }
                 }
 
                 foreach (var orderLine in order.OrderLines)
@@ -103,6 +110,35 @@ namespace SQLRepository
                 return allOrders;
             }
         }
+
+        public Order ModifyOrder(Order order)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+                var p = new DynamicParameters();
+
+                p.Add("@Id", order.Id);
+                p.Add("@Price", order.Price);
+                p.Add("@Time", order.Time);
+                p.Add("@CustomerId", order.Customer.Id);
+                p.Add("@EmployeeId", order.Employee.Id);
+                p.Add("@Comment", order.Comment);
+
+                
+                var result = conexion.Execute("dbo.spOrders_Update", param: p, commandType: CommandType.StoredProcedure);
+
+                foreach (var orderLine in order.OrderLines)
+                {
+                     orderLine.OrderId = order.Id;
+                    _orderLineRepository.ModifyOrderLine(orderLine);
+                }
+
+
+                return order;
+            }
+        }
+
         public void InsertTablesOrders(Order order, Table table)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -119,11 +155,11 @@ namespace SQLRepository
             }
         }
 
-      
+
+       
 
 
-           
-        }
+    }
 
         //public int AmountOfOrdersInDb()
         //{

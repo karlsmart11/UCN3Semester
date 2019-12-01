@@ -245,9 +245,15 @@ namespace KarmaClient
             tableWindow.Show();
         }
 
-        private void OrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Order_Menu_Click(object sender, RoutedEventArgs e)
         {
+          
+                OrderWindow orderWindow = new OrderWindow();
+                orderWindow.Show();
 
-        }
+            }
+        
     }
+
+     
 }

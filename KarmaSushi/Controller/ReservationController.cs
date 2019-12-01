@@ -10,15 +10,15 @@ namespace Controller
 {
     public class ReservationController : IDisposable
     {
-        public Reservation GetByCustomer(Customer customer)
-        {
-            IReservation instance = new ReservationRepository();
-            return instance.GetByCustomer(customer);
-        }
+        //public Reservation GetByCustomer(Customer customer)
+        //{
+        //    IReservationRepository instance = new ReservationRepository();
+        //    return instance.GetByCustomer(customer);
+        //}
 
         public Reservation InsertReservation(Reservation reservation)
         {
-            IReservation instance = new ReservationRepository();
+            IReservationRepository instance = new ReservationRepository();
             return instance.InsertReservation(reservation);
         }
 

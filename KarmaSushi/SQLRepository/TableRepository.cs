@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace SQLRepository
 {   
-    public class TableRepository : ITable
+    public class TableRepository : ITableRepository
     {
         public Table InsertTable(Table table)
         {

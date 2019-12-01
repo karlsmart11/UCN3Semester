@@ -10,26 +10,16 @@ namespace Controller
 {
     public class ProductController :  IDisposable
     {
-        public ProductController()
-        {
-            _productRepository = new ProductRepository();
-        }
-
-        public ProductController(IProduct productRepository)
-        {
-            _productRepository = productRepository;
-        }
-
-        IProduct _productRepository = null;
-
         public Product GetProductById(string id)
         {
-            return _productRepository.GetProductById(id);
+            IProductRepository instance = new ProductRepository();
+            return instance.GetProductById(id);
         }
 
         public Product GetProductByName(string name)
         {
-            return _productRepository.GetProductByName(name);
+            IProductRepository instance = new ProductRepository();
+            return instance.GetProductByName(name);
         }
 
         /*
@@ -45,7 +35,8 @@ namespace Controller
         */
         public List<Product> GetAllProducts ()
         {
-            return _productRepository.GetAllProducts();
+            IProductRepository instance = new ProductRepository();
+            return instance.GetAllProducts();
         }
 
 

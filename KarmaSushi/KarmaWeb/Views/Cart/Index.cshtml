@@ -1,0 +1,56 @@
+﻿@using KarmaWeb.OrderServiceRef
+@model KarmaWeb.OrderServiceRef.Order
+
+<h2>Index</h2>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+</head>
+
+<body>
+    <h3>Cart page</h3>
+
+    <h2>Basket</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in (List<OrderLine>)Session["cart"])
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Description)
+            </td>
+            <td>
+                @item.Product.Price Kr.
+            </td>
+            <td>
+                @*@Html.Display(modelItem => item.Quantity)*@
+            </td>
+            <td>
+                <asp:button runat="server" id="btnRemove" class="btn btn-default">Remove</asp:button>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @Html.ActionLink("Pick more items", "Index", controllerName:"Order")
+</div>
+</body>

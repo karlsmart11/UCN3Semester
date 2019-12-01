@@ -7,7 +7,7 @@ using Model;
 
 namespace Interface
 {
-    public interface IOrder
+    public interface IOrderRepository
     {
         /// <summary>
         /// Returns order from database.
@@ -18,8 +18,8 @@ namespace Interface
         Order GetOrderById(string id);
         Order InsertOrder(Order order);
         List<Order> GetAllOrders();
-    
 
+        Order ModifyOrder(Order order);
 
     }
 }

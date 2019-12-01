@@ -12,7 +12,7 @@ using Model;
 
 namespace SQLRepository
 {
-    public class CustomerRepository : ICustomer
+    public class CustomerRepository : ICustomerRepository
     {
         public Customer GetCustomerById(string id)
         {
