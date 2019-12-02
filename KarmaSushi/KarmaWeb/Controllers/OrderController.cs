@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using KarmaWeb.OrderServiceRef;
 using KarmaWeb.ProductServiceRef;
 
 namespace KarmaWeb.Controllers
@@ -12,18 +12,90 @@ namespace KarmaWeb.Controllers
         /// <summary>
         /// Client reference for the Product service.
         /// </summary>
-        private readonly ProductServicesClient _pClient = new ProductServicesClient();  
+        private readonly ProductServicesClient _pClient = new ProductServicesClient();
+        private readonly OrderServiceClient _oClient = new OrderServiceClient();
 
         // GET: Order
         public ActionResult Index()
         {
+            //if (Session["sum"] == null)
+            //{
+            //    Session["sum"] = ((List<OrderLine>)Session["cart"]).Sum(x => x.Product.Price);
+            //}
+
+            if (Session["cart"] == null)
+            {
+                var cart = new List<OrderLine>();
+                Session["cart"] = cart;
+            }
+
             return View(_pClient.GetAllProducts());
         }
 
-        //public ActionResult Select(string id)
-        //{
-        //    return RedirectToAction("Index", _pClient.GetProductById(id));
-        //}
+        public ActionResult ToCart(string id)
+        {
+            var refP = _pClient.GetProductById(id);
+            var p = ParseProduct(refP);
+
+            var cart = (List<OrderLine>) Session["cart"];
+            var index = DoesProductExist(id);
+            if (index != -1)
+            {
+                cart[index].Quantity++;
+            }
+            else
+            {
+                cart.Add(new OrderLine {Product = ParseProduct(_pClient.GetProductById(id)), Quantity = 1});
+            }
+
+            Session["cart"] = cart;
+            
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Remove(string id)
+        {
+            var cart = (List<OrderLine>)Session["cart"];
+            var index = DoesProductExist(id);
+            cart.RemoveAt(index);
+            Session["cart"] = cart;
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddOrder(List<OrderLine> lines)
+        {
+            //TODO handle customer + employee + tables maybe handled??
+            //var currentCart = Session["cart"] as List<OrderLine>;
+            //if ((currentCart ?? throw new InvalidOperationException()).Any())
+            //{
+            //    _oClient.InsertOrder(new Order
+            //    {
+            //        OrderLines = lines
+            //    });
+            //}
+            return RedirectToAction("Index", "Home");
+        }
+
+        private static OrderServiceRef.Product ParseProduct(ProductServiceRef.Product p)
+        {
+            var orderProduct = new OrderServiceRef.Product()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price
+            };
+            return orderProduct;
+        }
+
+        private int DoesProductExist(string id)
+        {
+            var cart = (List<OrderLine>)Session["cart"];
+            for (var i = 0; i < cart.Count; i++)
+                if (cart[i].Product.Id.Equals(int.Parse(id)))
+                    return i;
+            return -1;
+        }
 
         #region Boilerplate MVC controller
 

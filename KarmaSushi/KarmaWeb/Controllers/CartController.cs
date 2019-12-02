@@ -80,7 +80,7 @@ namespace KarmaWeb.Controllers
         {
             var cart = (List<OrderLine>)Session["cart"];
             for (var i = 0; i < cart.Count; i++)
-                if (cart[i].Product.Id.Equals(id))
+                if (cart[i].Product.Id.Equals(int.Parse(id)))
                     return i;
             return -1;
         }
