@@ -25,8 +25,7 @@ namespace KarmaWeb.Controllers
 
             if (Session["cart"] == null)
             {
-                var cart = new List<OrderLine>();
-                Session["cart"] = cart;
+                Session["cart"] = new List<OrderLine>();
             }
 
             return View(_pClient.GetAllProducts());
@@ -34,8 +33,8 @@ namespace KarmaWeb.Controllers
 
         public ActionResult ToCart(string id)
         {
-            var refP = _pClient.GetProductById(id);
-            var p = ParseProduct(refP);
+            //var refP = _pClient.GetProductById(id);
+            //var p = ParseProduct(refP);
 
             var cart = (List<OrderLine>) Session["cart"];
             var index = DoesProductExist(id);
@@ -62,17 +61,23 @@ namespace KarmaWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddOrder(List<OrderLine> lines)
+        public ActionResult AddOrder(string comment)
         {
-            //TODO handle customer + employee + tables maybe handled??
-            //var currentCart = Session["cart"] as List<OrderLine>;
-            //if ((currentCart ?? throw new InvalidOperationException()).Any())
-            //{
-            //    _oClient.InsertOrder(new Order
-            //    {
-            //        OrderLines = lines
-            //    });
-            //}
+            var sum = 0d;
+            foreach (var orderLine in (List<OrderLine>) Session["cart"])
+            {
+                sum += orderLine.Product.Price * orderLine.Quantity;
+            }
+
+            _oClient.InsertOrder(new Order
+            {
+                Price = new decimal(sum),
+                Tables = new List<Table> { new Table { Id = 2 } },
+                OrderLines = (List<OrderLine>)Session["cart"],
+                Employee = new Employee { Id = 1 },
+                Comment = comment
+            });
+
             return RedirectToAction("Index", "Home");
         }
 
