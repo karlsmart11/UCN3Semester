@@ -21,5 +21,6 @@ namespace Interface
 
         Order ModifyOrder(Order order);
 
+        bool DeleteOrder(string id);
     }
 }

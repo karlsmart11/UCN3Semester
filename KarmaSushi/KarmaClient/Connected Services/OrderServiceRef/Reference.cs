@@ -804,6 +804,13 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/ModifyOrder", ReplyAction="http://tempuri.org/IOrderService/ModifyOrderResponse")]
         System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> ModifyOrderAsync(KarmaClient.OrderServiceRef.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.OrderServiceRef.Error), Action="http://tempuri.org/IOrderService/DeleteOrderErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        bool DeleteOrder(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
+        System.Threading.Tasks.Task<bool> DeleteOrderAsync(string id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -863,6 +870,14 @@ namespace KarmaClient.OrderServiceRef {
         
         public System.Threading.Tasks.Task<KarmaClient.OrderServiceRef.Order> ModifyOrderAsync(KarmaClient.OrderServiceRef.Order order) {
             return base.Channel.ModifyOrderAsync(order);
+        }
+        
+        public bool DeleteOrder(string id) {
+            return base.Channel.DeleteOrder(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteOrderAsync(string id) {
+            return base.Channel.DeleteOrderAsync(id);
         }
     }
 }

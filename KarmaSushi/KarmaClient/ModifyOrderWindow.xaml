@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarmaClient"
         mc:Ignorable="d"
-        Title="Modify Order" Height="450" Width="800"  WindowStartupLocation="CenterScreen">
+        Title="Modify Order" Height="452.413" Width="1241.555"  WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -38,12 +40,59 @@
         </ComboBox>
         <ComboBox x:Name="employeeCB" HorizontalAlignment="Left" Margin="9.8,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="178" RenderTransformOrigin="0.608,0.313" Height="37" Grid.Column="1"/>
         <TextBox x:Name="commentTxt" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" Grid.Row="5" Text="" VerticalAlignment="Top" Width="178"/>
-        <Label Content="items" Grid.Column="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Height="AUTO" Width="AUTO" FontSize="20" Grid.ColumnSpan="2"/>
-        <Button  x:Name="btnCancel" Grid.Column="2" Content="Cancel" HorizontalAlignment="Left" Margin="15,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="173" Height="40"/>
-        <Button x:Name="btnSave" Grid.Column="3" Click="btnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="173" Height="40"/>
-        <Button x:Name="btnEditItems" Grid.Column="3" Content="Edit Items" HorizontalAlignment="Left" Margin="76,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="79
-                " Height="40"/>
+        <Label Content="Items in order" Grid.Column="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  Margin="0,0,0,0" VerticalAlignment="Top" Height="AUTO" Width="147" FontSize="20" Grid.ColumnSpan="2"/>
+        <Button  x:Name="btnCancel" Grid.Column="4" Content="Cancel" HorizontalAlignment="Left" Margin="42,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="173" Height="40" Click="btnCancel_Click" />
+        <Button x:Name="btnSave" Grid.Column="5" Click="btnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="173" Height="40"/>
         <TextBox x:Name="timeTxt" Grid.Column="1" IsEnabled="False" HorizontalAlignment="Left" Height="32" Margin="10,15,0,0" Grid.Row="2" Text="" VerticalAlignment="Top" Width="178"/>
-        <Grid x:Name="GridItems" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="203" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="438"/>
+        <ListBox x:Name="listTableProducts" Grid.Column="2" HorizontalAlignment="Left" Height="219" Margin="10,10,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="436" Grid.ColumnSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent" Width="{Binding ActualWidth, ElementName=listTableProducts}"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Price}"></TextBlock>
+
+                        <Button Grid.Column="3" Width="Auto" Height="Auto"
+                                            HorizontalAlignment="Right"
+                                            Content="X" Background="#202F49"
+                                        Click="Button_Click"  Margin="0,0,20,0"/>
+
+
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="ProductsList" Grid.Column="4" HorizontalAlignment="Left" Height="219" Margin="10,10,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="430" Grid.ColumnSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent" Width="{Binding ActualWidth, ElementName=ProductsList}"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Price}"></TextBlock>
+
+
+
+                        <Button Grid.Column="3" Width="Auto" Height="Auto"
+                                            HorizontalAlignment="Right"
+                                            Content="Add" Background="#202F49"
+                                     Click="Button_Click_1"  Margin="0,0,20,0"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Menu" Grid.Column="4" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"  Height="AUTO" Width="75" FontSize="20" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

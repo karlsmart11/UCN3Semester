@@ -109,8 +109,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-
-    <Page Include="ModifyItemsInOrdersWindow.xaml">
+    <Page Include="ModifyAddNewItemsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,7 +117,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="Tables.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,8 +131,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModifyItemsInOrdersWindow.xaml.cs">
-      <DependentUpon>ModifyItemsInOrdersWindow.xaml</DependentUpon>
+    <Compile Include="ModifyAddNewItemsWindow.xaml.cs">
+      <DependentUpon>ModifyAddNewItemsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModifyOrderWindow.xaml.cs">
       <DependentUpon>ModifyOrderWindow.xaml</DependentUpon>

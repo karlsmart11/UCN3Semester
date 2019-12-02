@@ -71,8 +71,19 @@ namespace SQLRepository
              
                 return  orderLine;
 
+            }
+        }
 
+        public bool DeleteOrderLine(OrderLine orderLine)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+                var p = new DynamicParameters();
+                p.Add("@OrderId", orderLine.OrderId);
 
+                var result = conexion.Execute("dbo.spOrderLine_Delete", param: p, commandType: CommandType.StoredProcedure);
+                return result > 0;
             }
         }
     }
