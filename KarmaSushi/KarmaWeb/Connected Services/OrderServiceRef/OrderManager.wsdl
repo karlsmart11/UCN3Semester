@@ -43,6 +43,15 @@
   <wsdl:message name="IOrderService_ModifyOrder_ErrorFault_FaultMessage">
     <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q4:Error" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrder" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteOrder_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q5:Error" />
+  </wsdl:message>
   <wsdl:portType name="IOrderService">
     <wsdl:operation name="GetOrderById">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/GetOrderById" message="tns:IOrderService_GetOrderById_InputMessage" />
@@ -63,6 +72,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/ModifyOrder" message="tns:IOrderService_ModifyOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/ModifyOrderResponse" message="tns:IOrderService_ModifyOrder_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IOrderService/ModifyOrderErrorFault" name="ErrorFault" message="tns:IOrderService_ModifyOrder_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteOrder" message="tns:IOrderService_DeleteOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderResponse" message="tns:IOrderService_DeleteOrder_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderErrorFault" name="ErrorFault" message="tns:IOrderService_DeleteOrder_ErrorFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IOrderService" type="tns:IOrderService">
@@ -105,6 +119,18 @@
     </wsdl:operation>
     <wsdl:operation name="ModifyOrder">
       <soap:operation soapAction="http://tempuri.org/IOrderService/ModifyOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrder">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/DeleteOrder" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
