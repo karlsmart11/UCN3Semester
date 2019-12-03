@@ -1,8 +1,9 @@
 ﻿@using System.Globalization
 @using System.Web.UI.WebControls
 @using KarmaWeb.OrderServiceRef
-@model IEnumerable<KarmaWeb.ProductServiceRef.Product>
-@{ double totSum = 0; }
+@model KarmaWeb.Models.OrderViewModel
+
+@*@{ double totSum = 0; }*@
 
     <div class="row">
         <div class="col-lg-8">
@@ -10,13 +11,13 @@
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Name)
+                        @Html.DisplayNameFor(model => model.Product.Name)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Description)
+                        @Html.DisplayNameFor(model => model.Product.Description)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Price)
+                        @Html.DisplayNameFor(model => model.Product.Price)
                     </th>
                     @*<th>
                         Quantity
@@ -24,7 +25,7 @@
                     <th></th>
                 </tr>
 
-                @foreach (var item in Model)
+                @foreach (var item in Model.Products)
                 {
                     <tr>
                         <td>
@@ -59,9 +60,9 @@
                     <td><b>Price</b></td>
                     <td />
                 </tr>
+
                 @foreach (var line in (List<OrderLine>)Session["cart"])
                 {
-                    double sum = 0;
                     <tr>
                         <td>
                             @line.Product.Name
@@ -71,10 +72,10 @@
                         </td>
                         <td>
                             @{
-                                sum = line.Quantity * line.Product.Price;
-                                totSum += sum;
+                                Model.Sum = line.Quantity * line.Product.Price;
+                                Model.TotSum += Model.Sum;
                             }
-                            <p>@sum</p>
+                            <p>@Model.Sum</p>
                         </td>
                         <td>
                             <a class="btn btn-default"
@@ -84,18 +85,28 @@
                         </td>
                     </tr>
                 }
+
                 <tr>
                     <td />
                     <td />
                     <td>
-                        <p>Total: @totSum</p>
+                        <p>Total: @Model.TotSum</p>
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="@Url.Action("AddOrder", "Order")">Order</a>
                     </td>
+                </tr>
+
+                <tr>
+                    @using (Html.BeginForm("AddOrder", "Order"))
+                    {
+                        <td colspan="3">
+                            @Html.TextBox("orderComment", "Comment", new {@class = "form-control"})
+                        </td>
+                        <td>
+                            <input type="submit" value="Order" class="btn btn-primary"/>
+                        </td>
+                    }
                 </tr>
             </table>
         </div>
-
-        @Html.TextBox("CommentTxt", "Initial", new { @class = "form-control" })
     </div>

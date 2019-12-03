@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using KarmaWeb.Models;
 using KarmaWeb.OrderServiceRef;
 using KarmaWeb.ProductServiceRef;
 
@@ -18,17 +19,17 @@ namespace KarmaWeb.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            //if (Session["sum"] == null)
-            //{
-            //    Session["sum"] = ((List<OrderLine>)Session["cart"]).Sum(x => x.Product.Price);
-            //}
-
             if (Session["cart"] == null)
             {
                 Session["cart"] = new List<OrderLine>();
             }
 
-            return View(_pClient.GetAllProducts());
+            var viewModel = new OrderViewModel
+            {
+                Products = _pClient.GetAllProducts()
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult ToCart(string id)
@@ -37,7 +38,7 @@ namespace KarmaWeb.Controllers
             //var p = ParseProduct(refP);
 
             var cart = (List<OrderLine>) Session["cart"];
-            var index = DoesProductExist(id);
+            var index = GetProductIndex(id);
             if (index != -1)
             {
                 cart[index].Quantity++;
@@ -55,13 +56,14 @@ namespace KarmaWeb.Controllers
         public ActionResult Remove(string id)
         {
             var cart = (List<OrderLine>)Session["cart"];
-            var index = DoesProductExist(id);
+            var index = GetProductIndex(id);
             cart.RemoveAt(index);
             Session["cart"] = cart;
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddOrder(string comment)
+        [HttpPost]
+        public ActionResult AddOrder()
         {
             var sum = 0d;
             foreach (var orderLine in (List<OrderLine>) Session["cart"])
@@ -75,7 +77,8 @@ namespace KarmaWeb.Controllers
                 Tables = new List<Table> { new Table { Id = 2 } },
                 OrderLines = (List<OrderLine>)Session["cart"],
                 Employee = new Employee { Id = 1 },
-                Comment = comment
+                //Comment = orderComment
+                Comment = Request.Form["orderComment"]
             });
 
             return RedirectToAction("Index", "Home");
@@ -93,7 +96,13 @@ namespace KarmaWeb.Controllers
             return orderProduct;
         }
 
-        private int DoesProductExist(string id)
+        /// <summary>
+        /// Return the index of the product in the cart.
+        /// Return -1 if the product doesn't exist in the cart.
+        /// </summary>
+        /// <param name="id">Id of the product to be found</param>
+        /// <returns></returns>
+        private int GetProductIndex(string id)
         {
             var cart = (List<OrderLine>)Session["cart"];
             for (var i = 0; i < cart.Count; i++)
