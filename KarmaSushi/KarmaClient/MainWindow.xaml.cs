@@ -252,7 +252,12 @@ namespace KarmaClient
                 orderWindow.Show();
 
             }
-        
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            CancelReservation cancelReservationWindow = new CancelReservation();
+            cancelReservationWindow.Show();
+        }
     }
 
      

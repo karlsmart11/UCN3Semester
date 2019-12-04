@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a5c9b26c-8f64-4f1b-a69c-85b8883d9a99" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ServiceKarma/ReservationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ReservationService.disco" MetadataType="Disco" ID="94f22588-b785-4901-a2a2-94b2be5d5b65" SourceId="1" SourceUrl="http://localhost/ServiceKarma/ReservationService.svc?disco" />
+    <MetadataFile FileName="ReservationService.xsd" MetadataType="Schema" ID="1f051999-4a38-4673-ae56-863781aa0646" SourceId="1" SourceUrl="http://localhost/ServiceKarma/ReservationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ReservationService1.xsd" MetadataType="Schema" ID="5a176bb6-fc71-4dfc-84b5-430e201e496c" SourceId="1" SourceUrl="http://localhost/ServiceKarma/ReservationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ReservationManager.wsdl" MetadataType="Wsdl" ID="027faad8-3017-4bb9-b93f-6ab0f2b271c7" SourceId="1" SourceUrl="http://localhost/ServiceKarma/ReservationService.svc?wsdl" />
+    <MetadataFile FileName="ReservationService2.xsd" MetadataType="Schema" ID="b97b1c58-371b-4a13-b557-70bd33d5ee38" SourceId="1" SourceUrl="http://localhost/ServiceKarma/ReservationService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

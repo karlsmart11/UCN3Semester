@@ -55,7 +55,7 @@ namespace KarmaClient
 
                 DateTime dateNow = DateTime.Today;
 
-                    ListBox listBox = new ListBox();
+                   
                     TextBox textBoxProductsName = new TextBox();
                     int result = DateTime.Compare(date.Date, dateNow.Date);
                 if (result==0)

@@ -10,8 +10,8 @@
         <Menu DockPanel.Dock="Top" IsMainMenu="True" FontSize="12" Foreground="White">
              <MenuItem Header="_Reservations" >
                 <MenuItem x:Name="Tables_Reservation" Header="_Create reservation" Click="Tables_Reservation_Click"/>
-                <MenuItem Header="_Modify reservation" />
-                <MenuItem Header="_Cancel reservation" />
+                <MenuItem x:Name="Cancel_Reservation" Header="_Cancel reservation" Click="MenuItem_Click" />
+               
                 
             </MenuItem>
             <MenuItem x:Name="Order_Menu" Header="_Orders" Click="Order_Menu_Click" />

@@ -37,5 +37,11 @@ namespace ServiceContract
             UriTemplate = "/GetTablesBySeats/", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] //Fault contract allows you to customize the error messages
         List<Table> GetTablesBySeats(int seats);
+
+        [OperationContract]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+                UriTemplate = "/GetAvailableTables/{DesiredTime}", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))]
+        List<Table> GetAvailableTables(string DesiredTime);
     }
 }

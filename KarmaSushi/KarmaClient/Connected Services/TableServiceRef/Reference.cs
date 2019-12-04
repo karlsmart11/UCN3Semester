@@ -191,6 +191,13 @@ namespace KarmaClient.TableServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetTablesBySeats", ReplyAction="http://tempuri.org/ITableServices/GetTablesBySeatsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetTablesBySeatsAsync(int seats);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetAvailableTables", ReplyAction="http://tempuri.org/ITableServices/GetAvailableTablesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.TableServiceRef.Error), Action="http://tempuri.org/ITableServices/GetAvailableTablesErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetAvailableTables(string DesiredTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetAvailableTables", ReplyAction="http://tempuri.org/ITableServices/GetAvailableTablesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAvailableTablesAsync(string DesiredTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -242,6 +249,14 @@ namespace KarmaClient.TableServiceRef {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetTablesBySeatsAsync(int seats) {
             return base.Channel.GetTablesBySeatsAsync(seats);
+        }
+        
+        public System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetAvailableTables(string DesiredTime) {
+            return base.Channel.GetAvailableTables(DesiredTime);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAvailableTablesAsync(string DesiredTime) {
+            return base.Channel.GetAvailableTablesAsync(DesiredTime);
         }
     }
 }
