@@ -33,5 +33,10 @@ namespace ServiceContract
         [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "PUT", UriTemplate = "/ModifyOrder", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         Order ModifyOrder(Order order);
+
+        [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "DELETE", UriTemplate = "/DeleteOrder/{id}", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        bool DeleteOrder(string id);
     }
 }

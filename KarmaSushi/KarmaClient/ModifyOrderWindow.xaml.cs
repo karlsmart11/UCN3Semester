@@ -23,29 +23,36 @@ namespace KarmaClient
     /// </summary>
     public partial class ModifyOrderWindow : Window
     {
+        public List<ProductServiceRef.Product> productsIdInOrder = new List<ProductServiceRef.Product>();
         private int employeeId = -1;
-     
-        public static EmployeeServiceRef.EmployeeServiceClient  proxyEmployee = new EmployeeServiceRef.EmployeeServiceClient();
+
+        public static EmployeeServiceRef.EmployeeServiceClient proxyEmployee = new EmployeeServiceRef.EmployeeServiceClient();
         public static OrderServiceRef.OrderServiceClient proxyOrder = new OrderServiceRef.OrderServiceClient();
-        
+        public static ProductServiceRef.ProductServicesClient proxyProducts = new ProductServiceRef.ProductServicesClient();
         public static List<EmployeeServiceRef.Employee> arrayEmployees = proxyEmployee.GetAllEmployees();
         public static OrderServiceRef.Employee employeeById;
-       
+        private List<ProductServiceRef.Product> productsList = new List<ProductServiceRef.Product>();
         private Order orderModifed;
+        List<OrderLine> newOrderLineList;
+        ProductServiceRef.Product productToAdd;
+
+
         public ModifyOrderWindow(Order order)
         {
-           
+
             InitializeComponent();
             getOrder(order);
             populateEmployeeCB();
             PopulateFields();
-            //PopulateDataGrid();
-          
-        }
+            PopulateTextBlock();
+            PopulateProductsInMenu();
 
+
+        }
+      
         public void PopulateFields()
         {
-            priceTxt.Text = CalculatePrice().ToString();
+            priceTxt.Text = CalculatePriceBeforeAdd().ToString();
             timeTxt.Text = orderModifed.Time.ToString();
 
             if (orderModifed.Customer != null)
@@ -63,7 +70,7 @@ namespace KarmaClient
                     employeeId = orderModifed.Employee.Id;
                 }
             }
-            
+
             commentTxt.Text = orderModifed.Comment;
         }
 
@@ -74,57 +81,89 @@ namespace KarmaClient
                 employeeCB.Items.Add(item.Name);
             }
         }
-       
-        public void PopulateGridItems()
+
+      
+
+        public void PopulateTextBlock()
         {
+
+
             foreach (var item in orderModifed.OrderLines)
             {
-                Button button = new Button();
-                
+                int quantity = item.Quantity;
+                for (int i = 0; i < quantity; i++)
+                {
+                    ProductServiceRef.Product productNew = new ProductServiceRef.Product();
+                    productNew.Id = item.Product.Id;
+                    productNew.Name = item.Product.Name;
+                    productNew.Price = item.Product.Price;
+                    productsIdInOrder.Add(productNew);
+                }
+
             }
+
+
+           
+            listTableProducts.ItemsSource = null;
+            listTableProducts.ItemsSource = productsIdInOrder;
+
+        }
+
+        public void updateTextBlock()
+        {
+          listTableProducts.ItemsSource = null;
+          listTableProducts.ItemsSource = productsIdInOrder;
+        }
+
+        public void PopulateOrderLineNew()
+        {
+            newOrderLineList = new List<OrderLine>();
+            var q = from x in productsIdInOrder
+                    group x by x.Id into g
+                    let count = g.Count()
+                    orderby count descending
+                    select new { Id = g.Key, Count = count};
+
+            foreach (var x in q)
+            {
+                OrderLine newOrderLine = new OrderLine();
+                ProductServiceRef.Product product=proxyProducts.GetProductById(x.Id.ToString());
+                OrderServiceRef.Product productConverted = new OrderServiceRef.Product();
+                productConverted.Id = product.Id;
+                productConverted.Name = product.Name;
+                productConverted.Price = product.Price;
+                newOrderLine.Product = productConverted;
+                newOrderLine.Quantity = x.Count;
+                newOrderLineList.Add(newOrderLine);
+                //Console.WriteLine("Count: " + x.Count + " Id: " + x.Id );
+            }
+           
+
         }
 
        
-            //public void PopulateDataGrid()
-            //{
-            //    DataTable dt = new DataTable();
+        public void PopulateProductsInMenu()
+        {
+            ProductServiceRef.Product[] products = proxyProducts.GetAllProducts();
 
-
-            //    DataColumn Name = new DataColumn("Name", typeof(string));
-            //    DataColumn Description = new DataColumn("Description", typeof(string));
-            //    DataColumn Price = new DataColumn("Price", typeof(double));
-            //    DataColumn Quantity = new DataColumn("Quantity", typeof(int));
-
-
-            //    dt.Columns.Add(Name);
-            //    dt.Columns.Add(Description);
-            //    dt.Columns.Add(Price);
-            //    dt.Columns.Add(Quantity);
-
-            //    try
-            //    {
-            //        foreach (var item in orderModifed.OrderLines)
-            //        {
-            //            DataRow newRow = dt.NewRow();
-            //            newRow[0] = item.Product.Name;
-            //            newRow[1] = item.Product.Description;
-            //            newRow[2] = item.Product.Price;
-            //            newRow[3] = item.Quantity.ToString();
-            //            dt.Rows.Add(newRow);
-            //        }
-            //        productsDataGrid.ItemsSource = dt.DefaultView;
-            //    }
-            //    catch (Exception)
-            //    {
-
-            //        throw;
-            //    }
-            //}
-
-            public double CalculatePrice()
+            ProductsList.ItemsSource = null;
+            ProductsList.ItemsSource = products;
+        }
+      
+        public double CalculatePriceBeforeAdd()
         {
             double priceTotal = 0;
             foreach (var item in orderModifed.OrderLines)
+            {
+                priceTotal += (item.Product.Price) * (item.Quantity);
+            }
+
+            return priceTotal;
+        }
+        public double CalculatePriceAfterAdd()
+        {
+            double priceTotal = 0;
+            foreach (var item in newOrderLineList)
             {
                 priceTotal += (item.Product.Price) * (item.Quantity);
             }
@@ -140,9 +179,9 @@ namespace KarmaClient
         {
 
 
-            
+
             string selecteNameInCombo = employeeCB.SelectedItem.ToString();
-           List<EmployeeServiceRef.Employee> employeeList = proxyEmployee.GetAllEmployees();
+            List<EmployeeServiceRef.Employee> employeeList = proxyEmployee.GetAllEmployees();
 
             foreach (var item in employeeList)
             {
@@ -151,13 +190,13 @@ namespace KarmaClient
                     employeeId = item.Id;
                 }
             }
-           
-                
-            
+
+
+
 
             string employeeIdInString = employeeId.ToString();
             EmployeeServiceRef.Employee employeeTosend = proxyEmployee.GetEmployeeById(employeeIdInString);
-            orderModifed.Price= Convert.ToDecimal(priceTxt.Text);
+            orderModifed.Price = Convert.ToDecimal(priceTxt.Text);
             OrderServiceRef.Employee emplo = new OrderServiceRef.Employee();
             emplo.Id = employeeTosend.Id;
             emplo.Name = employeeTosend.Name;
@@ -165,7 +204,8 @@ namespace KarmaClient
             emplo.Email = employeeTosend.Email;
             orderModifed.Employee = emplo;
             orderModifed.Comment = commentTxt.Text;
-
+           // PopulateOrderLineNew();
+            orderModifed.OrderLines = newOrderLineList.ToArray();
             proxyOrder.ModifyOrder(orderModifed);
 
         }
@@ -175,18 +215,61 @@ namespace KarmaClient
             ModifyOrder();
             OrderWindow orderWindow = new OrderWindow();
             orderWindow.Show();
+
             this.Close();
         }
 
-       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // smallDel represents the small X buttons inside list
+            var smallDel = (Button)sender;
+            if (smallDel != null)
+            {
+                if (smallDel.DataContext is ProductServiceRef.Product product)
+                {
+                    productsIdInOrder.Remove(product);
+                }
+            }
+            else
+            {
+                foreach (var selected in listTableProducts.SelectedItems)
+                {
+                    productsIdInOrder.Remove((ProductServiceRef.Product)selected);
+                }
+            }
+            PopulateOrderLineNew();
+            priceTxt.Text = CalculatePriceAfterAdd().ToString();
+            updateTextBlock();
+        }
 
-     
-        //private void productsDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        //{
-        //    OrderLine[] orderLines= orderModifed.OrderLines;
-        //    var myvalue = productsDataGrid.SelectedIndex.ToString();
-            
-        //    MessageBox.Show(myvalue.ToString());
-        //}
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            OrderWindow orderWindow = new OrderWindow();
+            orderWindow.Show();
+            this.Close();
+        }
+
+      
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            var smallDel = (Button)sender;
+            if (smallDel != null)
+            {
+                if (smallDel.DataContext is ProductServiceRef.Product product)
+                {
+                    productToAdd = product;
+                }
+            }
+
+            productsIdInOrder.Add(productToAdd);
+
+            PopulateOrderLineNew();
+            priceTxt.Text = CalculatePriceAfterAdd().ToString();
+            updateTextBlock();
+
+        }
     }
+
 }

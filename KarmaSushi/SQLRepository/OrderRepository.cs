@@ -127,11 +127,19 @@ namespace SQLRepository
 
                 
                 var result = conexion.Execute("dbo.spOrders_Update", param: p, commandType: CommandType.StoredProcedure);
+             
+                foreach (var orderLine in order.OrderLines)
+                {
+                    orderLine.OrderId = order.Id;
 
+                    _orderLineRepository.DeleteOrderLine(orderLine);
+                }
                 foreach (var orderLine in order.OrderLines)
                 {
                      orderLine.OrderId = order.Id;
-                    _orderLineRepository.ModifyOrderLine(orderLine);
+                  
+                    _orderLineRepository.InsertOrderLine(orderLine);
+                 
                 }
 
 
@@ -156,7 +164,21 @@ namespace SQLRepository
         }
 
 
-       
+       public bool DeleteOrder(string id)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                connection.Open();
+                var p = new DynamicParameters();
+
+                p.Add("Id", id);
+             
+
+                var result = connection.Execute("dbo.spOrders_Delete", param: p, commandType: CommandType.StoredProcedure);
+                
+                return result > 0;
+            }
+        }
 
 
     }

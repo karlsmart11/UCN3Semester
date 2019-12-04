@@ -92,6 +92,26 @@ namespace Implementation
             }
         }
 
+        public bool DeleteOrder(string id)
+        {
+            try
+            {
+                using (var instance = new OrderController())
+                {
+                    return instance.DeleteOrder(id);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = e.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
 
     }
 }

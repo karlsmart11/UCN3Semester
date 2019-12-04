@@ -33,7 +33,12 @@ namespace Controller
             IOrderRepository instance = new OrderRepository();
             return instance.ModifyOrder(order);
         }
-       
+
+        public bool DeleteOrder(string id)
+        {
+            IOrderRepository instance = new OrderRepository();
+            return instance.DeleteOrder(id);
+        }
 
         void IDisposable.Dispose()
         {

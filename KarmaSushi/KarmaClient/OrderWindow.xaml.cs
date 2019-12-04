@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,12 +22,12 @@ namespace KarmaClient
     /// Interaction logic for OrderWindow.xaml
     /// </summary>
     public partial class OrderWindow : Window
-    {
+    {   
         public static OrderServiceRef.OrderServiceClient proxyOder = new OrderServiceRef.OrderServiceClient();
         public  Order[] arrayOrder = proxyOder.GetAllOrders();
         public int selecetedId = -1;
         public List<int> IdOrdersList;
-
+        
 
         public OrderWindow()
         {
@@ -35,7 +36,65 @@ namespace KarmaClient
             populateDataGridWithSOAP();
         }
 
+        public void updateDataGrid()
+        {
+            DataTable dt = setUpDataGrid();
 
+
+            try
+            {
+
+                IdOrdersList = new List<int>();
+              
+                foreach (var item in arrayOrder)
+                {
+
+                    DateTime date = item.Time;
+
+                    DateTime dateNow = DataSelected.SelectedDate.Value;
+
+                   
+                    TextBox textBoxProductsName = new TextBox();
+                    int result = DateTime.Compare(date.Date, dateNow.Date);
+                    if (result == 0)
+                    {
+
+
+                        DataRow newRow = dt.NewRow();
+                        newRow[0] = item.Price.ToString();
+                        newRow[1] = date;
+                        if (item.Customer != null)
+                        {
+                            newRow[2] = item.Customer.Name.ToString();
+                        }
+                        else
+                        {
+                            newRow[2] = null;
+                        }
+                        newRow[3] = item.Employee.Name.ToString();
+                        IdOrdersList.Add(item.Id);
+                        foreach (var orderLinesItem in item.OrderLines)
+                        {
+                            textBoxProductsName.Text += (orderLinesItem.Product.Name.ToString() + " X ");
+                            textBoxProductsName.Text += (orderLinesItem.Quantity.ToString() + " \n");
+                        }
+
+                        newRow[4] = textBoxProductsName.Text;
+                        dt.Rows.Add(newRow);
+                    }
+
+                }
+
+                GridOrder.ItemsSource = dt.DefaultView;
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+        }
         public void populateDataGridWithSOAP()
         {
           
@@ -47,7 +106,7 @@ namespace KarmaClient
             {
 
                 IdOrdersList = new List<int>();
-                List<string> ListOfOrdersLines = new List<string>();
+           
                 foreach (var item in arrayOrder)
             {
 
@@ -55,7 +114,7 @@ namespace KarmaClient
 
                 DateTime dateNow = DateTime.Today;
 
-                   
+                 
                     TextBox textBoxProductsName = new TextBox();
                     int result = DateTime.Compare(date.Date, dateNow.Date);
                 if (result==0)
@@ -111,7 +170,7 @@ namespace KarmaClient
             try
             {
                 IdOrdersList = new List<int>();
-                List<string> ListOfOrdersLines = new List<string>();
+               
 
              
                 foreach (var item in arrayOrder)
@@ -123,7 +182,7 @@ namespace KarmaClient
                    
                     int result = DateTime.Compare(date.Date, dateNow.Date);
 
-                    ListBox listBox = new ListBox();
+                  
                     TextBox textBoxProductsName = new TextBox();
                     if (result == 0)
                     {
@@ -215,17 +274,41 @@ namespace KarmaClient
         {
 
             if (selecetedId != -1)
-            {
+            {  
                 Order order = proxyOder.GetOrderById(selecetedId.ToString());
                 ModifyOrderWindow modifyOrderWindow = new ModifyOrderWindow(order);
                 modifyOrderWindow.Show();
                 selecetedId = -1;
+                //if (proxyOder.State == CommunicationState.Opened)
+                //    proxyOder.Close();
                 this.Close();
-            }
+            }   
             else
             {
                 MessageBox.Show("No order selected");
             }
     }
+
+        private void CancelOrderBtn_Click(object sender, RoutedEventArgs e)
+        { 
+            if (selecetedId != -1)
+            {
+                proxyOder.DeleteOrder(selecetedId.ToString());
+                arrayOrder = proxyOder.GetAllOrders();
+                updateDataGrid();
+
+
+            }
+            else
+            {
+                MessageBox.Show("No order selected");
+            }
+        }
+
+        private void GoBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            this.Close();
+        }
     }
 }

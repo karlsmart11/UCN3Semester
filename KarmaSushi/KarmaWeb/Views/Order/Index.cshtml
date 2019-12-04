@@ -1,93 +1,112 @@
 ﻿@using System.Globalization
 @using System.Web.UI.WebControls
 @using KarmaWeb.OrderServiceRef
-@model IEnumerable<KarmaWeb.ProductServiceRef.Product>
+@model KarmaWeb.Models.OrderViewModel
 
-<div class="row">
-    <div class="col-lg-8">
-        <h2>Menu</h2>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                @*<th>
-                    Quantity
-                </th>*@
-                <th></th>
-            </tr>
+@*@{ double totSum = 0; }*@
 
-            @foreach (var item in Model)
-            {
+    <div class="row">
+        <div class="col-lg-8">
+            <h2>Menu</h2>
+            <table class="table">
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Price)
+                    </th>
+                    @*<th>
+                        Quantity
+                    </th>*@
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @*<td>
+                            <input class="input-group-lg" type="number" name="Quantity" value="1" min="1" max="99"/>
+                        </td>*@
+                        <td>
+                            <a class="btn btn-default"
+                               href="@Url.Action("ToCart", "Order", new {id = item.Id})">
+                                Add to cart
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="col-lg-4">
+            <h2>Cart</h2>
+            <table class="table">
+                <tr>
+                    <td><b>Name</b></td>
+                    <td><b>Quantity</b></td>
+                    <td><b>Price</b></td>
+                    <td />
+                </tr>
+
+                @foreach (var line in (List<OrderLine>)Session["cart"])
+                {
+                    <tr>
+                        <td>
+                            @line.Product.Name
+                        </td>
+                        <td>
+                            @line.Quantity
+                        </td>
+                        <td>
+                            @{
+                                Model.Sum = line.Quantity * line.Product.Price;
+                                Model.TotSum += Model.Sum;
+                            }
+                            <p>@Model.Sum</p>
+                        </td>
+                        <td>
+                            <a class="btn btn-default"
+                               href="@Url.Action("Remove", "Order", new {id = line.Product.Id.ToString()})">
+                                Remove
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td />
+                    <td />
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <p>Total: @Model.TotSum</p>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    @*<td>
-                        <input class="input-group-lg" type="number" name="Quantity" value="1" min="1" max="99"/>
-                    </td>*@
-                    <td>
-                        <a class="btn btn-default"
-                           href="@Url.Action("ToCart", "Order", new {id = item.Id})">
-                            Add to cart
-                        </a>
                     </td>
                 </tr>
-            }
-        </table>
-    </div>
 
-    <div class="col-lg-4">
-        <h2>Cart</h2>
-        <table class="table">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>Price</b></td>
-                <td/>
-            </tr>
-            @foreach (var line in (List<OrderLine>) Session["cart"])
-            {
-                double sum = 0;
                 <tr>
-                    <td>
-                        @line.Product.Name
-                    </td>
-                    <td>
-                        @line.Quantity
-                    </td>
-                    <td>
-                        @{sum = line.Quantity * line.Product.Price;}
-                        <p>@sum</p>
-                    </td>
-                    <td>
-                        <a class="btn btn-default" 
-                           href="@Url.Action("Remove", "Order", new {id = line.Product.Id.ToString()})">
-                            Remove
-                        </a>
-                    </td>
+                    @using (Html.BeginForm("AddOrder", "Order"))
+                    {
+                        <td colspan="3">
+                            @Html.TextBox("orderComment", "Comment", new {@class = "form-control"})
+                        </td>
+                        <td>
+                            <input type="submit" value="Order" class="btn btn-primary"/>
+                        </td>
+                    }
                 </tr>
-            }
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td align="right">
-                <a class="btn btn-primary" href="@Url.Action("AddOrder","Order", new {lines = (List<OrderLine>)Session["cart"]})">Order</a>
-            </td>
-        </tr>
-        </table>
+            </table>
+        </div>
     </div>
-</div>
