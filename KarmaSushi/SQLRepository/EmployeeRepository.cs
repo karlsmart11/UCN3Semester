@@ -18,7 +18,7 @@ namespace SQLRepository
         /// The word using is use to define which objects are going to release resources(destruct the object) once finished.
         /// The method use stored procedures in the database in this case giving them one parameter
         /// </summary>
-        /// <param Name="id">Id of the wanted employee</param>
+        /// <param name="id">Id of the wanted employee</param>
         /// <returns>Employee</returns>
         public Employee GetEmployeeById(string id)
         {
@@ -33,12 +33,10 @@ namespace SQLRepository
                 return result ;
             }
         }
-
         public Employee InsertEmployee(Employee employee)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                connection.Open();
                 var p = new DynamicParameters();
                
                 p.Add("@Name", employee.Name);
@@ -56,7 +54,6 @@ namespace SQLRepository
                 return employee;
             }
         }
-
         public List<Employee> GetAllEmployees()
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -64,6 +61,24 @@ namespace SQLRepository
                 var allEmployees = connection.Query<Employee>(sql: "SELECT * FROM Employee").ToList();
 
                 return allEmployees;
+            }
+        }
+
+        public void ModifyEmployee(Employee emp)
+        {
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.spEmployee_Update",
+                    param: emp,
+                    commandType: CommandType.StoredProcedure);
+            }
+
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
             }
         }
     }

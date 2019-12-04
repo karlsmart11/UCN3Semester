@@ -71,5 +71,25 @@ namespace Implementation
                 });
             }
         }
+
+        public void ModifyEmployee(Employee employee)
+        {
+            try
+            {
+                using (var instance = new EmployeeController())
+                {
+                    instance.ModifyEmployee(employee);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
     }
 }

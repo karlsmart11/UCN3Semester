@@ -17,5 +17,6 @@ namespace Interface
         Employee GetEmployeeById(string id);
         Employee InsertEmployee(Employee employee);
         List<Employee> GetAllEmployees();
+        void ModifyEmployee(Employee employee);
     }
 }
