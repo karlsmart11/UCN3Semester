@@ -34,6 +34,15 @@
   <wsdl:message name="ITableServices_GetTablesBySeats_ErrorFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
   </wsdl:message>
+  <wsdl:message name="ITableServices_GetAvailableTables_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableTables" />
+  </wsdl:message>
+  <wsdl:message name="ITableServices_GetAvailableTables_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableTablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITableServices_GetAvailableTables_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q4:Error" />
+  </wsdl:message>
   <wsdl:portType name="ITableServices">
     <wsdl:operation name="InsertTable">
       <wsdl:input wsaw:Action="http://tempuri.org/ITableServices/InsertTable" message="tns:ITableServices_InsertTable_InputMessage" />
@@ -49,6 +58,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITableServices/GetTablesBySeats" message="tns:ITableServices_GetTablesBySeats_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITableServices/GetTablesBySeatsResponse" message="tns:ITableServices_GetTablesBySeats_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ITableServices/GetTablesBySeatsErrorFault" name="ErrorFault" message="tns:ITableServices_GetTablesBySeats_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTables">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITableServices/GetAvailableTables" message="tns:ITableServices_GetAvailableTables_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITableServices/GetAvailableTablesResponse" message="tns:ITableServices_GetAvailableTables_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITableServices/GetAvailableTablesErrorFault" name="ErrorFault" message="tns:ITableServices_GetAvailableTables_ErrorFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITableServices" type="tns:ITableServices">
@@ -79,6 +93,18 @@
     </wsdl:operation>
     <wsdl:operation name="GetTablesBySeats">
       <soap:operation soapAction="http://tempuri.org/ITableServices/GetTablesBySeats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTables">
+      <soap:operation soapAction="http://tempuri.org/ITableServices/GetAvailableTables" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

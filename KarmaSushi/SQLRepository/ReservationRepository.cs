@@ -70,5 +70,55 @@ namespace SQLRepository
                     commandType: CommandType.StoredProcedure);
             }
         }
+
+        public List<Reservation> GetAllReservations()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var allReservations = connection.Query<Reservation>(sql: "SELECT * FROM [dmab0918_1074178].[dbo].[Reservation]").ToList();
+
+                return allReservations;
+            }
+        }
+
+        public Reservation UpdateReservation (Reservation reservation)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+                var p = new DynamicParameters();
+
+                p.Add("@Id", reservation.Id);
+                p.Add("@Time", reservation.Time);
+              
+
+
+                var result = conexion.Execute("dbo.spReservation_Update", param: p, commandType: CommandType.StoredProcedure);
+
+                return reservation;
+
+
+
+            }
+        }
+
+        public Reservation DeleteReservation(Reservation reservation)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+               
+                var p = new DynamicParameters();
+
+                p.Add("@Id", reservation.Id);
+                var result = conexion.Execute("dbo.spReservation_Delete", param: p, commandType: CommandType.StoredProcedure);
+
+                return reservation;
+
+
+
+            }
+        }
+
     }
 }

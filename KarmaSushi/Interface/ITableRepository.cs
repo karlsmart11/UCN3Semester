@@ -14,5 +14,6 @@ namespace Interface
         List<Table> GetTablesBySeats(int seats);
         List<Table> GetTablesByOrder(Order order);
         List<Table> GetAllTables();
+        List<Table> GetAvailableTables(string DesiredTime);
     }
 }

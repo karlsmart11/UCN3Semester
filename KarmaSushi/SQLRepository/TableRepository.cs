@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Interface;
 using Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -63,6 +64,23 @@ namespace SQLRepository
                     commandType: CommandType.StoredProcedure).ToList();
 
                 return allTablesSeats;
+            }
+        }
+
+        public List<Table> GetAvailableTables(string DesiredTime)
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+
+            {
+                DateTime NewTime = Convert.ToDateTime(DesiredTime);
+                var p = new DynamicParameters();
+                p.Add("@Time", NewTime);
+
+
+                var allAvailableTables = connection.Query<Table>(sql: "spTable_Available", param: p,
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                return allAvailableTables;
             }
         }
     }
