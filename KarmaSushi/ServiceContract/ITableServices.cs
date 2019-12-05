@@ -40,8 +40,17 @@ namespace ServiceContract
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-                UriTemplate = "/GetAvailableTables/{DesiredTime}", BodyStyle = WebMessageBodyStyle.Bare)]
+                UriTemplate = "/GetAvailableTables/{desiredTime}", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))]
-        List<Table> GetAvailableTables(string DesiredTime);
+        List<Table> GetAvailableTables(string desiredTime);
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            Method = "POST",
+            UriTemplate = "/ModifyTable",
+            BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        void ModifyTable(Table table);
     }
 }

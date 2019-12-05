@@ -51,48 +51,6 @@ namespace Implementation
                 });
             }
         }
-        /*
-        public Product GetProductByCategory(Category category)
-        {
-            try
-            {
-                using (var instance = new ProductController())
-                {
-                    return instance.GetProductByCategory(category);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new FaultException<Error>(new Error()
-                {
-                    CodigoError = "10001",
-                    Mensaje = ex.Message,
-                    Description = "Exception managed by the administrator"
-                });
-            }
-
-
-        }
-
-        public Product GetProductByPrice(double price)
-        {
-            try
-            {
-                using (var instance = new ProductController())
-                {
-                    return instance.GetProductByPrice(price);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new FaultException<Error>(new Error()
-                {
-                    CodigoError = "10001",
-                    Mensaje = ex.Message,
-                    Description = "Exception managed by the administrator"
-                });
-            }
-        }*/
 
         public List<Product> GetAllProducts()
         {
@@ -101,6 +59,26 @@ namespace Implementation
                 using (var instance = new ProductController())
                 {
                     return instance.GetAllProducts();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public void ModifyProduct(Product product)
+        {
+            try
+            {
+                using (var instance = new ProductController())
+                {
+                    instance.ModifyProduct(product);
                 }
             }
             catch (Exception ex)

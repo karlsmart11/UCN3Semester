@@ -34,6 +34,9 @@ namespace KarmaClient.EmployeeServiceRef {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -92,6 +95,19 @@ namespace KarmaClient.EmployeeServiceRef {
                 if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
                     this.PhoneField = value;
                     this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
                 }
             }
         }
@@ -207,6 +223,13 @@ namespace KarmaClient.EmployeeServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEmployeeService/GetAllEmployees", ReplyAction="http://tempuri.org/IEmployeeService/GetAllEmployeesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.EmployeeServiceRef.Employee>> GetAllEmployeesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEmployeeService/ModifyEmployee", ReplyAction="http://tempuri.org/IEmployeeService/ModifyEmployeeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.EmployeeServiceRef.Error), Action="http://tempuri.org/IEmployeeService/ModifyEmployeeErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        void ModifyEmployee(KarmaClient.EmployeeServiceRef.Employee employee);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEmployeeService/ModifyEmployee", ReplyAction="http://tempuri.org/IEmployeeService/ModifyEmployeeResponse")]
+        System.Threading.Tasks.Task ModifyEmployeeAsync(KarmaClient.EmployeeServiceRef.Employee employee);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -258,6 +281,14 @@ namespace KarmaClient.EmployeeServiceRef {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.EmployeeServiceRef.Employee>> GetAllEmployeesAsync() {
             return base.Channel.GetAllEmployeesAsync();
+        }
+        
+        public void ModifyEmployee(KarmaClient.EmployeeServiceRef.Employee employee) {
+            base.Channel.ModifyEmployee(employee);
+        }
+        
+        public System.Threading.Tasks.Task ModifyEmployeeAsync(KarmaClient.EmployeeServiceRef.Employee employee) {
+            return base.Channel.ModifyEmployeeAsync(employee);
         }
     }
 }

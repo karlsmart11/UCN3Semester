@@ -15,30 +15,21 @@ namespace Controller
             IProductRepository instance = new ProductRepository();
             return instance.GetProductById(id);
         }
-
         public Product GetProductByName(string name)
         {
             IProductRepository instance = new ProductRepository();
             return instance.GetProductByName(name);
         }
-
-        /*
-        public Product GetProductByPrice(double price)
-        {
-            return _productRepository.GetProductByPrice(price);
-        }
-
-        public Product GetProductByCategory(Category category)
-        {
-            return _productRepository.GetProductByCategory(category);
-        }
-        */
         public List<Product> GetAllProducts ()
         {
             IProductRepository instance = new ProductRepository();
             return instance.GetAllProducts();
         }
-
+        public void ModifyProduct(Product product)
+        {
+            IProductRepository instance = new ProductRepository();
+            instance.ModifyProduct(product);
+        }
 
 
         void IDisposable.Dispose()

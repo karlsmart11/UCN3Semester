@@ -44,7 +44,7 @@
   <xs:element name="GetAvailableTables">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DesiredTime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="desiredTime" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -53,6 +53,18 @@
       <xs:sequence>
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetAvailableTablesResult" nillable="true" type="q5:ArrayOfTable" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="table" nillable="true" type="q6:Table" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyTableResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

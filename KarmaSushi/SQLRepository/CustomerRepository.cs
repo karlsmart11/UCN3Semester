@@ -27,7 +27,6 @@ namespace SQLRepository
                 return result;
             }
         }
-
         public Customer GetCustomerByName(string name)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -44,7 +43,6 @@ namespace SQLRepository
                 return result;
             }
         }
-
         public Customer InsertCustomer(Customer customer)
         {
 
@@ -67,6 +65,23 @@ namespace SQLRepository
                 customer.Id = p.Get<int>("@Id");
 
                 return customer;
+            }
+        }
+        public void ModifyCustomer(Customer customer)
+        {
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.spCustomer_Update",
+                    param: customer,
+                    commandType: CommandType.StoredProcedure);
+            }
+
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
             }
         }
     }

@@ -30,7 +30,6 @@ namespace SQLRepository
                 return table;
             }
         }
-
         public List<Table> GetTablesByOrder(Order order)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -44,7 +43,6 @@ namespace SQLRepository
                 return tables;
             }
         }
-
         public List<Table> GetAllTables()
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -54,7 +52,6 @@ namespace SQLRepository
                 return allTables;
             }
         }
-
         public List<Table> GetTablesBySeats(int seats)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
@@ -66,21 +63,40 @@ namespace SQLRepository
                 return allTablesSeats;
             }
         }
-
-        public List<Table> GetAvailableTables(string DesiredTime)
+        public List<Table> GetAvailableTables(string desiredTime)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
 
             {
-                DateTime NewTime = Convert.ToDateTime(DesiredTime);
+                var newTime = Convert.ToDateTime(desiredTime);
                 var p = new DynamicParameters();
-                p.Add("@Time", NewTime);
+                
+                p.Add("@Time", newTime);
 
-
-                var allAvailableTables = connection.Query<Table>(sql: "spTable_Available", param: p,
+                var allAvailableTables = connection.Query<Table>(
+                    sql: "spTable_Available",
+                    param: p,
                     commandType: CommandType.StoredProcedure).ToList();
 
                 return allAvailableTables;
+            }
+        }
+
+        public void ModifyTable(Table table)
+        {
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.Table_Update",
+                    param: table,
+                    commandType: CommandType.StoredProcedure);
+            }
+
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
             }
         }
     }

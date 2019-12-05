@@ -44,12 +44,12 @@ namespace SQLRepository
                 p.Add("@Email", employee.Email);
                 p.Add("@Id", employee.Id, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var employeeIdentity = connection.ExecuteScalar(
+                connection.ExecuteScalar(
                     "dbo.spEmployee_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
-                var pIdEmployee = p.Get<Int32>("Id");
-                employee.Id = pIdEmployee;
+
+                employee.Id = p.Get<Int32>("Id");
 
                 return employee;
             }
@@ -63,7 +63,6 @@ namespace SQLRepository
                 return allEmployees;
             }
         }
-
         public void ModifyEmployee(Employee emp)
         {
             byte[] rowVersion;

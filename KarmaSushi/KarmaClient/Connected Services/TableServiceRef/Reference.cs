@@ -29,6 +29,9 @@ namespace KarmaClient.TableServiceRef {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SeatsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -63,6 +66,19 @@ namespace KarmaClient.TableServiceRef {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
                 }
             }
         }
@@ -194,10 +210,17 @@ namespace KarmaClient.TableServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetAvailableTables", ReplyAction="http://tempuri.org/ITableServices/GetAvailableTablesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.TableServiceRef.Error), Action="http://tempuri.org/ITableServices/GetAvailableTablesErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
-        System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetAvailableTables(string DesiredTime);
+        System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetAvailableTables(string desiredTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/GetAvailableTables", ReplyAction="http://tempuri.org/ITableServices/GetAvailableTablesResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAvailableTablesAsync(string DesiredTime);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAvailableTablesAsync(string desiredTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/ModifyTable", ReplyAction="http://tempuri.org/ITableServices/ModifyTableResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.TableServiceRef.Error), Action="http://tempuri.org/ITableServices/ModifyTableErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        void ModifyTable(KarmaClient.TableServiceRef.Table table);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITableServices/ModifyTable", ReplyAction="http://tempuri.org/ITableServices/ModifyTableResponse")]
+        System.Threading.Tasks.Task ModifyTableAsync(KarmaClient.TableServiceRef.Table table);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -251,12 +274,20 @@ namespace KarmaClient.TableServiceRef {
             return base.Channel.GetTablesBySeatsAsync(seats);
         }
         
-        public System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetAvailableTables(string DesiredTime) {
-            return base.Channel.GetAvailableTables(DesiredTime);
+        public System.Collections.Generic.List<KarmaClient.TableServiceRef.Table> GetAvailableTables(string desiredTime) {
+            return base.Channel.GetAvailableTables(desiredTime);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAvailableTablesAsync(string DesiredTime) {
-            return base.Channel.GetAvailableTablesAsync(DesiredTime);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.TableServiceRef.Table>> GetAvailableTablesAsync(string desiredTime) {
+            return base.Channel.GetAvailableTablesAsync(desiredTime);
+        }
+        
+        public void ModifyTable(KarmaClient.TableServiceRef.Table table) {
+            base.Channel.ModifyTable(table);
+        }
+        
+        public System.Threading.Tasks.Task ModifyTableAsync(KarmaClient.TableServiceRef.Table table) {
+            return base.Channel.ModifyTableAsync(table);
         }
     }
 }

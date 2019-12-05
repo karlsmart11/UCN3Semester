@@ -5,6 +5,7 @@
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
       <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:Employee" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RowVer" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Tables" nillable="true" type="tns:ArrayOfTable" />
       <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
     </xs:sequence>
@@ -17,6 +18,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowVer" nillable="true" type="xs:base64Binary" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Customer" nillable="true" type="tns:Customer" />
@@ -26,6 +28,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowVer" nillable="true" type="xs:base64Binary" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Employee" nillable="true" type="tns:Employee" />
@@ -39,6 +42,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowVer" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Seats" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

@@ -30,7 +30,11 @@ namespace ServiceContract
         Order InsertOrder(Order order);
 
         [OperationContract]
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "PUT", UriTemplate = "/ModifyOrder", BodyStyle = WebMessageBodyStyle.Bare)]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, 
+            RequestFormat = WebMessageFormat.Json,
+            Method = "PUT",
+            UriTemplate = "/ModifyOrder",
+            BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         Order ModifyOrder(Order order);
 

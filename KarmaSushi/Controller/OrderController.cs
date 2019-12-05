@@ -28,7 +28,7 @@ namespace Controller
             return instance.GetAllOrders();
         }
 
-        public Order  ModifyOrder(Order order)
+        public Order ModifyOrder(Order order)
         {
             IOrderRepository instance = new OrderRepository();
             return instance.ModifyOrder(order);

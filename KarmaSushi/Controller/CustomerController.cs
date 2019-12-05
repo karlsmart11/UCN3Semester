@@ -26,12 +26,15 @@ namespace Controller
             ICustomerRepository instance = new CustomerRepository();
             return instance.InsertCustomer(customer);
         }
+        public void ModifyCustomer(Customer customer)
+        {
+            ICustomerRepository instance = new CustomerRepository();
+            instance.ModifyCustomer(customer);
+        }
         
         void IDisposable.Dispose()
         {
             GC.SuppressFinalize(this);
         }
     }
-
-   
 }

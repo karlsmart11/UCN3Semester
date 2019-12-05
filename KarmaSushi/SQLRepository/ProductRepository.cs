@@ -57,7 +57,27 @@ namespace SQLRepository
                 return allProducts;
             }
         }
-        private Category GetCategoryById(int productCategoryId)
+
+        public void ModifyProduct(Product product)
+        {
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.spProduct_Update",
+                    param: product,
+                    commandType: CommandType.StoredProcedure);
+            }
+
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
+            }
+        }
+
+
+        private static Category GetCategoryById(int productCategoryId)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
@@ -72,17 +92,5 @@ namespace SQLRepository
                 return cat;
             }
         }
-        //public Product GetProductByPrice(double price)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
-        //    {
-        //        var parameters = new DynamicParameters();
-        //        parameters.Add("@Price", price);
-
-        //        var result = connection.QuerySingle<Product>("dbo.spProduct_GetByPrice", param: parameters, commandType: CommandType.StoredProcedure);
-
-        //        return result;
-        //    }
-        //}
     }
 }

@@ -34,6 +34,15 @@
   <wsdl:message name="IProductServices_GetAllProducts_ErrorFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
   </wsdl:message>
+  <wsdl:message name="IProductServices_ModifyProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyProduct" />
+  </wsdl:message>
+  <wsdl:message name="IProductServices_ModifyProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductServices_ModifyProduct_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q4:Error" />
+  </wsdl:message>
   <wsdl:portType name="IProductServices">
     <wsdl:operation name="GetProductById">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductServices/GetProductById" message="tns:IProductServices_GetProductById_InputMessage" />
@@ -49,6 +58,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductServices/GetAllProducts" message="tns:IProductServices_GetAllProducts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductServices/GetAllProductsResponse" message="tns:IProductServices_GetAllProducts_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IProductServices/GetAllProductsErrorFault" name="ErrorFault" message="tns:IProductServices_GetAllProducts_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductServices/ModifyProduct" message="tns:IProductServices_ModifyProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductServices/ModifyProductResponse" message="tns:IProductServices_ModifyProduct_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IProductServices/ModifyProductErrorFault" name="ErrorFault" message="tns:IProductServices_ModifyProduct_ErrorFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductServices" type="tns:IProductServices">
@@ -79,6 +93,18 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllProducts">
       <soap:operation soapAction="http://tempuri.org/IProductServices/GetAllProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyProduct">
+      <soap:operation soapAction="http://tempuri.org/IProductServices/ModifyProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -37,6 +37,9 @@ namespace KarmaWeb.ProductServiceRef {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double PriceField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -112,6 +115,19 @@ namespace KarmaWeb.ProductServiceRef {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -136,6 +152,9 @@ namespace KarmaWeb.ProductServiceRef {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -169,6 +188,19 @@ namespace KarmaWeb.ProductServiceRef {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
                 }
             }
         }
@@ -284,6 +316,13 @@ namespace KarmaWeb.ProductServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductServices/GetAllProducts", ReplyAction="http://tempuri.org/IProductServices/GetAllProductsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaWeb.ProductServiceRef.Product>> GetAllProductsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductServices/ModifyProduct", ReplyAction="http://tempuri.org/IProductServices/ModifyProductResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaWeb.ProductServiceRef.Error), Action="http://tempuri.org/IProductServices/ModifyProductErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        void ModifyProduct(KarmaWeb.ProductServiceRef.Product product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductServices/ModifyProduct", ReplyAction="http://tempuri.org/IProductServices/ModifyProductResponse")]
+        System.Threading.Tasks.Task ModifyProductAsync(KarmaWeb.ProductServiceRef.Product product);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -335,6 +374,14 @@ namespace KarmaWeb.ProductServiceRef {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaWeb.ProductServiceRef.Product>> GetAllProductsAsync() {
             return base.Channel.GetAllProductsAsync();
+        }
+        
+        public void ModifyProduct(KarmaWeb.ProductServiceRef.Product product) {
+            base.Channel.ModifyProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task ModifyProductAsync(KarmaWeb.ProductServiceRef.Product product) {
+            return base.Channel.ModifyProductAsync(product);
         }
     }
 }

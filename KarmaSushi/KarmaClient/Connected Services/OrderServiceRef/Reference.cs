@@ -41,6 +41,9 @@ namespace KarmaClient.OrderServiceRef {
         private decimal PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private KarmaClient.OrderServiceRef.Table[] TablesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -135,6 +138,19 @@ namespace KarmaClient.OrderServiceRef {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public KarmaClient.OrderServiceRef.Table[] Tables {
             get {
                 return this.TablesField;
@@ -193,6 +209,9 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -269,6 +288,19 @@ namespace KarmaClient.OrderServiceRef {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -299,6 +331,9 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -358,6 +393,19 @@ namespace KarmaClient.OrderServiceRef {
                 if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
                     this.PhoneField = value;
                     this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
                 }
             }
         }
@@ -465,6 +513,9 @@ namespace KarmaClient.OrderServiceRef {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SeatsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -499,6 +550,19 @@ namespace KarmaClient.OrderServiceRef {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
                 }
             }
         }
@@ -549,6 +613,9 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -625,6 +692,19 @@ namespace KarmaClient.OrderServiceRef {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -649,6 +729,9 @@ namespace KarmaClient.OrderServiceRef {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] RowVerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -682,6 +765,19 @@ namespace KarmaClient.OrderServiceRef {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] RowVer {
+            get {
+                return this.RowVerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RowVerField, value) != true)) {
+                    this.RowVerField = value;
+                    this.RaisePropertyChanged("RowVer");
                 }
             }
         }

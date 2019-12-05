@@ -55,22 +55,21 @@ namespace SQLRepository
             }
         }
 
-        public OrderLine ModifyOrderLine(OrderLine orderLine)
+        public void ModifyOrderLine(OrderLine orderLine)
         {
-            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                conexion.Open();
-                var p = new DynamicParameters();
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.spOrderLine_Update",
+                    param: orderLine,
+                    commandType: CommandType.StoredProcedure);
+            }
 
-                p.Add("@Id", orderLine.Id);
-                p.Add("@ProductId", orderLine.Product.Id);
-                p.Add("@Quantity", orderLine.Quantity);
-
-
-                var result = conexion.Execute("dbo.spOrderLine_Update", param: p , commandType: CommandType.StoredProcedure);
-             
-                return  orderLine;
-
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
             }
         }
 
@@ -78,7 +77,6 @@ namespace SQLRepository
         {
             using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
             {
-                conexion.Open();
                 var p = new DynamicParameters();
                 p.Add("@OrderId", orderLine.OrderId);
 

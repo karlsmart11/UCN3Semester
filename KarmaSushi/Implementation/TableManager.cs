@@ -91,13 +91,33 @@ namespace Implementation
             }
         }
 
-        public List<Table> GetAvailableTables(string DesiredTime)
+        public List<Table> GetAvailableTables(string desiredTime)
         {
             try
             {
                 using (var instance = new TableController())
                 {
-                    return instance.GetAvailableTables(DesiredTime);
+                    return instance.GetAvailableTables(desiredTime);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public void ModifyTable(Table table)
+        {
+            try
+            {
+                using (var instance = new TableController())
+                {
+                    instance.ModifyTable(table);
                 }
             }
             catch (Exception ex)

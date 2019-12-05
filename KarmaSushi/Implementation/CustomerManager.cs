@@ -73,5 +73,25 @@ namespace Implementation
                 });
             }
         }
+
+        public void ModifyCustomer(Customer customer)
+        {
+            try
+            {
+                using (var instance = new CustomerController())
+                {
+                   instance.ModifyCustomer(customer);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error()
+                {
+                    CodigoError = "10001",
+                    Mensaje = ex.Message,
+                    Description = "Exception managed by the administrator "
+                });
+            }
+        }
     }
 }

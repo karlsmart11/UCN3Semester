@@ -113,7 +113,8 @@ namespace SQLRepository
 
         public Order ModifyOrder(Order order)
         {
-            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
 
@@ -123,8 +124,12 @@ namespace SQLRepository
                 p.Add("@CustomerId", order.Customer.Id);
                 p.Add("@EmployeeId", order.Employee.Id);
                 p.Add("@Comment", order.Comment);
+                p.Add("@RowVer", order.RowVer);
 
-                var result = conexion.Execute("dbo.spOrders_Update", param: p, commandType: CommandType.StoredProcedure);
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.spOrders_Update",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
              
                 foreach (var orderLine in order.OrderLines)
                 {
@@ -139,8 +144,15 @@ namespace SQLRepository
                     _orderLineRepository.InsertOrderLine(orderLine);
                 }
 
-                return order;
             }
+
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
+            }
+
+            return order;
         }
 
         public void InsertTablesOrders(Order order, Table table)

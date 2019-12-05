@@ -24,19 +24,6 @@ namespace ServiceContract
             UriTemplate = "/GetProductByName/{Name}", BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))]
         Product GetProductByName(string name);
-        /*
-        [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetProductByCategory/{Category}", BodyStyle = WebMessageBodyStyle.Bare)]
-        [FaultContract(typeof(Error))]
-        Product GetProductByCategory(Category category);
-
-        [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-           UriTemplate = "/GetProductByPrice/{Price}", BodyStyle = WebMessageBodyStyle.Bare)]
-        [FaultContract(typeof(Error))]
-        Product GetProductByPrice(double price);
-        */
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
@@ -44,7 +31,14 @@ namespace ServiceContract
         [FaultContract(typeof(Error))]
         List<Product> GetAllProducts();
 
-
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            Method = "POST",
+            UriTemplate = "/ModifyProduct",
+            BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        void ModifyProduct(Product product);
     }
 
 }

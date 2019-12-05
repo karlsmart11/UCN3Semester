@@ -34,5 +34,10 @@ namespace Model
 
         [DataMember]
         public string Address { get; set; }
+        /// <summary>
+        /// Version of the row to optimistic handling of concurrency.
+        /// </summary>
+        [DataMember]
+        public byte[] RowVer { get; set; }
     }
 }

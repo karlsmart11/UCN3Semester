@@ -14,25 +14,21 @@ namespace Model
         /// </summary>
         [DataMember]
         public int Id { get; set; }
-
         /// <summary>
         /// Name of the product.
         /// </summary>
         [DataMember]
         public string Name { get; set; }
-
         /// <summary>
         /// Description of the product.
         /// </summary>
         [DataMember]
         public string Description { get; set; }
-
         /// <summary>
         /// Price of 1 unit of the product.
         /// </summary>
         [DataMember]
         public double Price { get; set; }
-
         /// <summary>
         /// Category of the product.
         /// Used to group the products together.
@@ -40,6 +36,11 @@ namespace Model
         /// </summary>
         [DataMember]
         public Category Category { get; set; }
+        /// <summary>
+        /// Version of the row to optimistic handling of concurrency.
+        /// </summary>
+        [DataMember]
+        public byte[] RowVer { get; set; }
 
         #region Dapper test
 
@@ -47,5 +48,4 @@ namespace Model
 
         #endregion
     }
-    //public enum Category { Appetizer, MainCourse, Dessert };
 }
