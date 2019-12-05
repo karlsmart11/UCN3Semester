@@ -46,6 +46,7 @@ namespace SQLRepository
 
                 foreach (var table in reservation.Tables)
                 {
+                  
                     InsertReservedTable(reservation, table);
                 }
 
@@ -60,7 +61,7 @@ namespace SQLRepository
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
-
+                p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                 p.Add("@ReservationId", reservation.Id);
                 p.Add("@TableId", table.Id);
 
@@ -68,6 +69,8 @@ namespace SQLRepository
                     sql: "dbo.spReservedTable_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
+
+                //reservation.Id = p.Get<int>("@Id");
             }
         }
 

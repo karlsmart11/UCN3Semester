@@ -44,8 +44,7 @@ namespace KarmaClient
         private int availableSeats;
         private string dateReservationString;
         private List<Table> tablesToInsert = new List<Table>();
-        private string employeeID;
-        private int employeeIDint;
+        private int IsOk=1;
         
 
         public Reservation thisReservation = new Reservation();
@@ -127,16 +126,19 @@ namespace KarmaClient
             if (String.IsNullOrEmpty(phone) == true)
             {
                 MessageBox.Show("Phone cannot be left empty");
+                IsOk ++;
             }
             else
             {
                 if (digitsOnlyPhone == true)
                 {
                     phoneInt = Convert.ToInt32(phone);
+                    IsOk = 0;
                 }
                 else
                 {
                     MessageBox.Show("Phone number can only contain digits");
+                    IsOk ++;
                 }
             }
 
@@ -145,26 +147,37 @@ namespace KarmaClient
             if (String.IsNullOrEmpty(guests) == true)
             {
                 MessageBox.Show("Guests cannot be left empty");
+                IsOk ++;
             }
             else
             {
                 if (digitsOnlyGuests == true)
-                {
-                    guestsInt = Convert.ToInt32(guests);
-                    if (guestsInt > availableSeats)
+                { 
                     {
-                        MessageBox.Show("Number of guests exceeds available seating. Please select another table");
+                        guestsInt = Convert.ToInt32(guests);
+                        if (guestsInt > availableSeats)
+                        {
+                            MessageBox.Show("Number of guests exceeds available seating. Please select another table");
+                            IsOk ++;
+
+                        }
+                        else IsOk = 0;
                     }
+
+                    
                 }
                 else
                 {
                     MessageBox.Show("Guests field can only contain digits");
+                    IsOk ++;
                 }
 
                 if (String.IsNullOrEmpty(name) == true)
                 {
                     MessageBox.Show("Name cannot be left empty");
+                    IsOk ++;
                 }
+                else IsOk = 0;
             }
 
 
@@ -172,32 +185,34 @@ namespace KarmaClient
             if (String.IsNullOrEmpty(email) == true)
             {
                 MessageBox.Show("Email cannot be left empty");
+                IsOk ++;
             }
+            else IsOk = 0;
 
 
             if (String.IsNullOrEmpty(date) == true)
             {
                 MessageBox.Show("Date cannot be left empty");
+                IsOk ++;
             }
             else
             {
                 date2 = Convert.ToDateTime(date);
+                IsOk = 0;
             }
 
-            if ((String.IsNullOrEmpty(startTimeH))||(String.IsNullOrEmpty(startTimeM)) == true)
+            if ((String.IsNullOrEmpty(startTimeH)) || (String.IsNullOrEmpty(startTimeM)) == true)
             {
                 MessageBox.Show("Time cannot be left empty");
+                IsOk ++;
             }
-            else
-            {   if ((startTimeH.All(char.IsDigit)) && (startTimeM.All(char.IsDigit)) == false)
-                {
-                    MessageBox.Show("Time field can only contain digits");
-                }
-               
-            }
+            else IsOk = 0; 
+           
 
            
            
+            if (IsOk<1) 
+            { 
 
             var selectedEmployee = (EmployeeServiceRef.Employee)cbxEmployee.SelectedItem;
             thisReservation.Employee = new ReservationServiceRef.Employee
@@ -208,19 +223,35 @@ namespace KarmaClient
                 Email = selectedEmployee.Email
             };
 
+            foreach (Table thisTable in availableTables.SelectedItems)
+            {
+                tablesToInsert.Add(thisTable);
+            }
 
-            thisReservation.Tables = tablesToInsert.Select(
-                t => new ReservationServiceRef.Table
-                {
-                    Id = t.Id,
-                    Name = t.Name
-                }).ToList();
+            List<ReservationServiceRef.Table> listOfTablesToInsert = new List<ReservationServiceRef.Table>();
+            foreach (var item in tablesToInsert)
+            {
+                ReservationServiceRef.Table tableToInsert = new ReservationServiceRef.Table();
+                tableToInsert.Id = item.Id;
+                tableToInsert.Name = item.Name;
+                listOfTablesToInsert.Add(tableToInsert);
 
-            // Inserts finished reservation into database.
-            _reservation.InsertReservation(thisReservation);
+            }
+            thisReservation.Tables = listOfTablesToInsert;
+            //thisReservation.Tables = tablesToInsert.Select(
+            //      t => new ReservationServiceRef.Table
+            //      {
+            //          Id = t.Id,
+            //          Name = t.Name
+            //      }).ToList();
 
-            MessageBox.Show("Reservation created successfully");
-            this.Close();
+            
+                // Inserts finished reservation into database.
+                _reservation.InsertReservation(thisReservation);
+
+                MessageBox.Show("Reservation created successfully");
+                this.Close();
+            }
 
           
 
@@ -232,21 +263,26 @@ namespace KarmaClient
             
             availableSeats = 0;
             string tableName = null;
-            foreach (Table tables in availableTables.SelectedItems)
+
+
+            foreach (Table thisTable in availableTables.SelectedItems)
             {
-               
-                selectedTables.Add(tables);
-                tableName = tableName + ", " + tables.Name;
+
+                tableName += $"{thisTable.Name}, ";
                 txtSelectedTables.Text=tableName;
-                availableSeats += tables.Seats;
-                tablesToInsert.Add(tables);
+
+                availableSeats += thisTable.Seats;
+
                 if (availableTables.SelectedIndex<0)
                 {
                     txtSelectedTables.Text = "";
                 }
-
             }
-          
+
+
+
+
+
         }
 
       

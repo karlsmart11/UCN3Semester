@@ -27,7 +27,7 @@ namespace KarmaClient
         private string name;
         private DateTime date;
         private int selectedId;
-        private List<int> reservationIDs = new List<int>();
+        List<int> reservationIDs;
         private List<int> reservationIDs2 = new List<int>();
         private Reservation reservationToDelete;
         private List <int> updatedReservations = new List<int>();
@@ -45,23 +45,15 @@ namespace KarmaClient
 
         private void txtDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataTable dt = setUpDataGrid();
+          reservationIDs = new List<int>();
+        DataTable dt = setUpDataGrid();
 
             reservations = _reservation.GetAllReservations();
 
-            foreach (Reservation currentReservation in reservations)
-            {
-                reservationIDs.Add(currentReservation.Id);
-            }
+          
 
             try
             {
-
-                reservations = _reservation.GetAllReservations();
-                foreach (Reservation currentReservation in reservations)
-                {
-                    reservationIDs.Add(currentReservation.Id);
-                }
 
                 foreach (var item in reservations)
                 {
@@ -73,26 +65,32 @@ namespace KarmaClient
                     int result = DateTime.Compare(date.Date, dateNow.Date);
                     if (result == 0)
                     {
-                        reservationIDs2.Add(Convert.ToInt32(item.Id.ToString()));
 
-                        //DataRow newRow = dt.NewRow();
-                        //newRow[0] = item.Id.ToString();
-                       
-                        //if (item.Customer != null)
-                        //{
-                        //    newRow[1] = item.Customer.Name.ToString();
-                        //}
-                        //else
-                        //{
-                        //    newRow[1] = null;
-                        //}
+                        reservationIDs.Add(item.Id);
+                        DataRow newRow = dt.NewRow();
+                        newRow[0] = item.Id.ToString();
 
-                        //newRow[2] = date;
-                       
+                        reservationIDs2.Add(item.Id);
+                        foreach (var current in reservationIDs2)
+                        {
+                            
+                        }
+
+                        if (item.Customer != null)
+                        {
+                            newRow[1] = item.Customer.Name.ToString();
+                        }
+                        else
+                        {
+                            newRow[1] = null;
+                        }
+
+                        newRow[2] = date;
 
 
 
-                        //dt.Rows.Add(newRow);
+
+                        dt.Rows.Add(newRow);
                     }
 
                 }
@@ -114,12 +112,9 @@ namespace KarmaClient
 
 
             reservations = _reservation.GetAllReservations();
-            foreach (Reservation currentReservation in reservations)
-            {
-                reservationIDs.Add(currentReservation.Id);
-            }
+           
 
-
+            //it fills the table with all reservations whenever smth is clicked thats why it dont work by date
             int currentRowIndex = ListOfReservations.Items.IndexOf(ListOfReservations.CurrentItem);
 
             if (currentRowIndex >= 0)
@@ -168,7 +163,7 @@ namespace KarmaClient
         public void populateDataGridWithSOAP()
         {
 
-
+            reservationIDs = new List<int>();
             DataTable dt = setUpDataGrid();
 
 
@@ -237,19 +232,19 @@ namespace KarmaClient
 
             try
             {
-                //reservations = _reservation.GetAllReservations();
-                //foreach (Reservation currentReservation in reservations)
-                //{
-                //    reservationIDs.Add(currentReservation.Id);
-                //}
+                reservations = _reservation.GetAllReservations();
+                foreach (Reservation currentReservation in reservations)
+                {
+                    reservationIDs.Add(currentReservation.Id);
+                }
 
-               for(int i=0; i<reservations.Count; i++)
-                    for (int j=0; j<reservationIDs2.Count; i++)
-                    {
-                        if (reservations[i].Id == reservationIDs2[j])
-                            updatedReservations.Add(reservationIDs2[j]);
+                //for(int i=0; i<reservations.Count; i++)
+                //     for (int j=0; j<reservationIDs2.Count; i++)
+                //     {
+                //         if (reservations[i].Id == reservationIDs2[j])
+                //             updatedReservations.Add(reservationIDs2[j]);
 
-                    }
+                //     }
 
                 foreach (var item in reservations)
                 { 
