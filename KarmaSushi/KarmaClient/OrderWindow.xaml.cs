@@ -254,6 +254,7 @@ namespace KarmaClient
             int currentRowIndex = GridOrder.Items.IndexOf(GridOrder.CurrentItem);
             if (currentRowIndex >= 0)
             {
+
                 selecetedId = IdOrdersList[currentRowIndex];
                 Test.Content = currentRowIndex;
                 TestOrderLineId.Content = selecetedId;
