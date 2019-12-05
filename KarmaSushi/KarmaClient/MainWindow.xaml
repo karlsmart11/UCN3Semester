@@ -8,15 +8,32 @@
         Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top" IsMainMenu="True" FontSize="12" Foreground="White">
-             <MenuItem Header="_Reservations" >
-                <MenuItem x:Name="Tables_Reservation" Header="_Create reservation" Click="Tables_Reservation_Click"/>
-                <MenuItem x:Name="Cancel_Reservation" Header="_Cancel reservation" Click="MenuItem_Click" />
-               
-                
-            </MenuItem>
             <MenuItem x:Name="Order_Menu" Header="_Orders" Click="Order_Menu_Click" />
 
+            <MenuItem Header="_Reservations">
+                <MenuItem x:Name="Tables_Reservation" Header="_Create Reservation" Click="Tables_Reservation_Click" />
+                <MenuItem x:Name="Cancel_Reservation" Header="_Cancel Reservation" Click="Cancel_Reservation_Click" />
+            </MenuItem>
 
+            <MenuItem Header="_Customers">
+                <MenuItem x:Name="Edit_Customer" Header="_Edit Customer" Click="Edit_Customer_OnClick" />
+            </MenuItem>
+
+            <MenuItem Header="_Categories">
+                <MenuItem x:Name="Edit_Category" Header="_Edit Category" Click="Edit_Category_OnClick" />
+            </MenuItem>
+
+            <MenuItem Header="_Employees">
+                <MenuItem x:Name="Edit_Employee" Header="_Edit Employee" Click="Edit_Employee_OnClick" />
+            </MenuItem>
+
+            <MenuItem Header="_Products">
+                <MenuItem x:Name="Edit_Product" Header="_Edit Product" Click="Edit_Product_OnClick" />
+            </MenuItem>
+
+            <MenuItem Header="_Tables">
+                <MenuItem x:Name="Edit_Tables" Header="_Edit Table" Click="Edit_Tables_OnClick" />
+            </MenuItem>
         </Menu>
 
         <Grid>

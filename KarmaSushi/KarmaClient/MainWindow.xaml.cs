@@ -51,6 +51,7 @@ namespace KarmaClient
                 MenuPanel.Children.Add(CreateButton(p));
             }
         }
+
         private void PopulateCategoryTabs()
         {
             // Creates the individual tabs for the category. And sets their headers to the name of the category.
@@ -230,15 +231,8 @@ namespace KarmaClient
             OrderList.ItemsSource = _pList;
         }
 
+        #region Menu items click event handlers.
 
-
-        // This click event handler is only for demonstration purposes TODO remove when releasing
-        private void LargeDescriptionButtonTemplate_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("The Large Description of the product item goes here");
-        }
-
-       
         private void Tables_Reservation_Click(object sender, RoutedEventArgs e)
         {
             Tables tableWindow = new Tables();
@@ -251,14 +245,39 @@ namespace KarmaClient
                 OrderWindow orderWindow = new OrderWindow();
                 orderWindow.Show();
 
-            }
+        }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Reservation_Click(object sender, RoutedEventArgs e)
         {
             CancelReservation cancelReservationWindow = new CancelReservation();
             cancelReservationWindow.Show();
         }
-    }
 
-     
+        private void Edit_Customer_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Edit_Category_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Edit_Employee_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Edit_Product_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Edit_Tables_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
 }
