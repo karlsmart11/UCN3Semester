@@ -146,6 +146,25 @@ namespace KarmaSushi.Test
             Assert.IsNotNull(insertedTable);
         }
 
+        [TestMethod]
+        public void TestModifyEmployee()
+        {
+            using (var ctrl = new EmployeeController())
+            {
+                //Arrange
+                var emp = ctrl.GetEmployeeById("5");
+
+                //Act
+                emp.Name = "ModifiedNameByTest";
+                emp.Email = "ModifiedEmailByTest";
+                emp.Phone = "ModifiedPhoneByTest";
+                ctrl.ModifyEmployee(emp);
+
+                //Assert
+                Assert.IsTrue(ctrl.GetEmployeeById("4").Name.Equals("ModifiedName"));
+            }
+        }
+
         //[TestMethod]
         //public void TestInsertCustomerMock()
         //{

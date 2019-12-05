@@ -36,6 +36,12 @@ namespace Controller
             return instance.GetAllEmployees();
         }
 
+        public void ModifyEmployee(Employee employee)
+        {
+            IEmployeeRepository instance = new EmployeeRepository();
+            instance.ModifyEmployee(employee);
+        }
+
 
         /// <summary>
         /// IDisposable allows the system to close an unmanaged resource that is not in use anymore

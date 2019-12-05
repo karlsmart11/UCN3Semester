@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ReservationManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/ReservationService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/ReservationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/ReservationService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IReservationServices_InsertReservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertReservation" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_InsertReservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_InsertReservation_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q1:Error" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_GetAllReservations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReservations" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_GetAllReservations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReservationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_GetAllReservations_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q2:Error" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_UpdateReservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReservation" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_UpdateReservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_UpdateReservation_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_DeleteReservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReservation" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_DeleteReservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReservationServices_DeleteReservation_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q4:Error" />
+  </wsdl:message>
+  <wsdl:portType name="IReservationServices">
+    <wsdl:operation name="InsertReservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReservationServices/InsertReservation" message="tns:IReservationServices_InsertReservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReservationServices/InsertReservationResponse" message="tns:IReservationServices_InsertReservation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IReservationServices/InsertReservationErrorFault" name="ErrorFault" message="tns:IReservationServices_InsertReservation_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReservationServices/GetAllReservations" message="tns:IReservationServices_GetAllReservations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReservationServices/GetAllReservationsResponse" message="tns:IReservationServices_GetAllReservations_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IReservationServices/GetAllReservationsErrorFault" name="ErrorFault" message="tns:IReservationServices_GetAllReservations_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReservationServices/UpdateReservation" message="tns:IReservationServices_UpdateReservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReservationServices/UpdateReservationResponse" message="tns:IReservationServices_UpdateReservation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IReservationServices/UpdateReservationErrorFault" name="ErrorFault" message="tns:IReservationServices_UpdateReservation_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReservationServices/DeleteReservation" message="tns:IReservationServices_DeleteReservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReservationServices/DeleteReservationResponse" message="tns:IReservationServices_DeleteReservation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IReservationServices/DeleteReservationErrorFault" name="ErrorFault" message="tns:IReservationServices_DeleteReservation_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IReservationServices" type="tns:IReservationServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertReservation">
+      <soap:operation soapAction="http://tempuri.org/IReservationServices/InsertReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservations">
+      <soap:operation soapAction="http://tempuri.org/IReservationServices/GetAllReservations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReservation">
+      <soap:operation soapAction="http://tempuri.org/IReservationServices/UpdateReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReservation">
+      <soap:operation soapAction="http://tempuri.org/IReservationServices/DeleteReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReservationManager">
+    <wsdl:port name="BasicHttpBinding_IReservationServices" binding="tns:BasicHttpBinding_IReservationServices">
+      <soap:address location="http://localhost/ServiceKarma/ReservationService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

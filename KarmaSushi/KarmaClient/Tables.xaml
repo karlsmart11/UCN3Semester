@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Create table reservation" Height="539.6" Width="836">
     <Grid Margin="0,0,-6.4,-0.2">
-        <Grid HorizontalAlignment="Left" Height="368" VerticalAlignment="Top" Width="336" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
+        <Grid HorizontalAlignment="Left" Height="382" VerticalAlignment="Top" Width="336" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
             <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="90,62,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top"/>
@@ -22,7 +22,7 @@
             <DatePicker x:Name="txtDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Margin="90,287,0,0" Width="165" Background="White" Foreground="White" FontSize="20"/>
             <TextBlock HorizontalAlignment="Left" Margin="179,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="27" Width="5" Text=":"/>
             <TextBlock HorizontalAlignment="Left" Margin="179,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="27" Width="5" Text=":"/>
-            <Button x:Name="btnCheck" HorizontalAlignment="Left" Margin="227,324,0,0" VerticalAlignment="Top" Width="75" Height="36" Click="btnCheck_Click"/>
+            <Button x:Name="btnCheck" HorizontalAlignment="Center" Margin="168,336,0,0" VerticalAlignment="Top" Width="148" Height="36" Click="btnCheck_Click" Content="Show Available Tables"/>
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="439" Margin="351,10,0,0" VerticalAlignment="Top" Width="456">
@@ -49,7 +49,7 @@
             <Button x:Name="btnCreate" HorizontalAlignment="Left" Height="35" Margin="350,10,0,0" VerticalAlignment="Top" Width="85" Content="Create" Click="btnCreate_Click"/>
             <Button x:Name="btnCancel" HorizontalAlignment="Left" Height="35" Margin="242,10,0,0" VerticalAlignment="Top" Width="85" Content="Cancel" Click="btnCancel_Click"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="103" Margin="10,378,0,0" VerticalAlignment="Top" Width="269">
+        <Grid HorizontalAlignment="Left" Height="95" Margin="10,392,0,0" VerticalAlignment="Top" Width="269">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Employee" VerticalAlignment="Top"/>
             <ComboBox x:Name="cbxEmployee"  HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="167" Height="41"  SelectionChanged="cbxEmployee_SelectionChanged" RenderTransformOrigin="0.107,0.792" FontSize="14">
                 <ComboBox.ItemTemplate>

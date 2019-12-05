@@ -1,4 +1,5 @@
 ﻿using KarmaClient.EmployeeServiceRef;
+using KarmaClient.ReservationServiceRef;
 using KarmaClient.TableServiceRef;
 using System;
 using System.Collections.Generic;
@@ -24,29 +25,35 @@ namespace KarmaClient
     {
         private readonly EmployeeServiceClient _employee = new EmployeeServiceClient();
         private readonly TableServicesClient _table = new TableServicesClient();
-        //private readonly ReservedTableServiceClient _reservedTables = new ReservedTableServiceClient();
+        private readonly ReservationServicesClient _reservation = new ReservationServicesClient();
         private string name;
         public string phone;
         private string email;
         private string guests;
         private List<Table> tables = new List<Table>();
         private List<Table> selectedTables = new List<Table>();
+        private List<Table> onlyAvailable = new List<Table>();
         private string date;
         private string startTimeH;
         private string startTimeM;
         private string endTimeH;
         private string endTimeM;
-        private string minuts;
         private DateTime dateReservation;
         private DateTime selectedDate;
-       
+        private int guestsInt;
+        private int availableSeats;
+        private string dateReservationString;
+        private List<Table> tablesToInsert = new List<Table>();
+        private int IsOk=1;
+        
 
+        public Reservation thisReservation = new Reservation();
 
         public Tables()
         {
             InitializeComponent();
             PopulateEmployeeCB();
-            populateTables();
+            //populateTable();
             FillMinutesHours();
            
 
@@ -58,24 +65,27 @@ namespace KarmaClient
 
         }
 
-        public void populateTables()
-
+        private void populateTable()
         {
-            
             tables = _table.GetAllTables();
-            updateTable();
+            availableTables.ItemsSource = null;
+            availableTables.ItemsSource = tables;
         }
+
+
 
         public void PopulateEmployeeCB()
         {
             cbxEmployee.ItemsSource = null;
             cbxEmployee.ItemsSource = _employee.GetAllEmployees();
+           
 
         }
 
         private void cbxEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+           
         }
 
        
@@ -93,11 +103,6 @@ namespace KarmaClient
 
         }
 
-        private void updateTable()
-        {
-            availableTables.ItemsSource = null;
-            availableTables.ItemsSource = tables;            
-        }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -106,10 +111,6 @@ namespace KarmaClient
             email = txtEmail.Text.ToString();
             guests = txtGuests.Text.ToString();
             date = txtDate.Text.ToString();
-            startTimeH = cbxStartTimeH.Text.ToString();
-           // startTimeM = txtTimeStartM.Text.ToString();
-
-
 
 
             int guestsInt;
@@ -120,20 +121,24 @@ namespace KarmaClient
             bool digitsOnlyGuests = guests.All(char.IsDigit);
             bool digitsOnlyPhone = phone.All(char.IsDigit);
 
+          
 
             if (String.IsNullOrEmpty(phone) == true)
             {
                 MessageBox.Show("Phone cannot be left empty");
+                IsOk ++;
             }
             else
             {
                 if (digitsOnlyPhone == true)
                 {
                     phoneInt = Convert.ToInt32(phone);
+                    IsOk = 0;
                 }
                 else
                 {
                     MessageBox.Show("Phone number can only contain digits");
+                    IsOk ++;
                 }
             }
 
@@ -142,22 +147,37 @@ namespace KarmaClient
             if (String.IsNullOrEmpty(guests) == true)
             {
                 MessageBox.Show("Guests cannot be left empty");
+                IsOk ++;
             }
             else
             {
                 if (digitsOnlyGuests == true)
-                {
-                    guestsInt = Convert.ToInt32(guests);
+                { 
+                    {
+                        guestsInt = Convert.ToInt32(guests);
+                        if (guestsInt > availableSeats)
+                        {
+                            MessageBox.Show("Number of guests exceeds available seating. Please select another table");
+                            IsOk ++;
+
+                        }
+                        else IsOk = 0;
+                    }
+
+                    
                 }
                 else
                 {
                     MessageBox.Show("Guests field can only contain digits");
+                    IsOk ++;
                 }
 
                 if (String.IsNullOrEmpty(name) == true)
                 {
                     MessageBox.Show("Name cannot be left empty");
+                    IsOk ++;
                 }
+                else IsOk = 0;
             }
 
 
@@ -165,45 +185,104 @@ namespace KarmaClient
             if (String.IsNullOrEmpty(email) == true)
             {
                 MessageBox.Show("Email cannot be left empty");
+                IsOk ++;
             }
+            else IsOk = 0;
 
 
             if (String.IsNullOrEmpty(date) == true)
             {
                 MessageBox.Show("Date cannot be left empty");
+                IsOk ++;
             }
             else
             {
                 date2 = Convert.ToDateTime(date);
+                IsOk = 0;
             }
 
-            if ((String.IsNullOrEmpty(startTimeH))||(String.IsNullOrEmpty(startTimeM)) == true)
+            if ((String.IsNullOrEmpty(startTimeH)) || (String.IsNullOrEmpty(startTimeM)) == true)
             {
                 MessageBox.Show("Time cannot be left empty");
+                IsOk ++;
             }
-            else
-            {   if ((startTimeH.All(char.IsDigit)) && (startTimeM.All(char.IsDigit)) == false)
-                {
-                    MessageBox.Show("Time field can only contain digits");
-                }
-               
+            else IsOk = 0; 
+           
+
+           
+           
+            if (IsOk<1) 
+            { 
+
+            var selectedEmployee = (EmployeeServiceRef.Employee)cbxEmployee.SelectedItem;
+            thisReservation.Employee = new ReservationServiceRef.Employee
+            {
+                Id = selectedEmployee.Id,
+                Name = selectedEmployee.Name,
+                Phone = selectedEmployee.Phone,
+                Email = selectedEmployee.Email
+            };
+
+            foreach (Table thisTable in availableTables.SelectedItems)
+            {
+                tablesToInsert.Add(thisTable);
             }
+
+            List<ReservationServiceRef.Table> listOfTablesToInsert = new List<ReservationServiceRef.Table>();
+            foreach (var item in tablesToInsert)
+            {
+                ReservationServiceRef.Table tableToInsert = new ReservationServiceRef.Table();
+                tableToInsert.Id = item.Id;
+                tableToInsert.Name = item.Name;
+                listOfTablesToInsert.Add(tableToInsert);
+
+            }
+            thisReservation.Tables = listOfTablesToInsert;
+            //thisReservation.Tables = tablesToInsert.Select(
+            //      t => new ReservationServiceRef.Table
+            //      {
+            //          Id = t.Id,
+            //          Name = t.Name
+            //      }).ToList();
+
+            
+                // Inserts finished reservation into database.
+                _reservation.InsertReservation(thisReservation);
+
+                MessageBox.Show("Reservation created successfully");
+                this.Close();
+            }
+
+          
 
 
         }
 
         private void availableTables_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+            availableSeats = 0;
             string tableName = null;
-            foreach (Table tables in availableTables.SelectedItems)
+
+
+            foreach (Table thisTable in availableTables.SelectedItems)
             {
-               
-                selectedTables.Add(tables);
-                tableName = tableName + ", " + tables.Name;
+
+                tableName += $"{thisTable.Name}, ";
                 txtSelectedTables.Text=tableName;
 
+                availableSeats += thisTable.Seats;
+
+                if (availableTables.SelectedIndex<0)
+                {
+                    txtSelectedTables.Text = "";
+                }
             }
-          
+
+
+
+
+
         }
 
       
@@ -230,11 +309,7 @@ namespace KarmaClient
             }
         }
 
-        //public DateTime selectedDate
-        //{
-        //    get { return dateReservation; }
-        //    set { dateReservation = value; }
-        //}
+    
 
         private void TimeCheck()
         {   
@@ -248,12 +323,17 @@ namespace KarmaClient
 
             //combines the reservation date from the calendar with the input time
             var dateReservation = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, dateWithStartTime.Hour, dateWithStartTime.Minute, dateWithStartTime.Second);
-            
-            //TODO take available tables
+            thisReservation.Time = dateReservation;
+
+            //take available tables
+            dateReservationString = Convert.ToString(dateReservation);
+
+            tables = _table.GetAvailableTables(dateReservationString);
+            availableTables.ItemsSource = null;
+            availableTables.ItemsSource = tables;
 
 
 
-            MessageBox.Show(dateReservation.ToString());
         }
 
       
@@ -277,7 +357,6 @@ namespace KarmaClient
                 int startH = Convert.ToInt32(startTimeH);
                 int endH = startH + 2;
                 string endH2 = Convert.ToString(endH);
-
                 cbxEndTimeH.SelectedItem = endH2;
                 }
                 catch (Exception ex)
@@ -295,14 +374,6 @@ namespace KarmaClient
             TimeCheck();
         }
 
-        private void checkAvailableTables()
-        {
-
-        }
-
-        private void checkGuestNumber()
-        {
-            
-        }
+       
     }
 }

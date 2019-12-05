@@ -115,7 +115,6 @@ namespace SQLRepository
         {
             using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
             {
-                conexion.Open();
                 var p = new DynamicParameters();
 
                 p.Add("@Id", order.Id);
@@ -125,7 +124,6 @@ namespace SQLRepository
                 p.Add("@EmployeeId", order.Employee.Id);
                 p.Add("@Comment", order.Comment);
 
-                
                 var result = conexion.Execute("dbo.spOrders_Update", param: p, commandType: CommandType.StoredProcedure);
              
                 foreach (var orderLine in order.OrderLines)
@@ -139,9 +137,7 @@ namespace SQLRepository
                      orderLine.OrderId = order.Id;
                   
                     _orderLineRepository.InsertOrderLine(orderLine);
-                 
                 }
-
 
                 return order;
             }

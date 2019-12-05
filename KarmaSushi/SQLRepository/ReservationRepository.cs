@@ -46,6 +46,7 @@ namespace SQLRepository
 
                 foreach (var table in reservation.Tables)
                 {
+                  
                     InsertReservedTable(reservation, table);
                 }
 
@@ -60,7 +61,7 @@ namespace SQLRepository
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
                 var p = new DynamicParameters();
-
+                p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                 p.Add("@ReservationId", reservation.Id);
                 p.Add("@TableId", table.Id);
 
@@ -68,7 +69,59 @@ namespace SQLRepository
                     sql: "dbo.spReservedTable_Insert",
                     param: p,
                     commandType: CommandType.StoredProcedure);
+
+                //reservation.Id = p.Get<int>("@Id");
             }
         }
+
+        public List<Reservation> GetAllReservations()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                var allReservations = connection.Query<Reservation>(sql: "SELECT * FROM [dmab0918_1074178].[dbo].[Reservation]").ToList();
+
+                return allReservations;
+            }
+        }
+
+        public Reservation UpdateReservation (Reservation reservation)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+                var p = new DynamicParameters();
+
+                p.Add("@Id", reservation.Id);
+                p.Add("@Time", reservation.Time);
+              
+
+
+                var result = conexion.Execute("dbo.spReservation_Update", param: p, commandType: CommandType.StoredProcedure);
+
+                return reservation;
+
+
+
+            }
+        }
+
+        public Reservation DeleteReservation(Reservation reservation)
+        {
+            using (IDbConnection conexion = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                conexion.Open();
+               
+                var p = new DynamicParameters();
+
+                p.Add("@Id", reservation.Id);
+                var result = conexion.Execute("dbo.spReservation_Delete", param: p, commandType: CommandType.StoredProcedure);
+
+                return reservation;
+
+
+
+            }
+        }
+
     }
 }

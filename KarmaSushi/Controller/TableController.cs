@@ -36,6 +36,12 @@ namespace Controller
             return instance.GetAllTables();
         }
 
+        public List<Table> GetAvailableTables(string DesiredTime)
+        {
+            ITableRepository instance = new TableRepository();
+            return instance.GetAvailableTables(DesiredTime);
+        }
+
         void IDisposable.Dispose()
         {
             GC.SuppressFinalize(this);

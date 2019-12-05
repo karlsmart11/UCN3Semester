@@ -26,5 +26,25 @@ namespace ServiceContract
             BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         Reservation InsertReservation(Reservation reservation);
+
+
+        [OperationContract]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetAllReservations/", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] //Fault contract allows you to customize the error messages
+        List<Reservation> GetAllReservations();
+
+        [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "PUT",
+            UriTemplate = "/UpdateReservation", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        Reservation UpdateReservation(Reservation reservation);
+
+
+        [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "PUT",
+           UriTemplate = "/DeleteReservation/{Id}", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
+        Reservation DeleteReservation(Reservation reservation);
     }
 }
