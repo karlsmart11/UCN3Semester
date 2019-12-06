@@ -18,7 +18,6 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                connection.Open();
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", id);
 
@@ -31,7 +30,6 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                connection.Open();
                 var parameters = new DynamicParameters();
                 parameters.Add("@Name", name);
 
@@ -43,6 +41,15 @@ namespace SQLRepository
                 return result;
             }
         }
+
+        public List<Customer> GetAllCustomers()
+        {
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                return connection.Query<Customer>(sql:"SELECT * FROM Customer;").ToList();
+            }
+        }
+
         public Customer InsertCustomer(Customer customer)
         {
 

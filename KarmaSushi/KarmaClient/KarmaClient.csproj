@@ -71,10 +71,23 @@
     <Compile Include="CancelReservation.xaml.cs">
       <DependentUpon>CancelReservation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\CategoryServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\CustomerServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ReservationServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ModificationWindow.xaml.cs">
+      <DependentUpon>ModificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tables.xaml.cs">
       <DependentUpon>Tables.xaml</DependentUpon>
@@ -129,6 +142,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModifyAddNewItemsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +190,32 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\CategoryServiceRef\CategoryManager.wsdl" />
+    <None Include="Connected Services\CategoryServiceRef\CategoryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CategoryServiceRef\CategoryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CategoryServiceRef\CategoryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CategoryServiceRef\KarmaClient.CategoryServiceRef.Category.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CustomerServiceRef\CustomerManager.wsdl" />
+    <None Include="Connected Services\CustomerServiceRef\CustomerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CustomerServiceRef\CustomerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CustomerServiceRef\CustomerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CustomerServiceRef\KarmaClient.CustomerServiceRef.Customer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\EmployeeServiceRef\EmployeeManager.wsdl" />
     <None Include="Connected Services\EmployeeServiceRef\EmployeeService.xsd">
       <SubType>Designer</SubType>
@@ -251,6 +294,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CategoryServiceRef\" />
+    <WCFMetadataStorage Include="Connected Services\CustomerServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\EmployeeServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\OrderServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\ProductServiceRef\" />
@@ -328,6 +373,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ReservationServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CustomerServiceRef\CustomerService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CustomerServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CustomerServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CustomerServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CategoryServiceRef\CategoryService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CategoryServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CategoryServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CategoryServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

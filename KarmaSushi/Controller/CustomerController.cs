@@ -36,5 +36,11 @@ namespace Controller
         {
             GC.SuppressFinalize(this);
         }
+
+        public List<Customer> GetAllCustomers()
+        {
+            ICustomerRepository instance = new CustomerRepository();
+            return instance.GetAllCustomers();
+        }
     }
 }

@@ -36,5 +36,11 @@ namespace ServiceContract
             BodyStyle = WebMessageBodyStyle.Bare)]
         [FaultContract(typeof(Error))] // Fault contract allows you to customize the error messages
         void ModifyCustomer(Customer customer);
+
+        [OperationContract]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetAllCustomers", BodyStyle = WebMessageBodyStyle.Bare)]
+        [FaultContract(typeof(Error))]
+        List<Customer> GetAllCustomers();
     }
 }

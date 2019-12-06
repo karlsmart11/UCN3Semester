@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="33727ce2-231c-46e6-9210-0c56d6aada6b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ServiceKarma/CustomerService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CustomerManager.wsdl" MetadataType="Wsdl" ID="fc8ee624-aea1-4241-956a-7c5f24014617" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CustomerService.svc?wsdl" />
+    <MetadataFile FileName="CustomerService.disco" MetadataType="Disco" ID="99732172-80a9-4fd4-bbc9-0b6b833c88c3" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CustomerService.svc?disco" />
+    <MetadataFile FileName="CustomerService.xsd" MetadataType="Schema" ID="c34edaa7-2066-4955-8ef0-bae8f912681c" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CustomerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CustomerService1.xsd" MetadataType="Schema" ID="d8b57749-1691-4816-b8e7-fb50eb053c64" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CustomerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CustomerService2.xsd" MetadataType="Schema" ID="92c68953-ed89-438c-83d5-4006d6ee2971" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CustomerService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

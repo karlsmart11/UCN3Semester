@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CustomerManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/CustomerService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/CustomerService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://localhost/ServiceKarma/CustomerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICustomerService_GetCustomerById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerById" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetCustomerById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetCustomerById_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q1:Error" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetCustomerByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByName" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetCustomerByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetCustomerByName_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q2:Error" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_InsertCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_InsertCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_InsertCustomer_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_ModifyCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_ModifyCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_ModifyCustomer_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q4:Error" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetAllCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomers" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetAllCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerService_GetAllCustomers_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q5:Error" />
+  </wsdl:message>
+  <wsdl:portType name="ICustomerService">
+    <wsdl:operation name="GetCustomerById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerService/GetCustomerById" message="tns:ICustomerService_GetCustomerById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerService/GetCustomerByIdResponse" message="tns:ICustomerService_GetCustomerById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICustomerService/GetCustomerByIdErrorFault" name="ErrorFault" message="tns:ICustomerService_GetCustomerById_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerService/GetCustomerByName" message="tns:ICustomerService_GetCustomerByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerService/GetCustomerByNameResponse" message="tns:ICustomerService_GetCustomerByName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICustomerService/GetCustomerByNameErrorFault" name="ErrorFault" message="tns:ICustomerService_GetCustomerByName_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerService/InsertCustomer" message="tns:ICustomerService_InsertCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerService/InsertCustomerResponse" message="tns:ICustomerService_InsertCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICustomerService/InsertCustomerErrorFault" name="ErrorFault" message="tns:ICustomerService_InsertCustomer_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerService/ModifyCustomer" message="tns:ICustomerService_ModifyCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerService/ModifyCustomerResponse" message="tns:ICustomerService_ModifyCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICustomerService/ModifyCustomerErrorFault" name="ErrorFault" message="tns:ICustomerService_ModifyCustomer_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerService/GetAllCustomers" message="tns:ICustomerService_GetAllCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerService/GetAllCustomersResponse" message="tns:ICustomerService_GetAllCustomers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICustomerService/GetAllCustomersErrorFault" name="ErrorFault" message="tns:ICustomerService_GetAllCustomers_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICustomerService" type="tns:ICustomerService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCustomerById">
+      <soap:operation soapAction="http://tempuri.org/ICustomerService/GetCustomerById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByName">
+      <soap:operation soapAction="http://tempuri.org/ICustomerService/GetCustomerByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertCustomer">
+      <soap:operation soapAction="http://tempuri.org/ICustomerService/InsertCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyCustomer">
+      <soap:operation soapAction="http://tempuri.org/ICustomerService/ModifyCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <soap:operation soapAction="http://tempuri.org/ICustomerService/GetAllCustomers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerManager">
+    <wsdl:port name="BasicHttpBinding_ICustomerService" binding="tns:BasicHttpBinding_ICustomerService">
+      <soap:address location="http://localhost/ServiceKarma/CustomerService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

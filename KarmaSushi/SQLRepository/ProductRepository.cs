@@ -13,8 +13,9 @@ namespace SQLRepository
 {
     public class ProductRepository : IProductRepository
     {
-       
-        public Product GetProductById(string id)
+       private readonly CategoryRepository _categoryRepository = new CategoryRepository();
+
+       public Product GetProductById(string id)
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
@@ -26,7 +27,7 @@ namespace SQLRepository
                     param: p,
                     commandType: CommandType.StoredProcedure);
 
-                product.Category = GetCategoryById(product.CategoryId);
+                product.Category = _categoryRepository.GetCategoryById(product.CategoryId);
 
                 return product;
             }
@@ -47,11 +48,11 @@ namespace SQLRepository
         {
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
-                var allProducts = connection.Query<Product>(sql: "SELECT * FROM Product").ToList();
+                var allProducts = connection.Query<Product>(sql: "SELECT * FROM Product;").ToList();
 
                 foreach (var product in allProducts)
                 {
-                    product.Category = GetCategoryById(product.CategoryId);
+                    product.Category = _categoryRepository.GetCategoryById(product.CategoryId);
                 }
 
                 return allProducts;
@@ -73,23 +74,6 @@ namespace SQLRepository
             {
                 throw new DBConcurrencyException(
                     "The entity you were trying to edit has changed. Reload the entity and try again.");
-            }
-        }
-
-
-        private static Category GetCategoryById(int productCategoryId)
-        {
-            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
-            {
-                var p = new DynamicParameters();
-                p.Add("@Id", productCategoryId);
-
-                var cat = connection.QuerySingle<Category>(
-                    sql: "dbo.spCategory_GetById",
-                    param: p,
-                    commandType: CommandType.StoredProcedure);
-
-                return cat;
             }
         }
     }

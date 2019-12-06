@@ -40,7 +40,7 @@
         </ComboBox>
         <ComboBox x:Name="employeeCB" HorizontalAlignment="Left" Margin="9.8,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="178" RenderTransformOrigin="0.608,0.313" Height="37" Grid.Column="1"/>
         <TextBox x:Name="commentTxt" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" Grid.Row="5" Text="" VerticalAlignment="Top" Width="178"/>
-        <Label Content="Items in order" Grid.Column="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  Margin="0,0,0,0" VerticalAlignment="Top" Height="AUTO" Width="147" FontSize="20" Grid.ColumnSpan="2"/>
+        <Label Content="TypeOfItem in order" Grid.Column="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  Margin="0,0,0,0" VerticalAlignment="Top" Height="AUTO" Width="147" FontSize="20" Grid.ColumnSpan="2"/>
         <Button  x:Name="btnCancel" Grid.Column="4" Content="Cancel" HorizontalAlignment="Left" Margin="42,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="173" Height="40" Click="btnCancel_Click" />
         <Button x:Name="btnSave" Grid.Column="5" Click="btnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="173" Height="40"/>
         <TextBox x:Name="timeTxt" Grid.Column="1" IsEnabled="False" HorizontalAlignment="Left" Height="32" Margin="10,15,0,0" Grid.Row="2" Text="" VerticalAlignment="Top" Width="178"/>

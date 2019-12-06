@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="310a3c46-ab01-4ff5-a797-52991d382329" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ServiceKarma/CategoryService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CategoryManager.wsdl" MetadataType="Wsdl" ID="72aee6b3-175f-4fe1-9087-ab5be896ca3a" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CategoryService.svc?wsdl" />
+    <MetadataFile FileName="CategoryService.xsd" MetadataType="Schema" ID="5b53355d-3a20-4615-aa32-4358d2f63b71" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CategoryService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CategoryService1.xsd" MetadataType="Schema" ID="fcbda68e-6580-48c6-b96b-b309d72a6f54" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CategoryService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CategoryService.disco" MetadataType="Disco" ID="7c34954c-885e-4d7f-a444-3cfc5aaf6245" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CategoryService.svc?disco" />
+    <MetadataFile FileName="CategoryService2.xsd" MetadataType="Schema" ID="cbf349c9-cf92-41a5-9787-21060e9b687f" SourceId="1" SourceUrl="http://localhost/ServiceKarma/CategoryService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

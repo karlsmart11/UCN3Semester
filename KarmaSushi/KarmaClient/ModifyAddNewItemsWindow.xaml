@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarmaClient"
         mc:Ignorable="d"
-        Title="Add New Items" Height="378.82" Width="574.396" WindowStartupLocation="CenterScreen">
+        Title="Add New TypeOfItem" Height="378.82" Width="574.396" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox x:Name="ProductsList"  HorizontalAlignment="Left" Height="217" Margin="10,47,0,0" VerticalAlignment="Top" Width="546">
             <ListBox.ItemTemplate>

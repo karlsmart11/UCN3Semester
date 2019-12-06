@@ -241,10 +241,8 @@ namespace KarmaClient
 
         private void Order_Menu_Click(object sender, RoutedEventArgs e)
         {
-          
-                OrderWindow orderWindow = new OrderWindow();
-                orderWindow.Show();
-
+            OrderWindow orderWindow = new OrderWindow();
+            orderWindow.Show();
         }
 
         private void Cancel_Reservation_Click(object sender, RoutedEventArgs e)
@@ -255,29 +253,43 @@ namespace KarmaClient
 
         private void Edit_Customer_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var modWindow = new ModificationWindow(TypeOfItem.Cus);
+            modWindow.Show();
         }
 
         private void Edit_Category_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var modWindow = new ModificationWindow(TypeOfItem.Cat);
+            modWindow.Show();
         }
 
         private void Edit_Employee_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var modWindow = new ModificationWindow(TypeOfItem.Emp);
+            modWindow.Show();
         }
 
         private void Edit_Product_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var modWindow = new ModificationWindow(TypeOfItem.Pro);
+            modWindow.Show();
         }
 
         private void Edit_Tables_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var modWindow = new ModificationWindow(TypeOfItem.Tab);
+            modWindow.Show();
         }
 
         #endregion
+
+        public enum TypeOfItem
+        {
+            Cat,
+            Cus,
+            Emp,
+            Pro,
+            Tab
+        }
     }
 }
