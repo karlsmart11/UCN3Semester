@@ -25,6 +25,15 @@
   <wsdl:message name="ICategoryService_GetAllCategories_ErrorFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q2:Error" />
   </wsdl:message>
+  <wsdl:message name="ICategoryService_ModifyCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryService_ModifyCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryService_ModifyCategory_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Model" name="detail" element="q3:Error" />
+  </wsdl:message>
   <wsdl:portType name="ICategoryService">
     <wsdl:operation name="GetCategoryById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetCategoryById" message="tns:ICategoryService_GetCategoryById_InputMessage" />
@@ -35,6 +44,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetAllCategories" message="tns:ICategoryService_GetAllCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/GetAllCategoriesResponse" message="tns:ICategoryService_GetAllCategories_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICategoryService/GetAllCategoriesErrorFault" name="ErrorFault" message="tns:ICategoryService_GetAllCategories_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/ModifyCategory" message="tns:ICategoryService_ModifyCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/ModifyCategoryResponse" message="tns:ICategoryService_ModifyCategory_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICategoryService/ModifyCategoryErrorFault" name="ErrorFault" message="tns:ICategoryService_ModifyCategory_ErrorFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICategoryService" type="tns:ICategoryService">
@@ -53,6 +67,18 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <soap:operation soapAction="http://tempuri.org/ICategoryService/GetAllCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyCategory">
+      <soap:operation soapAction="http://tempuri.org/ICategoryService/ModifyCategory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

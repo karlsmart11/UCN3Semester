@@ -20,10 +20,10 @@ namespace Implementation
             }
             catch (Exception ex)
             {
-                throw new FaultException<Error>(new Error()
+                throw new FaultException<Error>(new Error
                 {
-                    CodigoError = "10001",
-                    Mensaje = ex.Message,
+                    ErrorCode = "10001",
+                    Message = ex.Message,
                     Description = "Exception managed by the administrator"
                 });
             }
@@ -40,10 +40,30 @@ namespace Implementation
             }
             catch (Exception ex)
             {
-                throw new FaultException<Error>(new Error()
+                throw new FaultException<Error>(new Error
                 {
-                    CodigoError = "10001",
-                    Mensaje = ex.Message,
+                    ErrorCode = "10001",
+                    Message = ex.Message,
+                    Description = "Exception managed by the administrator"
+                });
+            }
+        }
+
+        public void ModifyCategory(Category category)
+        {
+            try
+            {
+                using (var instance = new CategoryController())
+                {
+                    instance.ModifyCategory(category);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<Error>(new Error
+                {
+                    ErrorCode = "10001",
+                    Message = ex.Message,
                     Description = "Exception managed by the administrator"
                 });
             }

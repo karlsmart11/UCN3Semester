@@ -11,5 +11,6 @@ namespace Interface
     {
         Category GetCategoryById(int id);
         List<Category> GetAllCategories();
+        void ModifyCategory(Category category);
     }
 }

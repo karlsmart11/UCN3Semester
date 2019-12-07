@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
 using System.Windows;
 using KarmaClient.CategoryServiceRef;
 using KarmaClient.CustomerServiceRef;
@@ -6,6 +7,7 @@ using KarmaClient.ProductServiceRef;
 using KarmaClient.EmployeeServiceRef;
 using KarmaClient.TableServiceRef;
 using Category = KarmaClient.CategoryServiceRef.Category;
+using Error = KarmaClient.ProductServiceRef.Error;
 
 namespace KarmaClient
 {
@@ -42,6 +44,7 @@ namespace KarmaClient
         private void SetTxtAndLabels(MainWindow.TypeOfItem typeOfItem)
         {
             ComboBox.ItemsSource = null;
+            ComboBox5.ItemsSource = null;
 
             switch (typeOfItem)
             {
@@ -52,7 +55,7 @@ namespace KarmaClient
                     Label4.Content = "Price:";
                     Label5.Content = "Category:";
 
-                    Txt5.Visibility = Visibility.Hidden;
+                    Txt5.IsEnabled = false;
 
                     ComboBox.ItemsSource = _pClient.GetAllProducts();
                     ComboBox5.Visibility = Visibility.Visible;
@@ -64,8 +67,9 @@ namespace KarmaClient
                         
                         Txt2.Text = _currProduct.Name;
                         Txt3.Text = _currProduct.Description;
-                        Txt4.Text = _currProduct.Price.ToString();
-                        ComboBox5.SelectedItem = _currProduct.Category;
+                        Txt4.Text = _currProduct.Price.ToString(CultureInfo.CurrentCulture);
+                        Txt5.Text = _currProduct.Category.Name;
+                        ComboBox5.SelectedItem = _currProduct.Category; //TODO Fix so current products category is pre-selected in combobox
                     };
                     break;
 
@@ -178,6 +182,8 @@ namespace KarmaClient
                     if (_currCategory != null)
                     {
                         _currCategory.Name = Txt2.Text;
+
+                        _catClient.ModifyCategory(_currCategory);
                     }
                     Close();
                     break;
@@ -203,13 +209,25 @@ namespace KarmaClient
                         _currProduct.Price = double.Parse(Txt4.Text);
 
                         var catFromBox = (Category) ComboBox5.SelectionBoxItem;
-                        _currProduct.Category = new ProductServiceRef.Category
+                        if (catFromBox != null)
                         {
-                            Id = catFromBox.Id,
-                            Name = catFromBox.Name
-                        };
-
-                        _pClient.ModifyProduct(_currProduct);
+                            _currProduct.Category = new ProductServiceRef.Category
+                            {
+                                Id = catFromBox.Id,
+                                Name = catFromBox.Name
+                            };
+                        }
+                        try
+                        {
+                            _pClient.ModifyProduct(_currProduct);
+                        }
+                        catch (System.ServiceModel.FaultException<Error> ex)
+                        {
+                            MessageBox.Show( 
+                                "Error code: " + ex.Detail.ErrorCode
+                                               + "Message: " + ex.Detail.Message
+                                               + "Details: " + ex.Detail.Description);
+                        }
                     }
                     Close();
                     break;

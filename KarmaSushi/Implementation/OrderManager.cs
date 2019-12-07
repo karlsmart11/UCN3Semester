@@ -25,8 +25,8 @@ namespace Implementation
             {
                 throw new FaultException<Error>(new Error()
                 {
-                    CodigoError = "10001",
-                    Mensaje = ex.Message,
+                    ErrorCode = "10001",
+                    Message = ex.Message,
                     Description = "Exception managed by the administrator"
                 });
             }
@@ -45,8 +45,8 @@ namespace Implementation
             {
                 throw new FaultException<Error>(new Error()
                 {
-                    CodigoError = "10001",
-                    Mensaje = e.Message,
+                    ErrorCode = "10001",
+                    Message = e.Message,
                     Description = "Exception managed by the administrator"
                 });
             }
@@ -65,8 +65,8 @@ namespace Implementation
             {
                 throw new FaultException<Error>(new Error()
                 {
-                    CodigoError = "10001",
-                    Mensaje = e.Message,
+                    ErrorCode = "10001",
+                    Message = e.Message,
                     Description = "Exception managed by the administrator"
                 });
             }
@@ -85,8 +85,8 @@ namespace Implementation
             {
                 throw new FaultException<Error>(new Error()
                 {
-                    CodigoError = "10001",
-                    Mensaje = e.Message,
+                    ErrorCode = "10001",
+                    Message = e.Message,
                     Description = "Exception managed by the administrator"
                 });
             }
@@ -105,8 +105,8 @@ namespace Implementation
             {
                 throw new FaultException<Error>(new Error()
                 {
-                    CodigoError = "10001",
-                    Mensaje = e.Message,
+                    ErrorCode = "10001",
+                    Message = e.Message,
                     Description = "Exception managed by the administrator"
                 });
             }

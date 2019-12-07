@@ -64,9 +64,17 @@ namespace SQLRepository
             byte[] rowVersion;
             using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
             {
+                var p = new DynamicParameters();
+                p.Add("@Id", product.Id);
+                p.Add("@Name", product.Name);
+                p.Add("@Description", product.Description);
+                p.Add("@Price", product.Price);
+                p.Add("@CategoryId", product.Category.Id);
+                p.Add("@RowVer", product.RowVer);
+
                 rowVersion = connection.ExecuteScalar<byte[]>(
                     sql: "dbo.spProduct_Update",
-                    param: product,
+                    param: p,
                     commandType: CommandType.StoredProcedure);
             }
 
