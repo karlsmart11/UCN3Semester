@@ -82,9 +82,9 @@ namespace Implementation
             {
                 throw new FaultException<Error>(new Error
                 {
-                    ErrorCode = "10001",
+                    ErrorCode = "420",
                     Message = ex.Message,
-                    Description = "Exception managed by the administrator"
+                    Description = "Refresh entity and try again."
                 });
             }
         }

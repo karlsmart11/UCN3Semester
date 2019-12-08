@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows;
 using KarmaClient.CategoryServiceRef;
 using KarmaClient.CustomerServiceRef;
@@ -27,32 +28,18 @@ namespace KarmaClient
         private Product _currProduct;
         private Table _currTable;
 
-        public ModificationWindow()
-        {
-            InitializeComponent();
-        }
-
         public ModificationWindow(MainWindow.TypeOfItem typeOfItem)
         {
             InitializeComponent();
             SetTxtAndLabels(typeOfItem);
 
-            if (_currProduct == null 
-                || _currCategory == null 
-                || _currCustomer == null
-                || _currEmployee == null
-                || _currTable == null)
-            {
-                SaveBtn.Click += (sender, args) => Save((MainWindow.TypeOfItem)999); //Forces default in switch
-            }
-            else
-            {
-                SaveBtn.Click += (sender, args) => Save(typeOfItem);
-            }
+            SaveBtn.Click += (s, a) => Save(typeOfItem);
+            RefreshBtn.Click += (s, a) => Refresh(typeOfItem);
         }
 
         private void SetTxtAndLabels(MainWindow.TypeOfItem typeOfItem)
         {
+            //Initialize combo boxes
             ComboBox.ItemsSource = null;
             ComboBox5.ItemsSource = null;
 
@@ -71,6 +58,18 @@ namespace KarmaClient
                     ComboBox5.Visibility = Visibility.Visible;
                     ComboBox5.ItemsSource = _catClient.GetAllCategories();
 
+                    ComboBox.DropDownClosed += (s, a) =>
+                    {
+                        _currProduct = (Product)ComboBox.SelectionBoxItem;
+
+                        Txt2.Text = _currProduct.Name;
+                        Txt3.Text = _currProduct.Description;
+                        Txt4.Text = _currProduct.Price.ToString(CultureInfo.CurrentCulture);
+                        Txt5.Text = _currProduct.Category.Name;
+                        ComboBox5.SelectedItem = _currProduct.Category; //TODO Fix so current products category is pre-selected in combobox
+                        SaveBtn.IsEnabled = true;
+                    };
+
                     GoBtn.Click += (sender, args) =>
                     {
                         _currProduct = (Product) ComboBox.SelectionBoxItem;
@@ -80,6 +79,7 @@ namespace KarmaClient
                         Txt4.Text = _currProduct.Price.ToString(CultureInfo.CurrentCulture);
                         Txt5.Text = _currProduct.Category.Name;
                         ComboBox5.SelectedItem = _currProduct.Category; //TODO Fix so current products category is pre-selected in combobox
+                        SaveBtn.IsEnabled = true;
                     };
                     break;
 
@@ -96,11 +96,20 @@ namespace KarmaClient
 
                     ComboBox.ItemsSource = _catClient.GetAllCategories();
 
-                    GoBtn.Click += (sender, args) =>
+                    ComboBox.DropDownClosed += (s, a) =>
                     {
-                        _currCategory = (Category) ComboBox.SelectionBoxItem;
+                        _currCategory = (Category)ComboBox.SelectionBoxItem;
 
                         Txt2.Text = _currCategory.Name;
+                        SaveBtn.IsEnabled = true;
+                    };
+
+                    GoBtn.Click += (sender, args) =>
+                    {
+                        _currCategory = (Category)ComboBox.SelectionBoxItem;
+
+                        Txt2.Text = _currCategory.Name;
+                        SaveBtn.IsEnabled = true;
                     };
                     break;
 
@@ -113,6 +122,17 @@ namespace KarmaClient
 
                     ComboBox.ItemsSource = _cClient.GetAllCustomers();
 
+                    ComboBox.DropDownClosed += (s, a) =>
+                    {
+                        _currCustomer = (Customer)ComboBox.SelectionBoxItem;
+
+                        Txt2.Text = _currCustomer.Name;
+                        Txt3.Text = _currCustomer.Phone;
+                        Txt4.Text = _currCustomer.Email;
+                        Txt5.Text = _currCustomer.Address;
+                        SaveBtn.IsEnabled = true;
+                    };
+
                     GoBtn.Click += (sender, args) =>
                     {
                         _currCustomer = (Customer) ComboBox.SelectionBoxItem;
@@ -121,6 +141,7 @@ namespace KarmaClient
                         Txt3.Text = _currCustomer.Phone;
                         Txt4.Text = _currCustomer.Email;
                         Txt5.Text = _currCustomer.Address;
+                        SaveBtn.IsEnabled = true;
                     };
                     break;
 
@@ -135,6 +156,17 @@ namespace KarmaClient
 
                     ComboBox.ItemsSource = _eClient.GetAllEmployees();
 
+                    ComboBox.DropDownClosed += (s, a) =>
+                    {
+                        _currEmployee = (Employee)ComboBox.SelectionBoxItem;
+
+                        Txt2.Text = _currEmployee.Name;
+                        Txt3.Text = _currEmployee.Phone;
+                        Txt4.Text = _currEmployee.Email;
+
+                        SaveBtn.IsEnabled = true;
+                    };
+
                     GoBtn.Click += (sender, args) =>
                     {
                         _currEmployee = (Employee) ComboBox.SelectionBoxItem;
@@ -142,6 +174,8 @@ namespace KarmaClient
                         Txt2.Text = _currEmployee.Name;
                         Txt3.Text = _currEmployee.Phone;
                         Txt4.Text = _currEmployee.Email;
+
+                        SaveBtn.IsEnabled = true;
                     };
                     break;
 
@@ -157,18 +191,27 @@ namespace KarmaClient
 
                     ComboBox.ItemsSource = _tClient.GetAllTables();
 
+                    ComboBox.DropDownClosed += (s, a) =>
+                    {
+                        _currTable = (Table)ComboBox.SelectionBoxItem;
+
+                        Txt2.Text = _currTable.Name;
+                        Txt3.Text = _currTable.Seats.ToString();
+                        SaveBtn.IsEnabled = true;
+                    };
+
                     GoBtn.Click += (sender, args) =>
                     {
                         _currTable = (Table) ComboBox.SelectionBoxItem;
 
                         Txt2.Text = _currTable.Name;
                         Txt3.Text = _currTable.Seats.ToString();
+                        SaveBtn.IsEnabled = true;
                     };
                     break;
 
                 default:
-                    MessageBox.Show("Default");
-                    break;
+                    throw new ArgumentOutOfRangeException(nameof(typeOfItem), typeOfItem, null);
             }
         }
 
@@ -181,15 +224,29 @@ namespace KarmaClient
                     _currEmployee.Phone = Txt3.Text;
                     _currEmployee.Email = Txt4.Text;
 
-                    _eClient.ModifyEmployee(_currEmployee);
-                    Close();
+                    try
+                    {
+                        _eClient.ModifyEmployee(_currEmployee);
+                        Close();
+                    }
+                    catch (System.ServiceModel.FaultException<Error> ex)
+                    {
+                        Fail(ex);
+                    }
                     break;
 
                 case MainWindow.TypeOfItem.Cat:
                     _currCategory.Name = Txt2.Text;
 
-                    _catClient.ModifyCategory(_currCategory);
-                    Close();
+                    try
+                    {
+                        _catClient.ModifyCategory(_currCategory);
+                        Close();
+                    }
+                    catch (System.ServiceModel.FaultException<Error> ex)
+                    {
+                        Fail(ex);
+                    }
                     break;
 
                 case MainWindow.TypeOfItem.Cus:
@@ -198,8 +255,15 @@ namespace KarmaClient
                     _currCustomer.Email = Txt4.Text;
                     _currCustomer.Address = Txt5.Text;
 
-                    _cClient.ModifyCustomer(_currCustomer);
-                    Close();
+                    try
+                    {
+                        _cClient.ModifyCustomer(_currCustomer);
+                        Close();
+                    }
+                    catch (System.ServiceModel.FaultException<Error> ex)
+                    {
+                        Fail(ex);
+                    }
                     break;
 
                 case MainWindow.TypeOfItem.Pro:
@@ -220,21 +284,27 @@ namespace KarmaClient
                     try
                     {
                         _pClient.ModifyProduct(_currProduct);
+                        Close();
                     }
                     catch (System.ServiceModel.FaultException<Error> ex)
                     {
-                        MessageBox.Show("Error code: " + ex.Detail.ErrorCode
-                                           + "Message: " + ex.Detail.Message
-                                           + "Details: " + ex.Detail.Description);
+                        Fail(ex);
                     }
-
-                    Close();
                     break;
 
                 case MainWindow.TypeOfItem.Tab:
                     _currTable.Name = Txt2.Text;
                     _currTable.Seats = int.Parse(Txt3.Text);
-                    Close();
+
+                    try
+                    {
+                        _tClient.ModifyTable(_currTable);
+                        Close();
+                    }
+                    catch (System.ServiceModel.FaultException<Error> ex)
+                    {
+                        Fail(ex);
+                    }
                     break;
 
                 default:
@@ -245,6 +315,37 @@ namespace KarmaClient
         private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Refresh(MainWindow.TypeOfItem type)
+        {
+            switch (type)
+            {
+                case MainWindow.TypeOfItem.Cat:
+                    ComboBox.ItemsSource = _catClient.GetAllCategories();
+                    break;
+                case MainWindow.TypeOfItem.Cus:
+                    ComboBox.ItemsSource = _cClient.GetAllCustomers();
+                    break;
+                case MainWindow.TypeOfItem.Emp:
+                    ComboBox.ItemsSource = _eClient.GetAllEmployees();
+                    break;
+                case MainWindow.TypeOfItem.Pro:
+                    ComboBox.ItemsSource = _pClient.GetAllProducts();
+                    break;
+                case MainWindow.TypeOfItem.Tab:
+                    ComboBox.ItemsSource = _tClient.GetAllTables();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        private static void Fail(System.ServiceModel.FaultException<Error> ex)
+        {
+            MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                            $"Message: {ex.Detail.Message}\n" +
+                            $"Details: {ex.Detail.Description}");
         }
     }
 }
