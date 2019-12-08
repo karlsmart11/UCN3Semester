@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using KarmaClient.CategoryServiceRef;
 using KarmaClient.CustomerServiceRef;
@@ -38,7 +37,18 @@ namespace KarmaClient
             InitializeComponent();
             SetTxtAndLabels(typeOfItem);
 
-            SaveBtn.Click += (sender, args) => Save(typeOfItem);
+            if (_currProduct == null 
+                || _currCategory == null 
+                || _currCustomer == null
+                || _currEmployee == null
+                || _currTable == null)
+            {
+                SaveBtn.Click += (sender, args) => Save((MainWindow.TypeOfItem)999); //Forces default in switch
+            }
+            else
+            {
+                SaveBtn.Click += (sender, args) => Save(typeOfItem);
+            }
         }
 
         private void SetTxtAndLabels(MainWindow.TypeOfItem typeOfItem)
@@ -167,79 +177,66 @@ namespace KarmaClient
             switch (typeOfItem)
             {
                 case MainWindow.TypeOfItem.Emp:
-                    if (_currEmployee != null)
-                    {
-                        _currEmployee.Name = Txt2.Text;
-                        _currEmployee.Phone = Txt3.Text;
-                        _currEmployee.Email = Txt4.Text;
-                        
-                        _eClient.ModifyEmployee(_currEmployee);
-                    }
+                    _currEmployee.Name = Txt2.Text;
+                    _currEmployee.Phone = Txt3.Text;
+                    _currEmployee.Email = Txt4.Text;
+
+                    _eClient.ModifyEmployee(_currEmployee);
                     Close();
                     break;
 
                 case MainWindow.TypeOfItem.Cat:
-                    if (_currCategory != null)
-                    {
-                        _currCategory.Name = Txt2.Text;
+                    _currCategory.Name = Txt2.Text;
 
-                        _catClient.ModifyCategory(_currCategory);
-                    }
+                    _catClient.ModifyCategory(_currCategory);
                     Close();
                     break;
 
                 case MainWindow.TypeOfItem.Cus:
-                    if (_currCustomer != null)
-                    {
-                        _currCustomer.Name = Txt2.Text;
-                        _currCustomer.Phone = Txt3.Text;
-                        _currCustomer.Email = Txt4.Text;
-                        _currCustomer.Address = Txt5.Text;
+                    _currCustomer.Name = Txt2.Text;
+                    _currCustomer.Phone = Txt3.Text;
+                    _currCustomer.Email = Txt4.Text;
+                    _currCustomer.Address = Txt5.Text;
 
-                        _cClient.ModifyCustomer(_currCustomer);
-                    }
+                    _cClient.ModifyCustomer(_currCustomer);
                     Close();
                     break;
 
                 case MainWindow.TypeOfItem.Pro:
-                    if (_currProduct != null)
-                    {
-                        _currProduct.Name = Txt2.Text;
-                        _currProduct.Description = Txt3.Text;
-                        _currProduct.Price = double.Parse(Txt4.Text);
+                    _currProduct.Name = Txt2.Text;
+                    _currProduct.Description = Txt3.Text;
+                    _currProduct.Price = double.Parse(Txt4.Text);
 
-                        var catFromBox = (Category) ComboBox5.SelectionBoxItem;
-                        if (catFromBox != null)
+                    var catFromBox = (Category) ComboBox5.SelectionBoxItem;
+                    if (catFromBox != null)
+                    {
+                        _currProduct.Category = new ProductServiceRef.Category
                         {
-                            _currProduct.Category = new ProductServiceRef.Category
-                            {
-                                Id = catFromBox.Id,
-                                Name = catFromBox.Name
-                            };
-                        }
-                        try
-                        {
-                            _pClient.ModifyProduct(_currProduct);
-                        }
-                        catch (System.ServiceModel.FaultException<Error> ex)
-                        {
-                            MessageBox.Show( 
-                                "Error code: " + ex.Detail.ErrorCode
-                                               + "Message: " + ex.Detail.Message
-                                               + "Details: " + ex.Detail.Description);
-                        }
+                            Id = catFromBox.Id,
+                            Name = catFromBox.Name
+                        };
                     }
+
+                    try
+                    {
+                        _pClient.ModifyProduct(_currProduct);
+                    }
+                    catch (System.ServiceModel.FaultException<Error> ex)
+                    {
+                        MessageBox.Show("Error code: " + ex.Detail.ErrorCode
+                                           + "Message: " + ex.Detail.Message
+                                           + "Details: " + ex.Detail.Description);
+                    }
+
                     Close();
                     break;
 
                 case MainWindow.TypeOfItem.Tab:
-                    if (_currTable != null)
-                    {
-                        _currTable.Name = Txt2.Text;
-                        _currTable.Seats = int.Parse(Txt3.Text);
-                    }
+                    _currTable.Name = Txt2.Text;
+                    _currTable.Seats = int.Parse(Txt3.Text);
                     Close();
                     break;
+
                 default:
                     MessageBox.Show("Please choose something to modify.");
                     break;
