@@ -319,6 +319,10 @@ namespace KarmaClient
 
         private void Refresh(MainWindow.TypeOfItem type)
         {
+            Txt2.Text = "";
+            Txt3.Text = "";
+            Txt4.Text = "";
+            Txt5.Text = "";
             switch (type)
             {
                 case MainWindow.TypeOfItem.Cat:
@@ -332,6 +336,7 @@ namespace KarmaClient
                     break;
                 case MainWindow.TypeOfItem.Pro:
                     ComboBox.ItemsSource = _pClient.GetAllProducts();
+                    ComboBox5.ItemsSource = null;
                     break;
                 case MainWindow.TypeOfItem.Tab:
                     ComboBox.ItemsSource = _tClient.GetAllTables();

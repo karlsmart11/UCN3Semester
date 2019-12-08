@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using KarmaWeb.Models;
@@ -26,7 +25,8 @@ namespace KarmaWeb.Controllers
 
             var viewModel = new OrderViewModel
             {
-                Products = _pClient.GetAllProducts()
+                Products = _pClient.GetAllProducts(),
+                Categories = _pClient.GetAllProducts().Select(product => product.Category).ToList()
             };
 
             return View(viewModel);
@@ -65,19 +65,12 @@ namespace KarmaWeb.Controllers
         [HttpPost]
         public ActionResult AddOrder()
         {
-            var sum = 0d;
-            foreach (var orderLine in (List<OrderLine>) Session["cart"])
-            {
-                sum += orderLine.Product.Price * orderLine.Quantity;
-            }
-
             _oClient.InsertOrder(new Order
             {
-                Price = new decimal(sum),
+                Price = new decimal(((List<OrderLine>)Session["cart"]).Sum(orderLine => orderLine.Product.Price * orderLine.Quantity)),
                 Tables = new List<Table> { new Table { Id = 2 } },
                 OrderLines = (List<OrderLine>)Session["cart"],
                 Employee = new Employee { Id = 1 },
-                //Comment = orderComment
                 Comment = Request.Form["orderComment"]
             });
 
@@ -109,6 +102,12 @@ namespace KarmaWeb.Controllers
                 if (cart[i].Product.Id.Equals(int.Parse(id)))
                     return i;
             return -1;
+        }
+
+        public ActionResult SortMenuByCategory(string catId)
+        {
+            //TODO
+            return RedirectToAction("Index");
         }
 
         #region Boilerplate MVC controller
