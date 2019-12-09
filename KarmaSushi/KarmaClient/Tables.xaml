@@ -28,7 +28,7 @@
         <Grid HorizontalAlignment="Left" Height="439" Margin="351,10,0,0" VerticalAlignment="Top" Width="456">
             <TextBlock HorizontalAlignment="Left" Margin="159,10,0,0" TextWrapping="Wrap" Text="Available Tables" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,263,0,0" TextWrapping="Wrap" Text="Selected Tables :" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtSelectedTables" HorizontalAlignment="Left" Height="36" Margin="10,294,0,0" VerticalAlignment="Top" Width="436" FontSize="16" TextChanged="txtSelectedTables_TextChanged"/>
+            <TextBox x:Name="txtSelectedTables" HorizontalAlignment="Left" Height="36" Margin="10,294,0,0" VerticalAlignment="Top" Width="436" FontSize="16"/>
             <ListBox x:Name="availableTables" Grid.Row="0" SelectionMode="Multiple" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="436" Margin="10,58,0,0" FontSize="16" SelectionChanged="availableTables_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -51,7 +51,7 @@
         </Grid>
         <Grid HorizontalAlignment="Left" Height="95" Margin="10,392,0,0" VerticalAlignment="Top" Width="269">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Employee" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cbxEmployee"  HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="167" Height="41"  SelectionChanged="cbxEmployee_SelectionChanged" RenderTransformOrigin="0.107,0.792" FontSize="14">
+            <ComboBox x:Name="cbxEmployee"  HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="167" Height="41" RenderTransformOrigin="0.107,0.792" FontSize="14">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />

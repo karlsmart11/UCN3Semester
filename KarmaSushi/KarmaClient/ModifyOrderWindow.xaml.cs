@@ -1,6 +1,7 @@
 ﻿
 using KarmaClient.EmployeeServiceRef;
 using KarmaClient.OrderServiceRef;
+using KarmaClient.ProductServiceRef;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,31 +24,28 @@ namespace KarmaClient
     /// </summary>
     public partial class ModifyOrderWindow : Window
     {
-        public List<ProductServiceRef.Product> productsIdInOrder = new List<ProductServiceRef.Product>();
+        private readonly EmployeeServiceClient _eClient = new EmployeeServiceClient();
+        private readonly OrderServiceClient _oClient = new OrderServiceClient();
+        private readonly ProductServicesClient _pClient = new ProductServicesClient();
+
+        private readonly List<EmployeeServiceRef.Employee> arrayEmployees;
+        private List<OrderLine> newOrderLineList;
+        private Order orderModifed;
+        private ProductServiceRef.Product productToAdd;
         private int employeeId = -1;
 
-        public static EmployeeServiceRef.EmployeeServiceClient proxyEmployee = new EmployeeServiceRef.EmployeeServiceClient();
-        public static OrderServiceRef.OrderServiceClient proxyOrder = new OrderServiceRef.OrderServiceClient();
-        public static ProductServiceRef.ProductServicesClient proxyProducts = new ProductServiceRef.ProductServicesClient();
-        public static List<EmployeeServiceRef.Employee> arrayEmployees = proxyEmployee.GetAllEmployees();
-        public static OrderServiceRef.Employee employeeById;
-        private List<ProductServiceRef.Product> productsList = new List<ProductServiceRef.Product>();
-        private Order orderModifed;
-        List<OrderLine> newOrderLineList;
-        ProductServiceRef.Product productToAdd;
-
+        public List<ProductServiceRef.Product> productsIdInOrder = new List<ProductServiceRef.Product>();
 
         public ModifyOrderWindow(Order order)
         {
-
             InitializeComponent();
+            
+            arrayEmployees = _eClient.GetAllEmployees();
             getOrder(order);
             populateEmployeeCB();
             PopulateFields();
             PopulateTextBlock();
             PopulateProductsInMenu();
-
-
         }
       
         public void PopulateFields()
@@ -80,14 +78,10 @@ namespace KarmaClient
             {
                 employeeCB.Items.Add(item.Name);
             }
-        }
-
-      
+        }     
 
         public void PopulateTextBlock()
         {
-
-
             foreach (var item in orderModifed.OrderLines)
             {
                 int quantity = item.Quantity;
@@ -99,14 +93,10 @@ namespace KarmaClient
                     productNew.Price = item.Product.Price;
                     productsIdInOrder.Add(productNew);
                 }
-
             }
-
-
            
             listTableProducts.ItemsSource = null;
             listTableProducts.ItemsSource = productsIdInOrder;
-
         }
 
         public void updateTextBlock()
@@ -127,7 +117,7 @@ namespace KarmaClient
             foreach (var x in q)
             {
                 OrderLine newOrderLine = new OrderLine();
-                ProductServiceRef.Product product=proxyProducts.GetProductById(x.Id.ToString());
+                ProductServiceRef.Product product=_pClient.GetProductById(x.Id.ToString());
                 OrderServiceRef.Product productConverted = new OrderServiceRef.Product();
                 productConverted.Id = product.Id;
                 productConverted.Name = product.Name;
@@ -137,14 +127,11 @@ namespace KarmaClient
                 newOrderLineList.Add(newOrderLine);
                 //Console.WriteLine("Count: " + x.Count + " Id: " + x.Id );
             }
-           
-
         }
-
-       
+        
         public void PopulateProductsInMenu()
         {
-            ProductServiceRef.Product[] products = proxyProducts.GetAllProducts();
+            ProductServiceRef.Product[] products = _pClient.GetAllProducts();
 
             ProductsList.ItemsSource = null;
             ProductsList.ItemsSource = products;
@@ -175,13 +162,11 @@ namespace KarmaClient
         {
             orderModifed = order;
         }
+
         public void ModifyOrder()
         {
-
-
-
             string selecteNameInCombo = employeeCB.SelectedItem.ToString();
-            List<EmployeeServiceRef.Employee> employeeList = proxyEmployee.GetAllEmployees();
+            List<EmployeeServiceRef.Employee> employeeList = _eClient.GetAllEmployees();
 
             foreach (var item in employeeList)
             {
@@ -191,11 +176,8 @@ namespace KarmaClient
                 }
             }
 
-
-
-
             string employeeIdInString = employeeId.ToString();
-            EmployeeServiceRef.Employee employeeTosend = proxyEmployee.GetEmployeeById(employeeIdInString);
+            EmployeeServiceRef.Employee employeeTosend = _eClient.GetEmployeeById(employeeIdInString);
             orderModifed.Price = Convert.ToDecimal(priceTxt.Text);
             OrderServiceRef.Employee emplo = new OrderServiceRef.Employee();
             emplo.Id = employeeTosend.Id;
@@ -206,8 +188,17 @@ namespace KarmaClient
             orderModifed.Comment = commentTxt.Text;
            // PopulateOrderLineNew();
             orderModifed.OrderLines = newOrderLineList.ToArray();
-            proxyOrder.ModifyOrder(orderModifed);
 
+            try
+            {
+                _oClient.ModifyOrder(orderModifed);
+            }
+            catch (System.ServiceModel.FaultException<OrderServiceRef.Error> ex)
+            {
+                MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                                $"Message: {ex.Detail.Message}\n" +
+                                $"Details: {ex.Detail.Description}");
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -249,11 +240,8 @@ namespace KarmaClient
             this.Close();
         }
 
-      
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
             var smallDel = (Button)sender;
             if (smallDel != null)
             {
@@ -262,14 +250,10 @@ namespace KarmaClient
                     productToAdd = product;
                 }
             }
-
             productsIdInOrder.Add(productToAdd);
-
             PopulateOrderLineNew();
             priceTxt.Text = CalculatePriceAfterAdd().ToString();
             updateTextBlock();
-
         }
     }
-
 }
