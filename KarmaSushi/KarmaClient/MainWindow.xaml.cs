@@ -234,8 +234,8 @@ namespace KarmaClient
 
         private void Tables_Reservation_Click(object sender, RoutedEventArgs e)
         {
-            Tables tableWindow = new Tables();
-            tableWindow.Show();
+            CreateReservations reservationWindow = new CreateReservations();
+            reservationWindow.Show();
         }
 
         private void Order_Menu_Click(object sender, RoutedEventArgs e)
@@ -280,6 +280,12 @@ namespace KarmaClient
             modWindow.Show();
         }
 
+        private void Create_Table_Click(object sender, RoutedEventArgs e)
+        {
+            CreateTable createTableWindow = new CreateTable();
+            createTableWindow.Show();
+        }
+
         #endregion
 
         public enum TypeOfItem
@@ -290,5 +296,7 @@ namespace KarmaClient
             Pro,
             Tab
         }
+
+       
     }
 }

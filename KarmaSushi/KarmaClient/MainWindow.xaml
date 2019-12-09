@@ -33,6 +33,7 @@
 
             <MenuItem Header="_Tables">
                 <MenuItem x:Name="Edit_Tables" Header="_Edit Table" Click="Edit_Tables_OnClick" />
+                <MenuItem x:Name="Create_Table" Header="_Create Table" Click="Create_Table_Click" />
             </MenuItem>
         </Menu>
 
