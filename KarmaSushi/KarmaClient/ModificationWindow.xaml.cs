@@ -34,7 +34,9 @@ namespace KarmaClient
             SetTxtAndLabels(typeOfItem);
 
             SaveBtn.Click += (s, a) => Save(typeOfItem);
+           
             RefreshBtn.Click += (s, a) => Refresh(typeOfItem);
+
         }
 
         private void SetTxtAndLabels(MainWindow.TypeOfItem typeOfItem)
@@ -352,5 +354,7 @@ namespace KarmaClient
                             $"Message: {ex.Detail.Message}\n" +
                             $"Details: {ex.Detail.Description}");
         }
+
+       
     }
 }
