@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using KarmaWeb.OrderServiceRef;
-using KarmaWeb.ProductServiceRef;
+using Category = KarmaWeb.ProductServiceRef.Category;
 using Product = KarmaWeb.ProductServiceRef.Product;
 
 namespace KarmaWeb.Models
@@ -17,5 +14,6 @@ namespace KarmaWeb.Models
         public double Sum { get; set; }
         public Order CurrentOrder { get; set; }
         public Product Product { get; set; }
-    }
+        public List<Category> Categories { get; set; }
+}
 }

@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Product = KarmaClient.ProductServiceRef.Product;
 using KarmaClient.OrderServiceRef;
-using Table = KarmaClient.OrderServiceRef.Table;
 
 namespace KarmaClient
 {

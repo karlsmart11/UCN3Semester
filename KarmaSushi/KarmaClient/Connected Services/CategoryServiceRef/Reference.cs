@@ -100,13 +100,13 @@ namespace KarmaClient.CategoryServiceRef {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CodigoErrorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MensajeField;
+        private string ErrorCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -115,19 +115,6 @@ namespace KarmaClient.CategoryServiceRef {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CodigoError {
-            get {
-                return this.CodigoErrorField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodigoErrorField, value) != true)) {
-                    this.CodigoErrorField = value;
-                    this.RaisePropertyChanged("CodigoError");
-                }
             }
         }
         
@@ -145,14 +132,27 @@ namespace KarmaClient.CategoryServiceRef {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Mensaje {
+        public string ErrorCode {
             get {
-                return this.MensajeField;
+                return this.ErrorCodeField;
             }
             set {
-                if ((object.ReferenceEquals(this.MensajeField, value) != true)) {
-                    this.MensajeField = value;
-                    this.RaisePropertyChanged("Mensaje");
+                if ((object.ReferenceEquals(this.ErrorCodeField, value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
                 }
             }
         }
@@ -184,6 +184,13 @@ namespace KarmaClient.CategoryServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetAllCategories", ReplyAction="http://tempuri.org/ICategoryService/GetAllCategoriesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.CategoryServiceRef.Category>> GetAllCategoriesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/ModifyCategory", ReplyAction="http://tempuri.org/ICategoryService/ModifyCategoryResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(KarmaClient.CategoryServiceRef.Error), Action="http://tempuri.org/ICategoryService/ModifyCategoryErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+        void ModifyCategory(KarmaClient.CategoryServiceRef.Category category);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/ModifyCategory", ReplyAction="http://tempuri.org/ICategoryService/ModifyCategoryResponse")]
+        System.Threading.Tasks.Task ModifyCategoryAsync(KarmaClient.CategoryServiceRef.Category category);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -227,6 +234,14 @@ namespace KarmaClient.CategoryServiceRef {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<KarmaClient.CategoryServiceRef.Category>> GetAllCategoriesAsync() {
             return base.Channel.GetAllCategoriesAsync();
+        }
+        
+        public void ModifyCategory(KarmaClient.CategoryServiceRef.Category category) {
+            base.Channel.ModifyCategory(category);
+        }
+        
+        public System.Threading.Tasks.Task ModifyCategoryAsync(KarmaClient.CategoryServiceRef.Category category) {
+            return base.Channel.ModifyCategoryAsync(category);
         }
     }
 }

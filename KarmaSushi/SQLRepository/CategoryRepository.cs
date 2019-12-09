@@ -33,5 +33,23 @@ namespace SQLRepository
                 return connection.Query<Category>("SELECT * FROM Category;").ToList();
             }
         }
+
+        public void ModifyCategory(Category category)
+        {
+            byte[] rowVersion;
+            using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+            {
+                rowVersion = connection.ExecuteScalar<byte[]>(
+                    sql: "dbo.spCategory_Update",
+                    param: category,
+                    commandType: CommandType.StoredProcedure);
+            }
+
+            if (rowVersion == null)
+            {
+                throw new DBConcurrencyException(
+                    "The entity you were trying to edit has changed. Reload the entity and try again.");
+            }
+        }
     }
 }

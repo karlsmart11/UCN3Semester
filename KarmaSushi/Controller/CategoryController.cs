@@ -20,6 +20,11 @@ namespace Controller
             return instance.GetAllCategories();
         }
 
+        public void ModifyCategory(Category category)
+        {
+            ICategoryRepository instance = new CategoryRepository();
+            instance.ModifyCategory(category);
+        }
 
         void IDisposable.Dispose()
         {
