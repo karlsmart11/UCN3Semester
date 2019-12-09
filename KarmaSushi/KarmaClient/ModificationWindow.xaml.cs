@@ -7,7 +7,6 @@ using KarmaClient.ProductServiceRef;
 using KarmaClient.EmployeeServiceRef;
 using KarmaClient.TableServiceRef;
 using Category = KarmaClient.CategoryServiceRef.Category;
-using Error = KarmaClient.ProductServiceRef.Error;
 
 namespace KarmaClient
 {
@@ -229,9 +228,11 @@ namespace KarmaClient
                         _eClient.ModifyEmployee(_currEmployee);
                         Close();
                     }
-                    catch (System.ServiceModel.FaultException<Error> ex)
+                    catch (System.ServiceModel.FaultException<EmployeeServiceRef.Error> ex)
                     {
-                        Fail(ex);
+                        MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                                        $"Message: {ex.Detail.Message}\n" +
+                                        $"Details: {ex.Detail.Description}");
                     }
                     break;
 
@@ -243,9 +244,11 @@ namespace KarmaClient
                         _catClient.ModifyCategory(_currCategory);
                         Close();
                     }
-                    catch (System.ServiceModel.FaultException<Error> ex)
+                    catch (System.ServiceModel.FaultException<CategoryServiceRef.Error> ex)
                     {
-                        Fail(ex);
+                        MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                                        $"Message: {ex.Detail.Message}\n" +
+                                        $"Details: {ex.Detail.Description}");
                     }
                     break;
 
@@ -260,9 +263,11 @@ namespace KarmaClient
                         _cClient.ModifyCustomer(_currCustomer);
                         Close();
                     }
-                    catch (System.ServiceModel.FaultException<Error> ex)
+                    catch (System.ServiceModel.FaultException<CustomerServiceRef.Error> ex)
                     {
-                        Fail(ex);
+                        MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                                        $"Message: {ex.Detail.Message}\n" +
+                                        $"Details: {ex.Detail.Description}");
                     }
                     break;
 
@@ -286,9 +291,11 @@ namespace KarmaClient
                         _pClient.ModifyProduct(_currProduct);
                         Close();
                     }
-                    catch (System.ServiceModel.FaultException<Error> ex)
+                    catch (System.ServiceModel.FaultException<ProductServiceRef.Error> ex)
                     {
-                        Fail(ex);
+                        MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                                        $"Message: {ex.Detail.Message}\n" +
+                                        $"Details: {ex.Detail.Description}");
                     }
                     break;
 
@@ -301,9 +308,11 @@ namespace KarmaClient
                         _tClient.ModifyTable(_currTable);
                         Close();
                     }
-                    catch (System.ServiceModel.FaultException<Error> ex)
+                    catch (System.ServiceModel.FaultException<TableServiceRef.Error> ex)
                     {
-                        Fail(ex);
+                        MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
+                                        $"Message: {ex.Detail.Message}\n" +
+                                        $"Details: {ex.Detail.Description}");
                     }
                     break;
 
@@ -344,13 +353,6 @@ namespace KarmaClient
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
-        }
-
-        private static void Fail(System.ServiceModel.FaultException<Error> ex)
-        {
-            MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
-                            $"Message: {ex.Detail.Message}\n" +
-                            $"Details: {ex.Detail.Description}");
         }
     }
 }
