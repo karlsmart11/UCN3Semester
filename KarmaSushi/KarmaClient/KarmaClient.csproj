@@ -92,7 +92,6 @@
     </Compile>
     <Compile Include="CreateTable.xaml.cs">
       <DependentUpon>CreateTable.xaml</DependentUpon>
-
     </Compile>
     <Compile Include="ModificationWindow.xaml.cs">
       <DependentUpon>ModificationWindow.xaml</DependentUpon>
@@ -100,6 +99,10 @@
     <Compile Include="CreateReservations.xaml.cs">
       <DependentUpon>CreateReservations.xaml</DependentUpon>
     </Compile>
+    <page Include="CreateTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </page>
     <Page Include="CancelReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
