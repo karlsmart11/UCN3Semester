@@ -89,7 +89,7 @@
 
     <Compile Include="CreateCustomerWindow.xaml.cs">
       <DependentUpon>CreateCustomerWindow.xaml</DependentUpon>
-
+    </Compile>
     <Compile Include="CreateTable.xaml.cs">
       <DependentUpon>CreateTable.xaml</DependentUpon>
 

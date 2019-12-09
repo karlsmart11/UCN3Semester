@@ -357,12 +357,7 @@ namespace KarmaClient
             }
         }
 
-        private static void Fail(System.ServiceModel.FaultException<Error> ex)
-        {
-            MessageBox.Show($"Error code: {ex.Detail.ErrorCode}\n" +
-                            $"Message: {ex.Detail.Message}\n" +
-                            $"Details: {ex.Detail.Description}");
-        }
+      
 
        
     }
