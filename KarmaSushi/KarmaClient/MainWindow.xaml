@@ -16,6 +16,7 @@
             </MenuItem>
 
             <MenuItem Header="_Customers">
+                <MenuItem x:Name="Create_Customer" Header="_Create Customer" Click="Customer_Customer_Click"/>
                 <MenuItem x:Name="Edit_Customer" Header="_Edit Customer" Click="Edit_Customer_OnClick" />
             </MenuItem>
 
@@ -33,6 +34,7 @@
 
             <MenuItem Header="_Tables">
                 <MenuItem x:Name="Edit_Tables" Header="_Edit Table" Click="Edit_Tables_OnClick" />
+                <MenuItem x:Name="Create_Table" Header="_Create Table" Click="Create_Table_Click" />
             </MenuItem>
         </Menu>
 

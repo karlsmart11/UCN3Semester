@@ -21,7 +21,7 @@ namespace KarmaClient
     /// <summary>
     /// Interaction logic for Tables.xaml
     /// </summary>
-    public partial class Tables : Window
+    public partial class CreateReservations : Window
     {
         private readonly EmployeeServiceClient _employee = new EmployeeServiceClient();
         private readonly TableServicesClient _table = new TableServicesClient();
@@ -47,7 +47,7 @@ namespace KarmaClient
         private int IsOk = 1;
         public Reservation thisReservation = new Reservation();
 
-        public Tables()
+        public CreateReservations()
         {
             InitializeComponent();
             PopulateEmployeeCB();
