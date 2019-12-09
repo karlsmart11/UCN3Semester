@@ -13,10 +13,6 @@ using Model;
 
 namespace SQLRepository
 {
-    //Saved for the insert statement to receive the sql identity Id
-    //Remember to do connection.execute(); for insert
-    // p.add("@Id", 0, dbType: DBType.Int32, direction: ParameterDirection.Output);
-
     public class OrderRepository : IOrderRepository
     {
         private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
