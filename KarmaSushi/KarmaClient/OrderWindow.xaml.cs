@@ -31,7 +31,9 @@ namespace KarmaClient
 
         public OrderWindow()
         {
+            
             InitializeComponent();
+           
             arrayOrder = _oClient.GetAllOrders();
             populateDataGridWithSOAP();
         }
@@ -141,7 +143,75 @@ namespace KarmaClient
             }
         }
 
-        private void DataSelected_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+       
+
+        public DataTable setUpDataGrid()
+        {
+            DataTable dt = new DataTable();
+            DataColumn Price = new DataColumn("Price", typeof(decimal));
+            DataColumn Time = new DataColumn("Time", typeof(DateTime));
+            DataColumn Customer = new DataColumn("Customer", typeof(string));
+            DataColumn Employee = new DataColumn("Employee", typeof(string));
+            DataColumn Products = new DataColumn("Product", typeof(string));
+
+            dt.Columns.Add(Price);
+            dt.Columns.Add(Time);
+            dt.Columns.Add(Customer);
+            dt.Columns.Add(Employee);
+            dt.Columns.Add(Products);
+
+            return dt;
+        }
+
+        private void GridOrder_CurrentCellChanged(object sender, EventArgs e)
+        {
+            int currentRowIndex = GridOrder.Items.IndexOf(GridOrder.CurrentItem);
+
+            if (currentRowIndex >= 0)
+            {
+                selecetedId = IdOrdersList[currentRowIndex];
+               
+            }
+        }
+
+        private void ModityOrder_Click(object sender, RoutedEventArgs e)
+        {
+            if (selecetedId != -1)
+            {
+                Order order = _oClient.GetOrderById(selecetedId.ToString());
+                ModifyOrderWindow modifyOrderWindow = new ModifyOrderWindow(order);
+                modifyOrderWindow.Show();
+                selecetedId = -1;
+                //if (proxyOder.State == CommunicationState.Opened)
+                //    proxyOder.Close();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No order selected");
+            }
+        }
+
+        private void CancelOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (selecetedId != -1)
+            {
+                _oClient.DeleteOrder(selecetedId.ToString());
+                arrayOrder = _oClient.GetAllOrders();
+                updateDataGrid();
+            }
+            else
+            {
+                MessageBox.Show("No order selected");
+            }
+        }
+
+        private void GoBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void DataSelected_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
         {
             DataTable dt = setUpDataGrid();
 
@@ -191,78 +261,6 @@ namespace KarmaClient
             {
                 throw er;
             }
-        }
-
-        public DataTable setUpDataGrid()
-        {
-            DataTable dt = new DataTable();
-            DataColumn Price = new DataColumn("Price", typeof(decimal));
-            DataColumn Time = new DataColumn("Time", typeof(DateTime));
-            DataColumn Customer = new DataColumn("Customer", typeof(string));
-            DataColumn Employee = new DataColumn("Employee", typeof(string));
-            DataColumn Products = new DataColumn("Product", typeof(string));
-
-            dt.Columns.Add(Price);
-            dt.Columns.Add(Time);
-            dt.Columns.Add(Customer);
-            dt.Columns.Add(Employee);
-            dt.Columns.Add(Products);
-
-            return dt;
-        }
-
-        private void GridOrder_CurrentCellChanged(object sender, EventArgs e)
-        {
-            int currentRowIndex = GridOrder.Items.IndexOf(GridOrder.CurrentItem);
-
-            if (currentRowIndex >= 0)
-            {
-                selecetedId = IdOrdersList[currentRowIndex];
-                Test.Content = currentRowIndex;
-                TestOrderLineId.Content = selecetedId;
-            }
-            else
-            {
-                Test.Content = currentRowIndex;
-                TestOrderLineId.Content = selecetedId;
-            }
-        }
-
-        private void ModityOrder_Click(object sender, RoutedEventArgs e)
-        {
-            if (selecetedId != -1)
-            {
-                Order order = _oClient.GetOrderById(selecetedId.ToString());
-                ModifyOrderWindow modifyOrderWindow = new ModifyOrderWindow(order);
-                modifyOrderWindow.Show();
-                selecetedId = -1;
-                //if (proxyOder.State == CommunicationState.Opened)
-                //    proxyOder.Close();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("No order selected");
-            }
-        }
-
-        private void CancelOrderBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (selecetedId != -1)
-            {
-                _oClient.DeleteOrder(selecetedId.ToString());
-                arrayOrder = _oClient.GetAllOrders();
-                updateDataGrid();
-            }
-            else
-            {
-                MessageBox.Show("No order selected");
-            }
-        }
-
-        private void GoBackBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
