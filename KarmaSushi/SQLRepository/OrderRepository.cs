@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 using Interface;
 using Model;
@@ -139,7 +134,6 @@ namespace SQLRepository
                   
                     _orderLineRepository.InsertOrderLine(orderLine);
                 }
-
             }
 
             if (rowVersion == null)
@@ -187,9 +181,9 @@ namespace SQLRepository
 
     }
 
-        //public int AmountOfOrdersInDb()
-        //{
-        //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
-        //        return connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Orders");
-        //}
-    }
+    //public int AmountOfOrdersInDb()
+    //{
+    //    using (IDbConnection connection = new SqlConnection(Conexion.GetConnectionString()))
+    //        return connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Orders");
+    //}
+}
