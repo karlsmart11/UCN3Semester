@@ -95,7 +95,7 @@ namespace SQLRepository
             {
                 var p = new DynamicParameters();
 
-                p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+               
                 p.Add("@ReservationId", reservation.Id);
                 p.Add("@TableId", table.Id);
 

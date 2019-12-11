@@ -297,6 +297,10 @@ namespace KarmaClient
             Tab
         }
 
-       
+        private void Customer_Customer_Click(object sender, RoutedEventArgs e)
+        {
+            var createCustomerWindow = new CreateCustomerWindow();
+            createCustomerWindow.Show();
+        }
     }
 }

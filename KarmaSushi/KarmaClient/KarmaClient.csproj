@@ -86,6 +86,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+
+    <Compile Include="CreateCustomerWindow.xaml.cs">
+      <DependentUpon>CreateCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateTable.xaml.cs">
       <DependentUpon>CreateTable.xaml</DependentUpon>
     </Compile>
@@ -95,6 +99,10 @@
     <Compile Include="CreateReservations.xaml.cs">
       <DependentUpon>CreateReservations.xaml</DependentUpon>
     </Compile>
+    <page Include="CreateTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </page>
     <Page Include="CancelReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateTable.xaml">
+    <Page Include="CreateCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

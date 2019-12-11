@@ -33,7 +33,9 @@ namespace KarmaClient
             SetTxtAndLabels(typeOfItem);
 
             SaveBtn.Click += (s, a) => Save(typeOfItem);
+           
             RefreshBtn.Click += (s, a) => Refresh(typeOfItem);
+
         }
 
         private void SetTxtAndLabels(MainWindow.TypeOfItem typeOfItem)
@@ -354,5 +356,9 @@ namespace KarmaClient
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
+
+      
+
+       
     }
 }
