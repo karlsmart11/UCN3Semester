@@ -31,8 +31,7 @@ namespace KarmaClient
         private string email;
         private string guests;
         private List<Table> tables = new List<Table>();
-        private List<Table> selectedTables = new List<Table>();
-        private List<Table> onlyAvailable = new List<Table>();
+        private List<Table> _selectedTables = new List<Table>(); 
         private string date;
         private string startTimeH;
         private string startTimeM;
@@ -51,15 +50,16 @@ namespace KarmaClient
         {
             InitializeComponent();
             PopulateEmployeeCB();
-            //populateTable();
             FillMinutesHours();
         }
 
         private void populateTable()
         {
-            tables = _table.GetAllTables();
             availableTables.ItemsSource = null;
             availableTables.ItemsSource = tables;
+
+            selectedAvailableTables.ItemsSource = null;
+            selectedAvailableTables.ItemsSource = _selectedTables;
         }
 
         public void PopulateEmployeeCB()
@@ -178,7 +178,7 @@ namespace KarmaClient
                     Email = selectedEmployee.Email
                 };
 
-                foreach (Table thisTable in availableTables.SelectedItems)
+                foreach (Table thisTable in _selectedTables)
                 {
                     tablesToInsert.Add(thisTable);
                 }
@@ -193,14 +193,7 @@ namespace KarmaClient
 
                 }
                 thisReservation.Tables = listOfTablesToInsert;
-                //thisReservation.Tables = tablesToInsert.Select(
-                //      t => new ReservationServiceRef.Table
-                //      {
-                //          Id = t.Id,
-                //          Name = t.Name
-                //      }).ToList();
-
-
+               
                 // Inserts finished reservation into database.
                 _reservation.InsertReservation(thisReservation);
 
@@ -211,21 +204,7 @@ namespace KarmaClient
 
         private void availableTables_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            availableSeats = 0;
-            string tableName = null;
-
-            foreach (Table thisTable in availableTables.SelectedItems)
-            {
-                tableName += $"{thisTable.Name}, ";
-                txtSelectedTables.Text = tableName;
-
-                availableSeats += thisTable.Seats;
-
-                if (availableTables.SelectedIndex < 0)
-                {
-                    txtSelectedTables.Text = "";
-                }
-            }
+           
         }
 
         private void FillMinutesHours()
@@ -245,8 +224,16 @@ namespace KarmaClient
             for (i = 12; i < 21; i++)
             {
                 cbxStartTimeH.Items.Add(Convert.ToString(i));
+               
+            }
+
+            for (i = 14; i < 23; i++)
+            {
+               
                 cbxEndTimeH.Items.Add(Convert.ToString(i));
             }
+
+
         }
 
         private void TimeCheck()
@@ -297,6 +284,26 @@ namespace KarmaClient
         private void btnCheck_Click(object sender, RoutedEventArgs e)
         {
             TimeCheck();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Table selectedTable in availableTables.SelectedItems)
+            {
+                _selectedTables.Add(selectedTable);
+                tables.Remove(tables.Find(x => x == selectedTable));
+            }
+            populateTable();
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Table selectedTable in selectedAvailableTables.SelectedItems)
+            {
+                tables.Add(selectedTable);
+                _selectedTables.Remove(_selectedTables.Find(x => x == selectedTable));
+            }
+            populateTable();
         }
     }
 }
