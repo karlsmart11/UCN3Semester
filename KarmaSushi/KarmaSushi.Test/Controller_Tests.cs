@@ -1,12 +1,5 @@
-﻿using System;
-using Interface;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model;
-using Moq;
-using SQLRepository;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Controller;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace KarmaSushi.Test

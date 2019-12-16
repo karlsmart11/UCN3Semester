@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using SQLRepository;
-using Moq;
-using Interface;
 using Controller;
 
 namespace KarmaSushi.Test
