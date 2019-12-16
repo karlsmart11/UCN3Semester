@@ -8,18 +8,18 @@
         Title="Create table reservation" Height="679.047" Width="891.092">
     <Grid Margin="0,0,-6.4,-0.2">
         <Grid HorizontalAlignment="Left" Height="477" VerticalAlignment="Top" Width="336" Margin="10,98,0,0" RenderTransformOrigin="0.5,0.5">
-            <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="90,62,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
+            <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="90,62,0,0" VerticalAlignment="Top" Width="212" FontSize="16" TextChanged="txtName_TextChanged"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,95,0,0" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="90,99,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
+            <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="90,99,0,0" VerticalAlignment="Top" Width="212" FontSize="16" TextChanged="txtPhone_TextChanged"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,137,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="90,141,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
+            <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="90,141,0,0" VerticalAlignment="Top" Width="212" FontSize="16" TextChanged="txtEmail_TextChanged"/>
             <TextBlock HorizontalAlignment="Left" Margin="0,10,0,0" TextWrapping="Wrap" Text="Customer Information" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,179,0,0" TextWrapping="Wrap" Text="Guests" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtGuests" HorizontalAlignment="Left" Height="23" Margin="90,183,0,0" VerticalAlignment="Top" Width="212" FontSize="16"/>
+            <TextBox x:Name="txtGuests" HorizontalAlignment="Left" Height="23" Margin="90,183,0,0" VerticalAlignment="Top" Width="212" FontSize="16" TextChanged="txtGuests_TextChanged"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,221,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,337,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top"/>
-            <DatePicker x:Name="txtDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Margin="89,337,0,0" Width="165" Background="White" Foreground="White" FontSize="20"/>
+            <DatePicker x:Name="txtDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Margin="89,337,0,0" Width="165" Background="White" Foreground="White" FontSize="20" SelectedDateChanged="txtDate_SelectedDateChanged"/>
             <TextBlock HorizontalAlignment="Left" Margin="178,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="27" Width="5" Text=":"/>
             <TextBlock HorizontalAlignment="Left" Margin="179,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.053" Height="27" Width="5" Text=":"/>
             <Button x:Name="btnCheck" HorizontalAlignment="Center" Margin="178,411,10,0" VerticalAlignment="Top" Width="148" Height="36" Click="btnCheck_Click" Content="Show Tables"/>
@@ -32,7 +32,7 @@
         <Grid HorizontalAlignment="Left" Height="565" Margin="421,10,0,0" VerticalAlignment="Top" Width="456">
             <TextBlock HorizontalAlignment="Left" Margin="159,10,0,0" TextWrapping="Wrap" Text="Available Tables" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="159,288,0,0" TextWrapping="Wrap" Text="Selected Tables" VerticalAlignment="Top"/>
-            <ListBox x:Name="availableTables" Grid.Row="0" SelectionMode="Multiple" HorizontalAlignment="Left" Height="153" VerticalAlignment="Top" Width="436" Margin="10,75,0,0" FontSize="16" SelectionChanged="availableTables_SelectionChanged">
+            <ListBox x:Name="availableTables" Grid.Row="0" SelectionMode="Multiple" HorizontalAlignment="Left" Height="153" VerticalAlignment="Top" Width="436" Margin="10,75,0,0" FontSize="16">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Background="Transparent" Width="{Binding ActualWidth, ElementName=availableTables}"  >
@@ -74,7 +74,7 @@
         </Grid>
         <Grid HorizontalAlignment="Left" Height="69" Margin="0,10,0,0" VerticalAlignment="Top" Width="355">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Employee" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cbxEmployee"  HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="167" Height="41"  RenderTransformOrigin="0.107,0.792" FontSize="14">
+            <ComboBox x:Name="cbxEmployee"  HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="167" Height="41"  RenderTransformOrigin="0.107,0.792" FontSize="14" SelectionChanged="cbxEmployee_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
